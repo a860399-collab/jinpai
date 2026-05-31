@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>訂單進度查詢｜金牌一條根</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+    body{font-family:'Noto Sans TC',sans-serif;background:#f8fafc}
+    :root{--gold:#b45309;--herb:#2d6a4f}
+    .gold-text{color:var(--gold)}.herb-text{color:var(--herb)}
+    .gold-bg{background:linear-gradient(90deg,#d4af37,#f59e0b)}
+    .progress-step{flex:1;text-align:center;position:relative;min-width:64px}
+    .progress-step::before{content:'';position:absolute;top:14px;left:-50%;width:100%;height:3px;background:#e5e7eb;z-index:0}
+    .progress-step:first-child::before{display:none}
+    .progress-step.done::before{background:var(--herb)}
+    .progress-step.active::before{background:linear-gradient(90deg,var(--herb),#e5e7eb)}
+    .step-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:12px;font-weight:700;position:relative;z-index:1}
+    .step-dot.done{background:var(--herb);color:white}
+    .step-dot.active{background:#f59e0b;color:white;box-shadow:0 0 0 4px rgba(245,158,11,.25)}
+    .step-dot.pending{background:#e5e7eb;color:#9ca3af}
+    .step-label{font-size:11px;color:#6b7280;font-weight:500;line-height:1.3}
+    .step-label.active{color:var(--gold);font-weight:700}
+    .step-label.done{color:var(--herb)}
+    .form-input{width:100%;border:1.5px solid #d1d5db;border-radius:10px;padding:10px 14px;font-size:15px;outline:none;transition:border-color .2s}
+    .form-input:focus{border-color:#d4af37;box-shadow:0 0 0 3px rgba(212,175,55,.15)}
+    .btn-primary{background:linear-gradient(90deg,#d4af37,#f59e0b);color:white;transition:all .3s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(180,83,9,.3)}
+  </style>
+</head>
+<body class="min-h-screen">
+  <div style="background:#1e293b;color:#f59e0b;text-align:center;font-size:11px;padding:4px 8px">
+    ⚠️ PROTOTYPE — 查詢範圍包含 mock-data.json 及瀏覽器 localStorage 中的訂單
+  </div>
+  <!-- 導航 -->
+  <nav class="bg-white border-b border-amber-100 py-3 px-4">
+    <div class="max-w-2xl mx-auto flex justify-between items-center">
+      <a href="index.html" class="text-lg font-black" style="color:#451a03">金牌<span style="color:#b45309">一條根</span></a>
+      <a href="index.html" class="text-sm text-slate-500 hover:text-amber-600 transition flex items-center gap-1"><i class="fas fa-arrow-left text-xs"></i> 返回首頁</a>
+    </div>
+  </nav>
+
+  <div class="max-w-2xl mx-auto px-4 py-10">
+    <h1 class="text-2xl md:text-3xl font-black text-center mb-2" style="color:#451a03">訂單進度查詢</h1>
+    <p class="text-center text-slate-500 text-sm mb-8">輸入訂單編號與手機末三碼，查詢你的貨品出貨狀況</p>
+
+    <!-- 查詢表單 -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6" id="search-form">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">訂單編號 <span class="text-red-500">*</span></label>
+          <input type="text" id="input-order" class="form-input" placeholder="例：ORDER-20241120-0001">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">手機末三碼 <span class="text-red-500">*</span></label>
+          <input type="text" id="input-phone" class="form-input" placeholder="例：678" maxlength="3">
+        </div>
+        <button onclick="searchOrder()" class="btn-primary w-full py-3 rounded-xl font-bold text-base">
+          <i class="fas fa-search mr-2"></i>查詢訂單進度
+        </button>
+        <p id="search-error" class="text-red-500 text-sm text-center hidden"></p>
+      </div>
+    </div>
+
+    <!-- 查詢結果 -->
+    <div id="result-area" class="hidden">
+      <!-- 訂單基本資訊 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-4">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-xs text-slate-400 mb-1">訂單編號</p>
+            <p id="r-order-num" class="font-mono font-black text-base" style="color:#b45309"></p>
+          </div>
+          <span id="r-status-badge" class="text-xs font-bold px-3 py-1 rounded-full"></span>
+        </div>
+        <div class="grid grid-cols-2 gap-3 text-sm">
+          <div><p class="text-xs text-slate-400">下單日期</p><p id="r-date" class="font-medium"></p></div>
+          <div><p class="text-xs text-slate-400">付款方式</p><p class="font-medium">貨到付款</p></div>
+          <div><p class="text-xs text-slate-400">收件人</p><p id="r-name" class="font-medium"></p></div>
+          <div><p class="text-xs text-slate-400">貨到付款金額</p><p id="r-amount" class="font-bold gold-text text-base"></p></div>
+          <div class="col-span-2"><p class="text-xs text-slate-400">收件地址</p><p id="r-address" class="font-medium"></p></div>
+        </div>
+      </div>
+
+      <!-- 進度條 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-4">
+        <h3 class="font-bold text-sm mb-5" style="color:#451a03">出貨進度</h3>
+        <div class="flex items-start justify-between overflow-x-auto pb-2" id="progress-bar"></div>
+      </div>
+
+      <!-- 物流資訊 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-4" id="logistics-section">
+        <h3 class="font-bold text-sm mb-3" style="color:#451a03">物流資訊</h3>
+        <div id="logistics-content"></div>
+      </div>
+
+      <!-- 商品明細 -->
+      <div class="bg-amber-50 rounded-2xl p-5 mb-4">
+        <h3 class="font-bold text-sm mb-3" style="color:#451a03">商品明細</h3>
+        <div id="r-items" class="text-sm space-y-1"></div>
+      </div>
+
+      <!-- 貨到付款提醒 -->
+      <div class="bg-blue-50 rounded-2xl p-4 mb-4 flex items-start gap-3">
+        <i class="fas fa-phone text-blue-500 mt-0.5"></i>
+        <div>
+          <p class="font-bold text-sm text-blue-800 mb-1">貨到付款提醒</p>
+          <p class="text-xs text-blue-600">商品送達時請準備好 <span id="r-amount-remind" class="font-bold"></span> 現金付款。物流人員送達前會電話聯絡，請保持手機暢通。</p>
+        </div>
+      </div>
+
+      <!-- 客服聯絡 -->
+      <div class="bg-white rounded-2xl border border-gray-100 p-4 text-center text-sm text-slate-500">
+        <p class="mb-1">有問題嗎？請聯絡客服</p>
+        <p class="font-bold" style="color:#b45309"><i class="fab fa-line mr-1"></i> LINE官方帳號：[LINE_ID待填入]</p>
+      </div>
+
+      <div class="text-center mt-6">
+        <button onclick="resetSearch()" class="text-sm text-slate-400 hover:text-amber-600 transition underline">查詢其他訂單</button>
+      </div>
+    </div>
+
+    <!-- 找不到 -->
+    <div id="not-found" class="hidden bg-white rounded-2xl p-8 text-center border border-gray-100">
+      <i class="fas fa-search text-4xl text-slate-200 mb-3"></i>
+      <h3 class="font-bold text-slate-600 mb-2">找不到訂單資料</h3>
+      <p class="text-sm text-slate-400 mb-4">請確認訂單編號與手機末三碼是否正確，或聯繫客服協助查詢。</p>
+      <button onclick="resetSearch()" class="btn-primary px-6 py-2 rounded-xl font-bold text-sm">重新查詢</button>
+    </div>
+  </div>
+
+<script>
+// ── 狀態對應 ──
+const statusMap={
+  '訂單成立':{step:0,badge:'bg-blue-100 text-blue-700'},
+  '已通知業務部':{step:0,badge:'bg-blue-100 text-blue-700'},
+  '業務部確認':{step:1,badge:'bg-yellow-100 text-yellow-700'},
+  '備貨中':{step:2,badge:'bg-orange-100 text-orange-700'},
+  '已出貨':{step:3,badge:'bg-purple-100 text-purple-700'},
+  '配送中':{step:4,badge:'bg-indigo-100 text-indigo-700'},
+  '已送達':{step:5,badge:'bg-green-100 text-green-700'},
+  '已收款完成':{step:5,badge:'bg-green-200 text-green-800'},
+  '已結案':{step:5,badge:'bg-gray-100 text-gray-600'},
+  '取消訂單':{step:-1,badge:'bg-red-100 text-red-600'},
+};
+const steps=['訂單成立','業務確認','備貨中','已出貨','配送中','已送達'];
+
+// 從 URL 參數自動帶入
+window.addEventListener('DOMContentLoaded',()=>{
+  const p=new URLSearchParams(location.search);
+  if(p.get('order'))document.getElementById('input-order').value=p.get('order');
+  if(p.get('phone'))document.getElementById('input-phone').value=p.get('phone');
+  if(p.get('order')&&p.get('phone'))searchOrder();
+});
+
+async function searchOrder(){
+  const orderNum=document.getElementById('input-order').value.trim();
+  const phone3=document.getElementById('input-phone').value.trim();
+  const err=document.getElementById('search-error');
+  err.classList.add('hidden');
+  if(!orderNum||!phone3){err.textContent='請填寫訂單編號與手機末三碼';err.classList.remove('hidden');return;}
+
+  // 先查 localStorage
+  let order=null;
+  const local=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
+  order=local.find(o=>o.order_number===orderNum&&o.customer_phone.slice(-3)===phone3);
+
+  // 再查 mock-data.json
+  if(!order){
+    try{
+      const res=await fetch('mock-data.json');
+      const data=await res.json();
+      order=data.orders.find(o=>o.order_number===orderNum&&o.customer_phone.slice(-3)===phone3);
+    }catch(e){}
+  }
+
+  if(order){
+    showResult(order);
+  }else{
+    document.getElementById('result-area').classList.add('hidden');
+    document.getElementById('not-found').classList.remove('hidden');
+  }
+}
+
+function showResult(o){
+  document.getElementById('not-found').classList.add('hidden');
+  document.getElementById('result-area').classList.remove('hidden');
+
+  const status=o.order_status||'訂單成立';
+  const info=statusMap[status]||{step:0,badge:'bg-blue-100 text-blue-700'};
+
+  document.getElementById('r-order-num').textContent=o.order_number;
+  document.getElementById('r-date').textContent=(o.created_at||'').slice(0,10);
+  document.getElementById('r-name').textContent=o.customer_name;
+  const amt='$'+(o.total||o.total_amount||o.cod_amount||0).toLocaleString();
+  document.getElementById('r-amount').textContent=amt;
+  document.getElementById('r-amount-remind').textContent=amt;
+
+  // 遮蔽地址
+  const addr=o.shipping_address||o.customer_address||'';
+  document.getElementById('r-address').textContent=maskAddress(addr);
+
+  // 狀態徽章
+  const badge=document.getElementById('r-status-badge');
+  badge.textContent=status;
+  badge.className='text-xs font-bold px-3 py-1 rounded-full '+info.badge;
+
+  // 進度條
+  const pb=document.getElementById('progress-bar');
+  pb.innerHTML='';
+  const activeStep=info.step;
+  steps.forEach((s,i)=>{
+    const cls=i<activeStep?'done':i===activeStep?'active':'pending';
+    pb.innerHTML+=`<div class="progress-step ${cls}">
+      <div class="step-dot ${cls}">${i<activeStep?'<i class="fas fa-check text-xs"></i>':i+1}</div>
+      <div class="step-label ${cls}">${s}</div>
+    </div>`;
+  });
+
+  // 物流
+  const lc=document.getElementById('logistics-content');
+  if(o.logistics_company||o.tracking_number){
+    lc.innerHTML=`<div class="grid grid-cols-2 gap-3 text-sm">
+      <div><p class="text-xs text-slate-400">物流公司</p><p class="font-medium">${o.logistics_company||'—'}</p></div>
+      <div><p class="text-xs text-slate-400">物流單號</p><p class="font-mono font-bold">${o.tracking_number||'—'}</p></div>
+    </div>`;
+    if(o.shipped_at)lc.innerHTML+=`<p class="text-xs text-slate-400 mt-2">出貨日期：${o.shipped_at.slice(0,10)}</p>`;
+  }else{
+    lc.innerHTML='<p class="text-sm text-slate-400">物流資訊尚未更新，請稍後再查詢。</p>';
+  }
+
+  // 商品
+  const items=document.getElementById('r-items');
+  if(o.product){
+    items.innerHTML=`<div class="flex justify-between"><span>${o.product}</span><span class="font-bold gold-text">×1</span></div>`;
+  }else{
+    items.innerHTML='<p class="text-slate-400">商品明細請參閱訂單確認信</p>';
+  }
+}
+
+function maskAddress(addr){
+  if(!addr)return '—';
+  const parts=addr.match(/^(.{2,6}[縣市].{2,4}[鄉鎮市區])/);
+  if(parts)return parts[1]+'…（登入會員可查看完整地址）';
+  return addr.slice(0,6)+'…';
+}
+
+function resetSearch(){
+  document.getElementById('result-area').classList.add('hidden');
+  document.getElementById('not-found').classList.add('hidden');
+  document.getElementById('search-error').classList.add('hidden');
+  document.getElementById('input-order').value='';
+  document.getElementById('input-phone').value='';
+}
+</script>
+</body>
+</html>

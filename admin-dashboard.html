@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>後台總覽｜金牌一條根 Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+    body{font-family:'Noto Sans TC',sans-serif;background:#0f172a;color:#e2e8f0}
+    .sidebar{width:220px;flex-shrink:0}
+    .card{background:#1e293b;border-radius:12px;border:1px solid #334155}
+    .metric-card{background:#1e293b;border-radius:12px;border:1px solid #334155;padding:16px}
+    .stat-good{color:#34d399}.stat-warn{color:#fbbf24}.stat-danger{color:#f87171}.stat-info{color:#60a5fa}
+    .nav-link{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;color:#94a3b8;font-size:13px;transition:all .2s;text-decoration:none}
+    .nav-link:hover,.nav-link.active{background:#334155;color:#e2e8f0}
+    .badge{font-size:10px;padding:2px 7px;border-radius:999px;font-weight:700}
+    .status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+  </style>
+</head>
+<body class="min-h-screen">
+  <div style="background:#f59e0b;color:#1e293b;text-align:center;font-size:11px;padding:4px 8px;font-weight:700">
+    ⚠️ PROTOTYPE — 後台為前端模擬，資料來自 mock-data.json + localStorage，正式上線需接後端與權限系統
+  </div>
+  <div class="flex min-h-screen">
+    <!-- 側邊欄 -->
+    <div class="sidebar bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-1">
+      <div class="mb-6 px-2">
+        <p class="text-xs text-slate-500 mb-1">ADMIN</p>
+        <h1 class="font-black text-white text-sm">金牌一條根後台</h1>
+      </div>
+      <a href="admin-dashboard.html" class="nav-link active"><i class="fas fa-chart-bar w-4"></i> 總覽</a>
+      <a href="admin-orders.html" class="nav-link"><i class="fas fa-box w-4"></i> 訂單管理</a>
+      <a href="admin-members.html" class="nav-link"><i class="fas fa-users w-4"></i> 會員名冊</a>
+      <div class="my-2 border-t border-slate-800"></div>
+      <a href="order-tracking.html" class="nav-link"><i class="fas fa-search w-4"></i> 訂單查詢頁</a>
+      <a href="index.html" class="nav-link"><i class="fas fa-home w-4"></i> 前台首頁</a>
+    </div>
+    <!-- 主內容 -->
+    <div class="flex-1 p-6 overflow-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-black text-white">Dashboard 總覽</h2>
+        <span class="text-xs text-slate-400" id="now-time"></span>
+      </div>
+
+      <!-- 核心指標 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="metric-card">
+          <p class="text-xs text-slate-400 mb-1">今日訂單</p>
+          <p class="text-3xl font-black stat-good" id="m-today-orders">—</p>
+          <p class="text-xs text-slate-500 mt-1">今日成交金額</p>
+          <p class="text-sm font-bold stat-good" id="m-today-amount">—</p>
+        </div>
+        <div class="metric-card">
+          <p class="text-xs text-slate-400 mb-1">本月訂單</p>
+          <p class="text-3xl font-black stat-info" id="m-month-orders">—</p>
+          <p class="text-xs text-slate-500 mt-1">本月成交金額</p>
+          <p class="text-sm font-bold stat-info" id="m-month-amount">—</p>
+        </div>
+        <div class="metric-card">
+          <p class="text-xs text-slate-400 mb-1">待處理訂單</p>
+          <p class="text-3xl font-black stat-warn" id="m-pending">—</p>
+          <p class="text-xs text-slate-500 mt-1">需要關注</p>
+        </div>
+        <div class="metric-card">
+          <p class="text-xs text-slate-400 mb-1">會員總數</p>
+          <p class="text-3xl font-black" style="color:#c084fc" id="m-members">—</p>
+          <p class="text-xs text-slate-500 mt-1">LINE 名單</p>
+          <p class="text-sm font-bold" style="color:#c084fc" id="m-line">—</p>
+        </div>
+      </div>
+
+      <!-- 訂單狀態分布 -->
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="card p-5">
+          <h3 class="font-bold text-sm text-white mb-4">訂單狀態分布</h3>
+          <div class="space-y-2" id="status-breakdown"></div>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-bold text-sm text-white mb-4">來源平台分布</h3>
+          <div class="space-y-2" id="source-breakdown"></div>
+        </div>
+      </div>
+
+      <!-- 最新訂單 -->
+      <div class="card p-5 mb-4">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="font-bold text-sm text-white">最新訂單</h3>
+          <a href="admin-orders.html" class="text-xs text-blue-400 hover:text-blue-300">查看全部 →</a>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs">
+            <thead><tr class="text-slate-400 border-b border-slate-700">
+              <th class="text-left pb-2 pr-4">訂單編號</th>
+              <th class="text-left pb-2 pr-4">客戶</th>
+              <th class="text-left pb-2 pr-4">金額</th>
+              <th class="text-left pb-2 pr-4">狀態</th>
+              <th class="text-left pb-2">來源</th>
+            </tr></thead>
+            <tbody id="recent-orders" class="divide-y divide-slate-800"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 優惠碼績效 -->
+      <div class="card p-5">
+        <h3 class="font-bold text-sm text-white mb-4">優惠碼績效</h3>
+        <div class="space-y-3" id="coupon-stats"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+document.getElementById('now-time').textContent=new Date().toLocaleString('zh-TW');
+const statusColors={'訂單成立':'text-blue-400','業務部確認':'text-yellow-400','備貨中':'text-orange-400','已出貨':'text-purple-400','配送中':'text-indigo-400','已送達':'text-green-400','已結案':'text-slate-400','取消訂單':'text-red-400'};
+
+async function load(){
+  let orders=[],members=[],coupons=[];
+  try{
+    const res=await fetch('mock-data.json');
+    const d=await res.json();
+    orders=d.orders||[];members=d.members||[];coupons=d.coupons||[];
+  }catch(e){}
+  const local=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
+  orders=[...orders,...local];
+
+  const today=new Date().toISOString().slice(0,10);
+  const monthPre=new Date().toISOString().slice(0,7);
+  const todayOrders=orders.filter(o=>o.created_at&&o.created_at.startsWith(today));
+  const monthOrders=orders.filter(o=>o.created_at&&o.created_at.startsWith(monthPre));
+  const pending=orders.filter(o=>['訂單成立','已通知業務部','業務部確認','備貨中'].includes(o.order_status));
+
+  document.getElementById('m-today-orders').textContent=todayOrders.length;
+  document.getElementById('m-today-amount').textContent='$'+todayOrders.reduce((a,o)=>a+(o.total||o.total_amount||0),0).toLocaleString();
+  document.getElementById('m-month-orders').textContent=monthOrders.length;
+  document.getElementById('m-month-amount').textContent='$'+monthOrders.reduce((a,o)=>a+(o.total||o.total_amount||0),0).toLocaleString();
+  document.getElementById('m-pending').textContent=pending.length;
+  document.getElementById('m-members').textContent=members.length;
+  document.getElementById('m-line').textContent=members.filter(m=>m.line_status==='已加入').length+' 人已加入';
+
+  // 狀態分布
+  const statusCount={};
+  orders.forEach(o=>{statusCount[o.order_status]=(statusCount[o.order_status]||0)+1});
+  const sb=document.getElementById('status-breakdown');
+  Object.entries(statusCount).forEach(([s,c])=>{
+    const pct=Math.round(c/orders.length*100);
+    sb.innerHTML+=`<div class="flex items-center gap-2 text-xs"><span class="${statusColors[s]||'text-slate-300'} w-20 flex-shrink-0">${s}</span><div class="flex-1 bg-slate-700 rounded-full h-2"><div class="h-2 rounded-full bg-current ${statusColors[s]||'text-slate-300'}" style="width:${pct}%"></div></div><span class="text-slate-400 w-6 text-right">${c}</span></div>`;
+  });
+
+  // 來源分布
+  const srcCount={};
+  orders.forEach(o=>{srcCount[o.source||'未知']=(srcCount[o.source||'未知']||0)+1});
+  const srcb=document.getElementById('source-breakdown');
+  Object.entries(srcCount).forEach(([s,c])=>{
+    const pct=Math.round(c/orders.length*100);
+    srcb.innerHTML+=`<div class="flex items-center gap-2 text-xs"><span class="text-slate-300 w-24 flex-shrink-0">${s}</span><div class="flex-1 bg-slate-700 rounded-full h-2"><div class="h-2 rounded-full bg-amber-400" style="width:${pct}%"></div></div><span class="text-slate-400 w-6 text-right">${c}</span></div>`;
+  });
+
+  // 最新訂單
+  const ro=document.getElementById('recent-orders');
+  [...orders].sort((a,b)=>b.created_at>a.created_at?1:-1).slice(0,5).forEach(o=>{
+    ro.innerHTML+=`<tr class="text-slate-300">
+      <td class="py-2 pr-4 font-mono text-xs text-amber-400">${o.order_number}</td>
+      <td class="py-2 pr-4">${o.customer_name}</td>
+      <td class="py-2 pr-4 font-bold text-green-400">$${(o.total||o.total_amount||0).toLocaleString()}</td>
+      <td class="py-2 pr-4"><span class="${statusColors[o.order_status]||'text-slate-300'}">${o.order_status}</span></td>
+      <td class="py-2 text-slate-400">${o.source||'—'}</td>
+    </tr>`;
+  });
+
+  // 優惠碼
+  const cs=document.getElementById('coupon-stats');
+  if(coupons.length){
+    coupons.forEach(c=>{
+      const pct=c.usage_limit?Math.round(c.used_count/c.usage_limit*100):0;
+      cs.innerHTML+=`<div class="flex items-center gap-3 text-xs"><span class="font-mono font-bold text-yellow-300 w-28">${c.code}</span><div class="flex-1 bg-slate-700 rounded-full h-2"><div class="h-2 rounded-full bg-yellow-400" style="width:${pct}%"></div></div><span class="text-slate-400">${c.used_count}/${c.usage_limit||'∞'} 次</span><span class="${c.is_active?'text-green-400':'text-red-400'}">${c.is_active?'啟用':'停用'}</span></div>`;
+    });
+  }else{
+    cs.innerHTML='<p class="text-xs text-slate-500">無優惠碼資料</p>';
+  }
+}
+load();
+</script>
+</body>
+</html>

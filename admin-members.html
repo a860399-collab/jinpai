@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>會員名冊｜金牌一條根 Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+    body{font-family:'Noto Sans TC',sans-serif;background:#0f172a;color:#e2e8f0}
+    .sidebar{width:220px;flex-shrink:0}
+    .nav-link{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;color:#94a3b8;font-size:13px;transition:all .2s;text-decoration:none}
+    .nav-link:hover,.nav-link.active{background:#334155;color:#e2e8f0}
+    .card{background:#1e293b;border-radius:12px;border:1px solid #334155}
+    .form-input{background:#0f172a;border:1px solid #334155;color:#e2e8f0;border-radius:8px;padding:6px 12px;font-size:13px;outline:none}
+    .form-input:focus{border-color:#d4af37}
+    .btn-sm{padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s}
+    .tag{font-size:10px;padding:2px 7px;border-radius:999px;font-weight:700;background:#334155;color:#94a3b8}
+  </style>
+</head>
+<body class="min-h-screen">
+  <div style="background:#f59e0b;color:#1e293b;text-align:center;font-size:11px;padding:4px 8px;font-weight:700">
+    ⚠️ PROTOTYPE — 會員名冊為前端模擬，正式上線須接後端資料庫，匯出功能僅限 Admin 帳號
+  </div>
+  <div class="flex min-h-screen">
+    <div class="sidebar bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-1">
+      <div class="mb-6 px-2"><p class="text-xs text-slate-500 mb-1">ADMIN</p><h1 class="font-black text-white text-sm">金牌一條根後台</h1></div>
+      <a href="admin-dashboard.html" class="nav-link"><i class="fas fa-chart-bar w-4"></i> 總覽</a>
+      <a href="admin-orders.html" class="nav-link"><i class="fas fa-box w-4"></i> 訂單管理</a>
+      <a href="admin-members.html" class="nav-link active"><i class="fas fa-users w-4"></i> 會員名冊</a>
+      <div class="my-2 border-t border-slate-800"></div>
+      <a href="order-tracking.html" class="nav-link"><i class="fas fa-search w-4"></i> 訂單查詢頁</a>
+      <a href="index.html" class="nav-link"><i class="fas fa-home w-4"></i> 前台首頁</a>
+    </div>
+    <div class="flex-1 p-6 overflow-auto">
+      <div class="flex flex-wrap gap-3 justify-between items-center mb-5">
+        <h2 class="text-xl font-black text-white">會員名冊</h2>
+        <div class="flex gap-2">
+          <input type="text" id="search-box" placeholder="搜尋姓名 / 手機 / Email" class="form-input" oninput="renderMembers()">
+          <button onclick="exportCSV()" class="btn-sm bg-emerald-600 hover:bg-emerald-500 text-white">匯出 CSV <span style="font-size:10px;background:#065f46;padding:1px 4px;border-radius:4px;margin-left:3px">Admin only</span></button>
+        </div>
+      </div>
+
+      <!-- 統計 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5" id="member-stats"></div>
+
+      <div class="card overflow-x-auto">
+        <table class="w-full text-xs">
+          <thead><tr class="text-slate-400 border-b border-slate-700 text-left">
+            <th class="p-3">ID</th>
+            <th class="p-3">姓名</th>
+            <th class="p-3">手機</th>
+            <th class="p-3">LINE</th>
+            <th class="p-3">來源</th>
+            <th class="p-3">推薦人</th>
+            <th class="p-3">訂單數</th>
+            <th class="p-3">消費總額</th>
+            <th class="p-3">標籤</th>
+            <th class="p-3">行銷同意</th>
+          </tr></thead>
+          <tbody id="members-tbody" class="divide-y divide-slate-800"></tbody>
+        </table>
+        <div id="empty-msg" class="hidden text-center py-8 text-slate-500 text-sm">無符合條件的會員</div>
+      </div>
+      <p class="text-xs text-slate-500 mt-3" id="count-label"></p>
+    </div>
+  </div>
+
+<script>
+let allMembers=[];
+async function load(){
+  try{const res=await fetch('mock-data.json');const d=await res.json();allMembers=d.members||[];}catch(e){}
+  renderStats();renderMembers();
+}
+
+function renderStats(){
+  const stats=document.getElementById('member-stats');
+  const lineJoined=allMembers.filter(m=>m.line_status==='已加入').length;
+  const withOrders=allMembers.filter(m=>m.total_orders>0).length;
+  const repeat=allMembers.filter(m=>m.total_orders>1).length;
+  const marketing=allMembers.filter(m=>m.marketing_consent).length;
+  stats.innerHTML=`
+    <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:12px"><p class="text-xs text-slate-400">會員總數</p><p class="text-2xl font-black text-purple-400">${allMembers.length}</p></div>
+    <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:12px"><p class="text-xs text-slate-400">LINE 名單</p><p class="text-2xl font-black text-green-400">${lineJoined}</p></div>
+    <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:12px"><p class="text-xs text-slate-400">回購客</p><p class="text-2xl font-black text-yellow-400">${repeat}</p></div>
+    <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:12px"><p class="text-xs text-slate-400">行銷同意</p><p class="text-2xl font-black text-blue-400">${marketing}</p></div>`;
+}
+
+function renderMembers(){
+  const q=(document.getElementById('search-box').value||'').toLowerCase();
+  const filtered=allMembers.filter(m=>!q||(m.name||'').toLowerCase().includes(q)||(m.phone||'').includes(q)||(m.email||'').toLowerCase().includes(q));
+  const tbody=document.getElementById('members-tbody');
+  tbody.innerHTML='';
+  if(!filtered.length){document.getElementById('empty-msg').classList.remove('hidden');}
+  else{document.getElementById('empty-msg').classList.add('hidden');}
+  filtered.forEach(m=>{
+    const tags=(m.customer_tags||[]).map(t=>`<span class="tag">${t}</span>`).join(' ');
+    tbody.innerHTML+=`<tr class="hover:bg-slate-800/50 transition">
+      <td class="p-3 font-mono text-amber-400">${m.id}</td>
+      <td class="p-3 text-white font-medium">${m.name}</td>
+      <td class="p-3 text-slate-300">${maskPhone(m.phone)}</td>
+      <td class="p-3"><span class="${m.line_status==='已加入'?'text-green-400':'text-slate-500'}">${m.line_status==='已加入'?'✓ 已加入':'未加入'}</span></td>
+      <td class="p-3 text-slate-400">${m.source||'—'}</td>
+      <td class="p-3 font-mono text-purple-300 text-xs">${m.referred_by||'—'}</td>
+      <td class="p-3 text-center font-bold text-white">${m.total_orders||0}</td>
+      <td class="p-3 font-bold text-green-400">$${(m.total_spent||0).toLocaleString()}</td>
+      <td class="p-3">${tags}</td>
+      <td class="p-3 text-center">${m.marketing_consent?'<span class="text-green-400">✓</span>':'<span class="text-slate-500">✕</span>'}</td>
+    </tr>`;
+  });
+  document.getElementById('count-label').textContent='共 '+filtered.length+' 位會員';
+}
+
+function maskPhone(p){if(!p)return'—';return p.slice(0,4)+'***'+p.slice(-3);}
+
+function exportCSV(){
+  if(!allMembers.length){alert('無會員資料');return;}
+  const headers=['ID','姓名','手機','Email','LINE狀態','來源','推薦人','訂單數','消費總額','標籤','行銷同意','建立時間'];
+  const rows=allMembers.map(m=>[m.id,m.name,m.phone,m.email,m.line_status||'',m.source||'',m.referred_by||'',(m.total_orders||0),(m.total_spent||0),(m.customer_tags||[]).join(';'),m.marketing_consent?'是':'否',m.created_at||'']);
+  const csv=[headers,...rows].map(r=>r.map(c=>'"'+(c||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,﻿'+encodeURIComponent(csv);a.download='金牌一條根會員名冊_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+}
+load();
+</script>
+</body>
+</html>
