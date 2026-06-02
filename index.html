@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>金牌一條根｜草本舒緩膏 3+1組合$1000 貨到付款 免運</title>
-  <meta name="description" content="肩頸硬、腰背緊、久坐不舒服？金牌一條根草本舒緩膏，適合上班族、開車族、長輩日常保養。3+1組合$1000，貨到付款，加入會員領取專屬舒緩碼。">
+  <title>éå¤ªæ¥µï½èæ¬èç·©è 3+1çµå$1000 è²¨å°ä»æ¬¾ åé</title>
+  <meta name="description" content="è©é ¸ç¡¬ãè°èç·ãä¹åä¸èæï¼éå¤ªæ¥µèæ¬èç·©èï¼é©åä¸ç­æãéè»æãé·è¼©æ¥å¸¸ä¿é¤ã3+1çµå$1000ï¼è²¨å°ä»æ¬¾ï¼å å¥LINEå®æ¹å¸³èè§£éæå¡ç¦å©ã">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="金牌一條根草本舒緩膏｜3+1組合$1000 貨到付款">
-  <meta property="og:description" content="肩頸硬、腰背緊？日常痠痛別再硬撐。加入LINE領取專屬舒緩碼，3+1組合$1000，貨到付款。">
-  <meta property="og:image" content="照片/產品主圖.jpg">
+  <meta property="og:title" content="éå¤ªæ¥µèæ¬èç·©èï½3+1çµå$1000 è²¨å°ä»æ¬¾">
+  <meta property="og:description" content="è©é ¸ç¡¬ãè°èç·ï¼æ¥å¸¸ç çå¥åç¡¬æãå å¥LINEå®æ¹å¸³èï¼3+1çµå$1000ï¼è²¨å°ä»æ¬¾ã">
+  <meta property="og:image" content="ç§ç/ç¢åä¸»å.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
@@ -31,7 +31,7 @@
     .btn-pulse{animation:pulse-gold 2s infinite}
     @keyframes bounce-slow{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
     .bounce-slow{animation:bounce-slow 2s infinite}
-    /* 進度條 */
+    /* é²åº¦æ¢ */
     .progress-step{flex:1;text-align:center;position:relative}
     .progress-step::before{content:'';position:absolute;top:14px;left:-50%;width:100%;height:3px;background:#e5e7eb;z-index:0}
     .progress-step:first-child::before{display:none}
@@ -44,17 +44,17 @@
     .step-label{font-size:11px;color:#6b7280;font-weight:500}
     .step-label.active{color:var(--gold);font-weight:700}
     .step-label.done{color:var(--herb)}
-    /* 卡片 */
+    /* å¡ç */
     .pain-card{border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s}
     .pain-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(180,83,9,.12)}
     .product-card{border-radius:20px;transition:all .3s}
     .product-card.featured{transform:scale(1.04);border:2px solid var(--gold-light)}
     .product-card:not(.featured){opacity:.85}
-    /* 彈窗 */
+    /* å½çª */
     .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px}
     .modal-box{background:white;border-radius:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
     .modal-hidden{display:none}
-    /* 表單 */
+    /* è¡¨å® */
     .form-input{width:100%;border:1.5px solid #d1d5db;border-radius:10px;padding:10px 14px;font-size:15px;transition:border-color .2s;outline:none}
     .form-input:focus{border-color:var(--gold-light);box-shadow:0 0 0 3px rgba(212,175,55,.15)}
     .form-label{font-size:13px;font-weight:600;color:#374151;margin-bottom:4px;display:block}
@@ -63,7 +63,7 @@
     .faq-item.open .faq-answer{max-height:300px}
     .faq-item.open .faq-icon{transform:rotate(45deg)}
     .faq-icon{transition:transform .3s}
-    /* 捲動顯現 */
+    /* æ²åé¡¯ç¾ */
     .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
     .reveal.shown{opacity:1;transform:none}
     /* Sticky CTA mobile */
@@ -76,7 +76,7 @@
     .admin-link-badge{background:#1e293b;color:#94a3b8;font-size:11px;padding:2px 8px;border-radius:999px}
 
 
-    /* 宇宙太極圖片動畫 */
+    /* å®å®å¤ªæ¥µåçåç« */
     @keyframes cosmos-ring-spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
     @keyframes cosmos-ring-counter { from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
     @keyframes cosmos-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
@@ -89,7 +89,7 @@
     .cosmos-halo-3 { width:142%; height:142%; margin-top:-71%; margin-left:-71%; border-color:rgba(100,200,255,0.15); animation:cosmos-ring-spin 40s linear infinite; }
     .cosmos-glow-bg { position:absolute; inset:-15%; border-radius:50%; background:radial-gradient(circle,rgba(212,175,55,0.18) 0%,transparent 65%); animation:cosmos-glow-pulse 5s ease-in-out infinite; z-index:1; }
 
-    /* 宇宙太極動畫（CSS fallback） */
+    /* å®å®å¤ªæ¥µåç«ï¼CSS fallbackï¼ */
     @keyframes taichi-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @keyframes taichi-counter { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
     @keyframes cosmos-pulse { 0%,100% { opacity:0.6; transform:scale(1); } 50% { opacity:1; transform:scale(1.05); } }
@@ -115,38 +115,38 @@
 </head>
 <body class="antialiased">
 
-<!-- 開發提示列（正式上線前刪除） -->
+<!-- éç¼æç¤ºåï¼æ­£å¼ä¸ç·ååªé¤ï¼ -->
 <div style="display:none;background:#1e293b;color:#f59e0b;text-align:center;font-size:11px;padding:4px 8px;">
-  ⚠️ PROTOTYPE — 前端模擬，正式上線需接後端+資料庫+SMTP
-  ｜<a href="admin-dashboard.html" style="color:#94a3b8;text-decoration:underline">後台</a>
-  ｜<a href="order-tracking.html" style="color:#94a3b8;text-decoration:underline">訂單查詢</a>
+  â ï¸ PROTOTYPE â åç«¯æ¨¡æ¬ï¼æ­£å¼ä¸ç·éæ¥å¾ç«¯+è³æåº«+SMTP
+  ï½<a href="admin-dashboard.html" style="color:#94a3b8;text-decoration:underline">å¾å°</a>
+  ï½<a href="order-tracking.html" style="color:#94a3b8;text-decoration:underline">è¨å®æ¥è©¢</a>
 </div>
 
-<!-- 頂部公告列 -->
+<!-- é é¨å¬åå -->
 <div class="announce-bar text-white text-center text-sm py-2 px-4 font-medium">
-  🎁 新會員限定｜<strong>加入LINE官方帳號領取專屬舒緩碼</strong>，3+1組合限定優惠 <strong>$1000</strong>，貨到付款也適用・滿額免運
-  <button style="display:none" onclick="openLineModal()" class="ml-3 bg-white/20 hover:bg-white/30 text-white text-xs px-3 py-1 rounded-full transition">立即領取 →</button>
+  ð æ°æå¡éå®ï½<strong>å å¥LINEå®æ¹å¸³èï¼ä¸å®ææä¾åªæ æ´»å</strong>ï¼3+1çµåéå®åªæ  <strong>$1000</strong>ï¼è²¨å°ä»æ¬¾ä¹é©ç¨ã»æ»¿é¡åé
+  <button style="display:none" onclick="openLineModal()" class="ml-3 bg-white/20 hover:bg-white/30 text-white text-xs px-3 py-1 rounded-full transition">ç«å³é å â</button>
 </div>
 
-<!-- 導航 -->
+<!-- å°èª -->
 <nav class="sticky top-0 z-[100] bg-white/95 backdrop-blur-md border-b border-amber-100 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-    <a href="#" class="text-xl font-black deep-text tracking-tight">金牌<span class="gold-text">一條根</span></a>
+    <a href="#" class="text-xl font-black deep-text tracking-tight">èæ´»<span class="gold-text">å´é¸</span></a>
     <div class="hidden md:flex items-center gap-5 text-sm font-medium text-slate-500">
-      <a href="#pain" class="hover:text-amber-600 transition">使用情境</a>
-      <a href="#product" class="hover:text-amber-600 transition">商品方案</a>
-      <a href="#faq" class="hover:text-amber-600 transition">常見問題</a>
-      <a href="order-tracking.html" class="hover:text-amber-600 transition flex items-center gap-1"><i class="fas fa-search text-xs"></i>查詢訂單</a>
-      <button onclick="openOrderModal('combo')" class="btn-primary px-5 py-2 rounded-full font-bold text-sm btn-pulse">立即下單</button>
+      <a href="#pain" class="hover:text-amber-600 transition">ä½¿ç¨æå¢</a>
+      <a href="#product" class="hover:text-amber-600 transition">ååæ¹æ¡</a>
+      <a href="#faq" class="hover:text-amber-600 transition">å¸¸è¦åé¡</a>
+      <a href="order-tracking.html" class="hover:text-amber-600 transition flex items-center gap-1"><i class="fas fa-search text-xs"></i>æ¥è©¢è¨å®</a>
+      <button onclick="openOrderModal('combo')" class="btn-primary px-5 py-2 rounded-full font-bold text-sm btn-pulse">ç«å³ä¸å®</button>
     </div>
     <div class="flex md:hidden items-center gap-2">
       <a href="order-tracking.html" class="text-slate-400 text-sm px-2"><i class="fas fa-search"></i></a>
-      <button onclick="openOrderModal('combo')" class="btn-primary px-4 py-2 rounded-full font-bold text-sm">下單 $1000</button>
+      <button onclick="openOrderModal('combo')" class="btn-primary px-4 py-2 rounded-full font-bold text-sm">ä¸å® $1000</button>
     </div>
   </div>
 </nav>
 
-<!-- Toast 通知 -->
+<!-- Toast éç¥ -->
 <div id="purchase-toast" class="toast" style="display:none">
   <div class="flex items-center gap-2">
     <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 text-xs"><i class="fas fa-shopping-bag"></i></div>
@@ -159,49 +159,49 @@
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
     <div class="md:w-1/2 space-y-6 reveal">
       <div class="flex flex-wrap gap-2">
-        <span class="gold-bg text-white px-3 py-1 rounded-full text-xs font-bold">GMP中藥廠監製</span>
-        <span class="herb-bg text-white px-3 py-1 rounded-full text-xs font-bold">貨到付款</span>
-        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">可查詢出貨進度</span>
+        <span class="gold-bg text-white px-3 py-1 rounded-full text-xs font-bold">GMPä¸­è¥å» ç£è£½</span>
+        <span class="herb-bg text-white px-3 py-1 rounded-full text-xs font-bold">è²¨å°ä»æ¬¾</span>
+        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">å¯æ¥è©¢åºè²¨é²åº¦</span>
       </div>
       <h1 class="text-4xl md:text-5xl font-black leading-tight deep-text">
-        肩頸硬、腰背緊、<br>
-        <span class="gold-text">走路卡卡？</span><br>
-        <span class="text-3xl md:text-4xl font-bold text-slate-600">日常痠痛別再硬撐。</span>
+        è©é ¸ç¡¬ãè°èç·ã<br>
+        <span class="gold-text">èµ°è·¯å¡å¡ï¼</span><br>
+        <span class="text-3xl md:text-4xl font-bold text-slate-600">æ¥å¸¸ç çå¥åç¡¬æã</span>
       </h1>
       <p class="text-base md:text-lg text-slate-600 leading-relaxed border-l-4 border-amber-400 pl-4">
-        金牌一條根草本舒緩膏，適合<strong>久坐上班族、開車族、搬重物工作者、運動後放鬆</strong>與<strong>長輩日常保養</strong>。草本植萃，清涼舒爽，好推不黏膩。
+        éå¤ªæ¥µèæ¬èç·©èï¼é©å<strong>ä¹åä¸ç­æãéè»æãæ¬éç©å·¥ä½èãéåå¾æ¾é¬</strong>è<strong>é·è¼©æ¥å¸¸ä¿é¤</strong>ãèæ¬æ¤èï¼æ¸æ¶¼èç½ï¼å¥½æ¨ä¸é»è©ã
       </p>
       <div class="flex flex-col sm:flex-row gap-3">
         <button onclick="openLineModal()" class="btn-line px-6 py-3 rounded-xl font-bold text-base flex items-center justify-center gap-2 btn-pulse">
-          <i class="fab fa-line text-lg"></i> 加入LINE領取專屬舒緩碼
+          <i class="fab fa-line text-lg"></i> å å¥LINEå®æ¹å¸³è
         </button>
         <button onclick="openOrderModal('combo')" class="btn-primary px-6 py-3 rounded-xl font-bold text-base flex items-center justify-center gap-2">
-          <i class="fas fa-shopping-cart"></i> 3+1組合 $1000 貨到付款
+          <i class="fas fa-shopping-cart"></i> 3+1çµå $1000 è²¨å°ä»æ¬¾
         </button>
       </div>
       <div class="flex flex-wrap gap-4 text-sm text-slate-500">
-        <span class="flex items-center gap-1"><i class="fas fa-check-circle text-green-500"></i> 已有 12,800+ 組出貨</span>
-        <span class="flex items-center gap-1"><i class="fas fa-check-circle text-green-500"></i> 滿 $1000 免運</span>
-        <span class="flex items-center gap-1"><i class="fas fa-search text-blue-400"></i> 可查詢出貨進度</span>
+        <span class="flex items-center gap-1"><i class="fas fa-check-circle text-green-500"></i> å·²æ 12,800+ çµåºè²¨</span>
+        <span class="flex items-center gap-1"><i class="fas fa-check-circle text-green-500"></i> æ»¿ $1000 åé</span>
+        <span class="flex items-center gap-1"><i class="fas fa-search text-blue-400"></i> å¯æ¥è©¢åºè²¨é²åº¦</span>
       </div>
     </div>
     <div class="md:w-1/2 flex justify-center reveal">
-      <img src="照片/產品主圖.jpg" alt="金牌一條根草本舒緩膏" class="max-w-xs md:max-w-sm w-full drop-shadow-2xl">
+      <img src="ç§ç/ç¢åä¸»å.jpg" alt="éå¤ªæ¥µèæ¬èç·©è" class="max-w-xs md:max-w-sm w-full drop-shadow-2xl">
     </div>
   </div>
 </header>
 
-<!-- 信任標誌 -->
+<!-- ä¿¡ä»»æ¨èª -->
 <section class="bg-white py-8 border-b border-amber-50">
   <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-    <div class="space-y-1 reveal"><img src="照片/GMP證書.jpg" alt="GMP" class="h-14 mx-auto object-contain" style="background:white;border-radius:6px;padding:2px"><p class="font-bold deep-text text-sm">GMP中藥廠監製</p><p class="text-xs text-slate-400">台南新營在地製藥</p></div>
-    <div class="space-y-1 reveal"><img src="照片/專利證書.jpg" alt="專利" class="h-14 mx-auto object-contain" style="background:white;border-radius:6px;padding:2px"><p class="font-bold deep-text text-sm">合法廣告許可</p><p class="text-xs text-slate-400">安全合規不誇大</p></div>
-    <div class="space-y-1 reveal"><div class="h-14 flex items-center justify-center"><i class="fas fa-map-marker-alt text-3xl gold-text"></i></div><p class="font-bold deep-text text-sm">Made In Taiwan</p><p class="text-xs text-slate-400">台灣在地草本品牌</p></div>
-    <div class="space-y-1 reveal"><img src="照片/產品細節_擠壓口.jpg" alt="專利設計" class="h-14 mx-auto object-contain" style="background:white;border-radius:6px;padding:2px"><p class="font-bold deep-text text-sm">新型專利設計</p><p class="text-xs text-slate-400">獨家擠壓式瓶身</p></div>
+    <div class="space-y-1 reveal"><img src="ç§ç/GMPè­æ¸.jpg" alt="GMP" class="h-14 mx-auto object-contain" style="background:white;border-radius:6px;padding:2px"><p class="font-bold deep-text text-sm">GMPä¸­è¥å» ç£è£½</p><p class="text-xs text-slate-400">å°åæ°çå¨å°è£½è¥</p></div>
+    <div class="space-y-1 reveal"><img src="ç§ç/å»£åè¨±å¯.jpg" alt="å»£åè¨±å¯" class="h-14 mx-auto object-contain" style="background:white;border-radius:6px;padding:2px"><p class="font-bold deep-text text-sm">åæ³å»£åè¨±å¯</p><p class="text-xs text-slate-400">å®å¨åè¦ä¸èªå¤§</p></div>
+    <div class="space-y-1 reveal"><div class="h-14 flex items-center justify-center"><i class="fas fa-map-marker-alt text-3xl gold-text"></i></div><p class="font-bold deep-text text-sm">Made In Taiwan</p><p class="text-xs text-slate-400">å°ç£å¨å°èæ¬åç</p></div>
+    <div class="space-y-1 reveal"><img src="ç§ç/ç¢åç´°ç¯_æ å£å£.jpg" alt="ç¨å®¶è¨­è¨" class="h-14 mx-auto object-contain" style="background:white;border-radius:6px;padding:2px"><p class="font-bold deep-text text-sm">ç¨å®¶è¨­è¨</p><p class="text-xs text-slate-400">ç¨å®¶æ å£å¼ç¶èº«</p></div>
   </div>
 </section>
 
-<!-- 品牌故事：宇宙太極 -->
+<!-- åçæäºï¼å®å®å¤ªæ¥µ -->
 <section id="story" class="py-24 bg-stone-50">
   <div class="max-w-6xl mx-auto px-4">
     <div class="flex flex-col md:flex-row-reverse items-center gap-12">
@@ -209,16 +209,16 @@
         <canvas id="cosmos-canvas" style="width:100%;max-width:460px;border-radius:50%;display:block;cursor:default"></canvas>
       </div>
       <div class="md:w-1/2 space-y-6 reveal">
-        <h2 class="text-4xl font-bold deep-text">古法智慧，<br><span class="gold-text">現代守護</span>。</h2>
+        <h2 class="text-4xl font-bold deep-text">å¤æ³æºæ§ï¼<br><span class="gold-text">ç¾ä»£å®è­·</span>ã</h2>
         <div class="space-y-4 text-slate-600 leading-relaxed">
-          <p>當世界快到令人窒息，「金太極」為您找回身體的節奏。我們堅持在台南 GMP 中藥廠，透過古法與現代製程，守護每一克草本的生命力。</p>
-          <p>這不是化學涼感劑的廉價快感，而是太極五行「木火土金水」的深度平衡。</p>
+          <p>ç¶ä¸çå¿«å°ä»¤äººçªæ¯ï¼ãéå¤ªæ¥µãçºæ¨æ¾åèº«é«çç¯å¥ãæåå æå¨å°å GMP ä¸­è¥å» ï¼ééå¤æ³èç¾ä»£è£½ç¨ï¼å®è­·æ¯ä¸åèæ¬ççå½åã</p>
+          <p>éä¸æ¯åå­¸æ¶¼æåçå»å¹å¿«æï¼èæ¯å¤ªæ¥µäºè¡ãæ¨ç«åéæ°´ãçæ·±åº¦å¹³è¡¡ã</p>
         </div>
         <div class="bg-stone-800 p-8 rounded-3xl border-l-4 border-amber-400 shadow-2xl">
-          <p class="text-slate-200 italic text-xl">「做就要做到最好。這是我對這塊土地與您的承諾。」</p>
+          <p class="text-slate-200 italic text-xl">ãåå°±è¦åå°æå¥½ãéæ¯æå°éå¡åå°èæ¨çæ¿è«¾ãã</p>
           <div class="mt-6 flex items-center space-x-4">
-            <img src="照片/董事長照片.jpg" class="w-16 h-16 rounded-full border-2 border-amber-400 object-cover" loading="lazy">
-            <p class="font-bold gold-text">金牌一條根 董事長</p>
+            <img src="ç§ç/è£äºé·ç§ç.jpg" class="w-16 h-16 rounded-full border-2 border-amber-400 object-cover" loading="lazy">
+            <p class="font-bold gold-text">éå¤ªæ¥µ è£äºé·</p>
           </div>
         </div>
       </div>
@@ -226,37 +226,37 @@
   </div>
 </section>
 
-<!-- 教育消費者：如何識貨 -->
+<!-- æè²æ¶è²»èï¼å¦ä½è­è²¨ -->
 <section class="py-20 bg-white border-t border-b border-gray-100">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16 reveal">
-      <h2 class="text-3xl font-bold deep-text">一條根市場的水很深，<br><span class="text-red-600">教您如何不踩雷</span></h2>
+      <h2 class="text-3xl font-bold deep-text">èæ¬èç·©èå¸å ´é­é¾æ··éï¼<br><span class="text-red-600">ææ¨å¦ä½è°æé¸è³¼</span></h2>
     </div>
     <div class="grid md:grid-cols-2 gap-12">
       <div class="space-y-6 reveal">
-        <h3 class="text-xl font-bold gold-text flex items-center"><i class="fas fa-search-location mr-2"></i> 認準「真實生產地址」</h3>
-        <p class="text-gray-600">廉價產品往往標示不明，甚至只寫「進口」或虛假地址。金太極敢把地址印在最顯眼處，因為我們在台南擁有實體 GMP 中藥廠，隨時歡迎檢驗。</p>
-        <h3 class="text-xl font-bold gold-text flex items-center"><i class="fas fa-leaf mr-2"></i> 真草本萃取 vs. 化學藥水</h3>
-        <p class="text-gray-600">低價一條根常靠大量化學涼感劑欺騙體感。金太極膏使用真材實料的一條根草本配方，聞起來有草本溫潤清香，而非刺鼻化學味。</p>
+        <h3 class="text-xl font-bold gold-text flex items-center"><i class="fas fa-search-location mr-2"></i> èªæºãçå¯¦çç¢å°åã</h3>
+        <p class="text-gray-600">å»å¹ç¢åå¾å¾æ¨ç¤ºä¸æï¼çè³åªå¯«ãé²å£ãæèåå°åãéå¤ªæ¥µæ¢æå°åå°å¨æé¡¯ç¼èï¼å çºæåå¨å°åææå¯¦é« GMP ä¸­è¥å» ï¼é¨ææ­¡è¿æª¢é©ã</p>
+        <h3 class="text-xl font-bold gold-text flex items-center"><i class="fas fa-leaf mr-2"></i> çèæ¬èå vs. åå­¸è¥æ°´</h3>
+        <p class="text-gray-600">åéå£è³ªèæ¬èå¸¸é å¤§éåå­¸æ¶¼æåæ¬ºé¨é«æãéå¤ªæ¥µèä½¿ç¨çæå¯¦æçèæ¬éæ¹ï¼èèµ·ä¾æèæ¬æº«æ½¤æ¸é¦ï¼èéåºé¼»åå­¸å³ã</p>
         <button onclick="openModal()" class="mt-4 px-6 py-2 border-2 border-amber-400 gold-text font-bold rounded-full hover:bg-amber-50 transition">
-          <i class="fas fa-balance-scale mr-2"></i> 查看真假辨識對照表
+          <i class="fas fa-balance-scale mr-2"></i> æ¥ççåè¾¨è­å°ç§è¡¨
         </button>
       </div>
       <div class="space-y-6 reveal">
         <div class="bg-amber-50 p-8 rounded-3xl border border-amber-200">
-          <h4 class="text-2xl font-bold deep-text mb-6">金太極的成分宣言</h4>
+          <h4 class="text-2xl font-bold deep-text mb-6">éå¤ªæ¥µçæåå®£è¨</h4>
           <ul class="space-y-4">
-            <li class="flex items-center text-green-800"><i class="fas fa-check-circle mr-2"></i> 拒絕添加過量化學刺激物</li>
-            <li class="flex items-center text-green-800"><i class="fas fa-check-circle mr-2"></i> 堅持高成本中藥草本精華</li>
-            <li class="flex items-center text-green-800"><i class="fas fa-check-circle mr-2"></i> 每一瓶皆符合 GMP 製藥衛生標準</li>
-            <li class="flex items-center text-green-800"><i class="fas fa-check-circle mr-2"></i> 真實台南在地工廠直送</li>
+            <li class="flex items-center text-green-800"><i class="fas fa-check-circle mr-2"></i> æçµæ·»å ééåå­¸åºæ¿ç©</li>
+            <li class="flex items-center text-green-800"><i class="fas fa-check-circle mr-2"></i> å æé«ææ¬ä¸­è¥èæ¬ç²¾è¯</li>
+            <li class="flex items-center text-green-800"><i class="fas fa-check-circle mr-2"></i> æ¯ä¸ç¶çç¬¦å GMP è£½è¥è¡çæ¨æº</li>
+            <li class="flex items-center text-green-800"><i class="fas fa-check-circle mr-2"></i> çå¯¦å°åå¨å°å·¥å» ç´é</li>
           </ul>
         </div>
         <div class="flex items-center space-x-4 bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
-          <img src="照片/封條_安全撕毀對比.jpg" class="w-32 h-20 object-cover rounded-lg" loading="lazy">
+          <img src="ç§ç/å°æ¢_å®å¨ææ¯å°æ¯.jpg" class="w-32 h-20 object-cover rounded-lg" loading="lazy">
           <div>
-            <h5 class="font-bold text-sm deep-text">每一罐，都是首手保證</h5>
-            <p class="text-xs text-gray-500">不可逆拆封設計，一旦開啟即有裂痕，確保您收到的能量純淨無虞。</p>
+            <h5 class="font-bold text-sm deep-text">æ¯ä¸ç½ï¼é½æ¯é¦æä¿è­</h5>
+            <p class="text-xs text-gray-500">ä¸å¯éæå°è¨­è¨ï¼ä¸æ¦éåå³æè£çï¼ç¢ºä¿æ¨æ¶å°çè½éç´æ·¨ç¡èã</p>
           </div>
         </div>
       </div>
@@ -264,449 +264,449 @@
   </div>
 </section>
 
-<!-- 10 大麻煩解決方案 -->
+<!-- 10 å¤§éº»ç©è§£æ±ºæ¹æ¡ -->
 <section class="py-20 bg-gray-50">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16 reveal">
-      <h2 class="text-3xl font-bold deep-text">傳統藥膏的 10 個麻煩<br><span class="gold-text">金太極透過專利設計一次解決</span></h2>
+      <h2 class="text-3xl font-bold deep-text">å³çµ±è¥èç 10 åéº»ç©<br><span class="gold-text">éå¤ªæ¥µééç¨å®¶è¨­è¨ä¸æ¬¡è§£æ±º</span></h2>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.05s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_瓶口髒黏.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_ç¶å£é«é».jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">解決瓶口髒黏</p>
+          <p class="text-sm font-bold deep-text">è§£æ±ºç¶å£é«é»</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.1s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_手指接觸.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_æææ¥è§¸.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">告別手指直接挖</p>
+          <p class="text-sm font-bold deep-text">åå¥ææç´æ¥æ</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.15s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_交叉污染.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_äº¤åæ±¡æ.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">避免多人共用污染</p>
+          <p class="text-sm font-bold deep-text">é¿åå¤äººå±ç¨æ±¡æ</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.2s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_氧化變質.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_æ°§åè®è³ª.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">減少空氣氧化</p>
+          <p class="text-sm font-bold deep-text">æ¸å°ç©ºæ°£æ°§å</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.25s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_清理麻煩.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_æ¸çéº»ç©.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">免除用後擦瓶口</p>
+          <p class="text-sm font-bold deep-text">åé¤ç¨å¾æ¦ç¶å£</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.1s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_攜帶沾染.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_æå¸¶æ²¾æ.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">包包不再黏答答</p>
+          <p class="text-sm font-bold deep-text">ååä¸åé»ç­ç­</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.15s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_長輩難開.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_é·è¼©é£é.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">長輩取用更省力</p>
+          <p class="text-sm font-bold deep-text">é·è¼©åç¨æ´çå</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.2s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_用量難控.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_ç¨éé£æ§.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">用量精準不浪費</p>
+          <p class="text-sm font-bold deep-text">ç¨éç²¾æºä¸æµªè²»</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up" style="transition-delay:0.25s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_低價混淆.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_ä½å¹æ··æ·.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">一眼辨別正宗品牌</p>
+          <p class="text-sm font-bold deep-text">ä¸ç¼è¾¨å¥æ­£å®åç</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden reveal-hidden reveal-up border-2 border-amber-400" style="transition-delay:0.3s">
         <div class="bg-gray-50 p-4 flex items-center justify-center h-44">
-          <img src="照片/痛點_價值難辨.jpg" class="w-full h-full object-contain" loading="lazy">
+          <img src="ç§ç/çé»_å¹å¼é£è¾¨.jpg" class="w-full h-full object-contain" loading="lazy">
         </div>
         <div class="p-3 text-center">
-          <p class="text-sm font-bold deep-text">對得起價格的高品質</p>
+          <p class="text-sm font-bold deep-text">å°å¾èµ·å¹æ ¼çé«åè³ª</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 真假辨識對照表彈窗 -->
+<!-- çåè¾¨è­å°ç§è¡¨å½çª -->
 <div id="comparison-modal" class="modal-overlay modal-hidden">
   <div class="modal-box">
     <div class="gold-bg p-6 text-white flex justify-between items-center rounded-t-3xl">
-      <h3 class="text-xl font-bold">真假一條根・專業辨識表</h3>
+      <h3 class="text-xl font-bold">èæ¬èç·©èã»é¸è³¼è¾¨è­è¡¨</h3>
       <button onclick="closeModal()" class="text-2xl hover:text-gray-200">&times;</button>
     </div>
     <div class="p-6 overflow-x-auto">
       <table class="w-full text-left text-sm">
         <thead class="bg-gray-50 text-gray-600">
-          <tr><th class="p-3">項目</th><th class="p-3 gold-text">金太極膏（正宗台灣）</th><th class="p-3">廉價低價品（陸製/未知）</th></tr>
+          <tr><th class="p-3">é ç®</th><th class="p-3 gold-text">éå¤ªæ¥µèï¼æ­£å®å°ç£ï¼</th><th class="p-3">å»å¹ä½å¹åï¼é¸è£½/æªç¥ï¼</th></tr>
         </thead>
         <tbody class="divide-y">
-          <tr><td class="p-3 font-bold">生產工廠</td><td class="p-3">台南新營 GMP 中藥廠自產</td><td class="p-3">多為代工廠或標示不明</td></tr>
-          <tr><td class="p-3 font-bold">成分組成</td><td class="p-3">真材實料草本浸泡萃取</td><td class="p-3">高比例化學薄荷腦/冬青油</td></tr>
-          <tr><td class="p-3 font-bold">取用設計</td><td class="p-3">台灣新型專利擠壓瓶（衛生）</td><td class="p-3">傳統大口瓶（易污染、乾涸）</td></tr>
-          <tr><td class="p-3 font-bold">地址與合法性</td><td class="p-3">完整標示藥廠地址與廣告字號</td><td class="p-3">僅標示代理商或虛擬地址</td></tr>
+          <tr><td class="p-3 font-bold">çç¢å·¥å» </td><td class="p-3">å°åæ°ç GMP ä¸­è¥å» èªç¢</td><td class="p-3">å¤çºä»£å·¥å» ææ¨ç¤ºä¸æ</td></tr>
+          <tr><td class="p-3 font-bold">æåçµæ</td><td class="p-3">çæå¯¦æèæ¬æµ¸æ³¡èå</td><td class="p-3">é«æ¯ä¾åå­¸èè·è¦/æ¶¬éæ²¹</td></tr>
+          <tr><td class="p-3 font-bold">åç¨è¨­è¨</td><td class="p-3">å°ç£ç¨å®¶è¨­è¨æ å£ç¶ï¼è¡çï¼</td><td class="p-3">å³çµ±å¤§å£ç¶ï¼ææ±¡æãä¹¾æ¶¸ï¼</td></tr>
+          <tr><td class="p-3 font-bold">å°åèåæ³æ§</td><td class="p-3">å®æ´æ¨ç¤ºè¥å» å°åèå»£åå­è</td><td class="p-3">åæ¨ç¤ºä»£çåæèæ¬å°å</td></tr>
         </tbody>
       </table>
       <div class="mt-6 text-center">
-        <button onclick="closeModal()" class="gold-bg text-white px-8 py-2 rounded-full font-bold">我明白了，支持正宗</button>
+        <button onclick="closeModal()" class="gold-bg text-white px-8 py-2 rounded-full font-bold">ææç½äºï¼æ¯ææ­£å®</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- GMP 透明化生產工藝 -->
+<!-- GMP éæåçç¢å·¥è -->
 <section class="py-20 bg-white">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16 reveal">
-      <h2 class="text-3xl font-bold deep-text uppercase tracking-widest">GMP 透明化生產工藝</h2>
-      <p class="text-gray-500 mt-4 italic">對細節的偏執，是我們對您身心靈健康的尊重</p>
+      <h2 class="text-3xl font-bold deep-text uppercase tracking-widest">GMP éæåçç¢å·¥è</h2>
+      <p class="text-gray-500 mt-4 italic">å°ç´°ç¯çåå·ï¼æ¯æåå°æ¨èº«å¿éå¥åº·çå°é</p>
     </div>
     <div class="grid md:grid-cols-3 gap-8">
       <div class="space-y-4 reveal">
-        <img src="照片/生產流程_原料萃取.jpg" class="rounded-xl w-full h-48 object-cover shadow-md" loading="lazy">
-        <h3 class="text-xl font-bold deep-text text-center">Step 01. 草本萃取</h3>
-        <p class="text-sm text-gray-600 text-center">嚴選地道一條根，透過現代技術鎖住老祖宗的植物生命能量。</p>
+        <img src="ç§ç/çç¢æµç¨_åæèå.jpg" class="rounded-xl w-full h-48 object-cover shadow-md" loading="lazy">
+        <h3 class="text-xl font-bold deep-text text-center">Step 01. èæ¬èå</h3>
+        <p class="text-sm text-gray-600 text-center">å´é¸åªè³ªèæ¬ï¼ééç¾ä»£æè¡éä½èç¥å®çæ¤ç©çå½è½éã</p>
       </div>
       <div class="space-y-4 reveal">
-        <img src="照片/生產流程_精密調配.jpg" class="rounded-xl w-full h-48 object-cover shadow-md" loading="lazy">
-        <h3 class="text-xl font-bold deep-text text-center">Step 02. 精密調配</h3>
-        <p class="text-sm text-gray-600 text-center">在 GMP 標準無塵室中，將草本精華與專利基質完美融合，確保每一抹的純淨。</p>
+        <img src="ç§ç/çç¢æµç¨_ç²¾å¯èª¿é.jpg" class="rounded-xl w-full h-48 object-cover shadow-md" loading="lazy">
+        <h3 class="text-xl font-bold deep-text text-center">Step 02. ç²¾å¯èª¿é</h3>
+        <p class="text-sm text-gray-600 text-center">å¨ GMP æ¨æºç¡å¡µå®¤ä¸­ï¼å°èæ¬ç²¾è¯èç¨å®¶éæ¹å®ç¾èåï¼ç¢ºä¿æ¯ä¸æ¹çç´æ·¨ã</p>
       </div>
       <div class="space-y-4 reveal">
-        <img src="照片/生產流程_品質檢驗.jpg" class="rounded-xl w-full h-48 object-cover shadow-md" loading="lazy">
-        <h3 class="text-xl font-bold deep-text text-center">Step 03. 嚴苛檢驗</h3>
-        <p class="text-sm text-gray-600 text-center">不僅通過國家標準，更要求每一批產品都要符合「安心感」的高標。</p>
+        <img src="ç§ç/çç¢æµç¨_åè³ªæª¢é©.jpg" class="rounded-xl w-full h-48 object-cover shadow-md" loading="lazy">
+        <h3 class="text-xl font-bold deep-text text-center">Step 03. å´èæª¢é©</h3>
+        <p class="text-sm text-gray-600 text-center">ä¸åééåå®¶æ¨æºï¼æ´è¦æ±æ¯ä¸æ¹ç¢åé½è¦ç¬¦åãå®å¿æãçé«æ¨ã</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 專利設計對比 -->
+<!-- ç¨å®¶è¨­è¨å°æ¯ -->
 <section class="py-20 bg-white">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16 reveal">
-      <h2 class="text-3xl font-bold deep-text">你家的藥膏瓶口，是不是也總是髒髒黏黏的？</h2>
-      <p class="text-gray-500 mt-4">專利擠壓式設計，徹底解決傳統藥膏的 10 大麻煩</p>
+      <h2 class="text-3xl font-bold deep-text">ä½ å®¶çè¥èç¶å£ï¼æ¯ä¸æ¯ä¹ç¸½æ¯é«é«é»é»çï¼</h2>
+      <p class="text-gray-500 mt-4">ç¨å®¶æ å£å¼è¨­è¨ï¼å¾¹åºè§£æ±ºå³çµ±è¥èç 10 å¤§éº»ç©</p>
     </div>
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div class="space-y-6">
         <div class="flex items-center space-x-6 bg-red-50 p-6 rounded-2xl border-l-8 border-red-500 shadow-sm reveal-hidden reveal-left">
-          <img src="照片/對比_傳統廣口瓶.jpg" alt="傳統廣口瓶困擾" class="w-24 h-24 object-contain rounded-lg bg-white p-2" loading="lazy">
+          <img src="ç§ç/å°æ¯_å³çµ±å»£å£ç¶.jpg" alt="å³çµ±å»£å£ç¶å°æ¾" class="w-24 h-24 object-contain rounded-lg bg-white p-2" loading="lazy">
           <div>
-            <h4 class="font-bold text-red-700">傳統廣口瓶的困擾</h4>
-            <p class="text-sm text-red-600">手指反覆接觸容易污染、膏體氧化變質、瓶口殘留黏膩、多人共用不衛生。</p>
+            <h4 class="font-bold text-red-700">å³çµ±å»£å£ç¶çå°æ¾</h4>
+            <p class="text-sm text-red-600">ææåè¦æ¥è§¸å®¹ææ±¡æãèé«æ°§åè®è³ªãç¶å£æ®çé»è©ãå¤äººå±ç¨ä¸è¡çã</p>
           </div>
         </div>
         <div class="flex items-center space-x-6 bg-amber-50 p-6 rounded-2xl border-l-8 border-amber-400 shadow-md reveal-hidden reveal-right">
-          <img src="照片/對比_金太極專利瓶.jpg" alt="金太極專利設計" class="w-24 h-24 object-contain rounded-lg bg-white p-2 shadow-inner" loading="lazy">
+          <img src="ç§ç/å°æ¯_éå¤ªæ¥µç¨å®¶è¨­è¨ç¶.jpg" alt="éå¤ªæ¥µç¨å®¶è¨­è¨" class="w-24 h-24 object-contain rounded-lg bg-white p-2 shadow-inner" loading="lazy">
           <div>
-            <h4 class="font-bold deep-text">金太極專利擠壓設計</h4>
-            <p class="text-sm text-gray-700">用多少擠多少、減少空氣接觸、瓶口乾淨不沾染、長輩取用更直覺。</p>
+            <h4 class="font-bold deep-text">éå¤ªæ¥µç¨å®¶æ å£è¨­è¨</h4>
+            <p class="text-sm text-gray-700">ç¨å¤å°æ å¤å°ãæ¸å°ç©ºæ°£æ¥è§¸ãç¶å£ä¹¾æ·¨ä¸æ²¾æãé·è¼©åç¨æ´ç´è¦ºã</p>
           </div>
         </div>
       </div>
       <div class="relative reveal">
-        <img src="照片/專利設計特寫.jpg" alt="專利設計" class="rounded-2xl shadow-2xl w-full h-auto object-contain" loading="lazy">
-        <span class="absolute -top-4 -right-4 gold-bg text-white font-bold p-4 rounded-full shadow-lg">獨家專利</span>
+        <img src="ç§ç/ç¨å®¶è¨­è¨ç¹å¯«.jpg" alt="ç¨å®¶è¨­è¨" class="rounded-2xl shadow-2xl w-full h-auto object-contain" loading="lazy">
+        <span class="absolute -top-4 -right-4 gold-bg text-white font-bold p-4 rounded-full shadow-lg">ç¨å®¶è¨­è¨</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 適應症 -->
+<!-- é©æç -->
 <section class="py-20 bg-gray-50">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16 reveal">
-      <h2 class="text-3xl font-bold deep-text uppercase tracking-widest">金太極膏｜日常照護，多重適應</h2>
-      <p class="text-gray-500 mt-4 italic">一支安心藥膏，多種情境適用，為您與家人提供全方位守護</p>
+      <h2 class="text-3xl font-bold deep-text uppercase tracking-widest">éå¤ªæ¥µèï½æ¥å¸¸ç§è­·ï¼å¤éé©æ</h2>
+      <p class="text-gray-500 mt-4 italic">ä¸æ¯å®å¿è¥èï¼å¤ç¨®æå¢é©ç¨ï¼çºæ¨èå®¶äººæä¾å¨æ¹ä½å®è­·</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      <div class="space-y-3 text-center reveal"><img src="照片/適應症_蚊蟲叮咬.jpg" alt="蚊蟲叮咬" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">蚊蟲叮咬</h4><p class="text-sm text-gray-600">快速舒緩紅腫癢</p></div>
-      <div class="space-y-3 text-center reveal"><img src="照片/適應症_舟車暈浪.jpg" alt="舟車暈浪" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">舟車暈浪</h4><p class="text-sm text-gray-600">提神醒腦，緩解不適</p></div>
-      <div class="space-y-3 text-center reveal"><img src="照片/適應症_止痛止癢.jpg" alt="止痛止癢" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">止痛止癢</h4><p class="text-sm text-gray-600">日常小痛癢，一抹見效</p></div>
-      <div class="space-y-3 text-center reveal"><img src="照片/適應症_中暑暈眩.jpg" alt="中暑暈眩" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">中暑暈眩</h4><p class="text-sm text-gray-600">清涼解暑，緩解頭暈</p></div>
-      <div class="space-y-3 text-center reveal"><img src="照片/適應症_感冒頭痛.jpg" alt="感冒頭痛" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">感冒頭痛</h4><p class="text-sm text-gray-600">舒緩頭部不適</p></div>
-      <div class="space-y-3 text-center reveal"><img src="照片/適應症_肚痛腹脹.jpg" alt="肚痛腹脹" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">肚痛腹脹</h4><p class="text-sm text-gray-600">溫和舒緩腹部不適</p></div>
-      <div class="space-y-3 text-center reveal"><img src="照片/適應症_風溼筋痛.jpg" alt="風溼筋痛" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">風溼筋痛</h4><p class="text-sm text-gray-600">深層滲透，緩解痠痛</p></div>
-      <div class="space-y-3 text-center reveal"><img src="照片/適應症_刀傷創傷.jpg" alt="刀傷創傷" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">刀傷創傷</h4><p class="text-sm text-gray-600">輕微外傷的日常照護</p></div>
+      <div class="space-y-3 text-center reveal"><img src="ç§ç/é©æç_èè²å®å¬.jpg" alt="èè²å®å¬" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">èè²å®å¬</h4><p class="text-sm text-gray-600">å¿«éèç·©ç´è«ç¢</p></div>
+      <div class="space-y-3 text-center reveal"><img src="ç§ç/é©æç_èè»ææµª.jpg" alt="èè»ææµª" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">èè»ææµª</h4><p class="text-sm text-gray-600">æç¥éè¦ï¼ç·©è§£ä¸é©</p></div>
+      <div class="space-y-3 text-center reveal"><img src="ç§ç/é©æç_æ­¢çæ­¢ç¢.jpg" alt="æ­¢çæ­¢ç¢" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">æ­¢çæ­¢ç¢</h4><p class="text-sm text-gray-600">æ¥å¸¸å°çç¢ï¼ä¸æ¹è¦æ</p></div>
+      <div class="space-y-3 text-center reveal"><img src="ç§ç/é©æç_ä¸­ææç©.jpg" alt="ä¸­ææç©" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">ä¸­ææç©</h4><p class="text-sm text-gray-600">æ¸æ¶¼è§£æï¼ç·©è§£é ­æ</p></div>
+      <div class="space-y-3 text-center reveal"><img src="ç§ç/é©æç_æåé ­ç.jpg" alt="æåé ­ç" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">æåé ­ç</h4><p class="text-sm text-gray-600">èç·©é ­é¨ä¸é©</p></div>
+      <div class="space-y-3 text-center reveal"><img src="ç§ç/é©æç_èçè¹è¹.jpg" alt="èçè¹è¹" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">èçè¹è¹</h4><p class="text-sm text-gray-600">æº«åèç·©è¹é¨ä¸é©</p></div>
+      <div class="space-y-3 text-center reveal"><img src="ç§ç/é©æç_é¢¨æº¼ç­ç.jpg" alt="é¢¨æº¼ç­ç" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">é¢¨æº¼ç­ç</h4><p class="text-sm text-gray-600">æ·±å±¤æ»²éï¼ç·©è§£ç ç</p></div>
+      <div class="space-y-3 text-center reveal"><img src="ç§ç/é©æç_åå·åµå·.jpg" alt="åå·åµå·" class="w-36 h-36 mx-auto object-cover rounded-full shadow-md border-2 border-amber-400 p-1" loading="lazy"><h4 class="font-bold deep-text">åå·åµå·</h4><p class="text-sm text-gray-600">è¼å¾®å¤å·çæ¥å¸¸ç§è­·</p></div>
     </div>
   </div>
 </section>
 
-<!-- 全家人日常照護情境 -->
+<!-- å¨å®¶äººæ¥å¸¸ç§è­·æå¢ -->
 <section class="py-20 bg-amber-50 overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 text-center">
-    <h2 class="text-3xl font-bold mb-12 deep-text reveal">全家人的日常照護平衡</h2>
+    <h2 class="text-3xl font-bold mb-12 deep-text reveal">å¨å®¶äººçæ¥å¸¸ç§è­·å¹³è¡¡</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="group cursor-pointer reveal">
-        <div class="overflow-hidden rounded-xl mb-3"><img src="照片/久坐上班族.jpg" class="transform group-hover:scale-110 transition duration-500 w-full" loading="lazy"></div>
-        <p class="font-medium deep-text">辦公久坐肩頸</p>
+        <div class="overflow-hidden rounded-xl mb-3"><img src="ç§ç/ä¹åä¸ç­æ.jpg" class="transform group-hover:scale-110 transition duration-500 w-full" loading="lazy"></div>
+        <p class="font-medium deep-text">è¾¦å¬ä¹åè©é ¸</p>
       </div>
       <div class="group cursor-pointer reveal">
-        <div class="overflow-hidden rounded-xl mb-3"><img src="照片/做家事腰背.jpg" class="transform group-hover:scale-110 transition duration-500 w-full" loading="lazy"></div>
-        <p class="font-medium deep-text">家事搬重勞損</p>
+        <div class="overflow-hidden rounded-xl mb-3"><img src="ç§ç/åå®¶äºè°è.jpg" class="transform group-hover:scale-110 transition duration-500 w-full" loading="lazy"></div>
+        <p class="font-medium deep-text">å®¶äºæ¬éåæ</p>
       </div>
       <div class="group cursor-pointer reveal">
-        <div class="overflow-hidden rounded-xl mb-3"><img src="照片/長輩日常保養.jpg" class="transform group-hover:scale-110 transition duration-500 w-full" loading="lazy"></div>
-        <p class="font-medium deep-text">長輩關節保養</p>
+        <div class="overflow-hidden rounded-xl mb-3"><img src="ç§ç/é·è¼©æ¥å¸¸ä¿é¤.jpg" class="transform group-hover:scale-110 transition duration-500 w-full" loading="lazy"></div>
+        <p class="font-medium deep-text">é·è¼©éç¯ä¿é¤</p>
       </div>
       <div class="group cursor-pointer reveal">
-        <div class="overflow-hidden rounded-xl mb-3"><img src="照片/登山戶外備用.jpg" class="transform group-hover:scale-110 transition duration-500 w-full" loading="lazy"></div>
-        <p class="font-medium deep-text">登山露營必備</p>
+        <div class="overflow-hidden rounded-xl mb-3"><img src="ç§ç/ç»å±±æ¶å¤åç¨.jpg" class="transform group-hover:scale-110 transition duration-500 w-full" loading="lazy"></div>
+        <p class="font-medium deep-text">ç»å±±é²çå¿å</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 社群爆款浪潮 -->
+<!-- ç¤¾ç¾¤çæ¬¾æµªæ½® -->
 <section class="py-20 bg-white overflow-hidden">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-12 reveal">
-      <h2 class="text-3xl font-bold deep-text">全台社群洗版推薦</h2>
-      <p class="text-gray-500 mt-2 italic">從脆到抖音，這支「擠壓式藥膏」真的火了！</p>
+      <h2 class="text-3xl font-bold deep-text">å¨å°ç¤¾ç¾¤æ´çæ¨è¦</h2>
+      <p class="text-gray-500 mt-2 italic">å¾èå°æé³ï¼éæ¯ãæ å£å¼è¥èãççç«äºï¼</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
       <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 reveal">
-        <div class="flex items-center space-x-2 mb-3"><i class="fab fa-at text-blue-500"></i><span class="font-bold text-sm">Threads 脆熱議</span></div>
-        <p class="text-sm text-gray-600 italic">「原本想說一條根都差不多，結果這個擠壓瓶真的救了我的包包，再也不會黏答答了...」</p>
+        <div class="flex items-center space-x-2 mb-3"><i class="fab fa-at text-blue-500"></i><span class="font-bold text-sm">Threads èç±è­°</span></div>
+        <p class="text-sm text-gray-600 italic">ãåæ¬æ³èªªèæ¬èé½å·®ä¸å¤ï¼çµæéåæ å£ç¶ççæäºæçååï¼åä¹ä¸æé»ç­ç­äº...ã</p>
       </div>
       <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 reveal">
-        <div class="flex items-center space-x-2 mb-3"><i class="fab fa-tiktok text-black"></i><span class="font-bold text-sm">TikTok 爆紅短影音</span></div>
-        <p class="text-sm text-gray-600 italic">#開箱 辦公室都在傳這支！擠出來的質地超像專櫃乳霜，上班肩頸卡卡必備！</p>
+        <div class="flex items-center space-x-2 mb-3"><i class="fab fa-tiktok text-black"></i><span class="font-bold text-sm">TikTok çç´ç­å½±é³</span></div>
+        <p class="text-sm text-gray-600 italic">#éç®± è¾¦å¬å®¤é½å¨å³éæ¯ï¼æ åºä¾çè³ªå°è¶åå°æ«ä¹³éï¼ä¸ç­è©é ¸å¡å¡å¿åï¼</p>
       </div>
       <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 reveal">
-        <div class="flex items-center space-x-2 mb-3"><i class="fab fa-instagram text-pink-500"></i><span class="font-bold text-sm">IG 質感博主推薦</span></div>
-        <p class="text-sm text-gray-600 italic">「太極設計的白色包裝好優雅，帶去瑜伽課也被問爆，完全沒有傳統藥膏味。」</p>
+        <div class="flex items-center space-x-2 mb-3"><i class="fab fa-instagram text-pink-500"></i><span class="font-bold text-sm">IG è³ªæåä¸»æ¨è¦</span></div>
+        <p class="text-sm text-gray-600 italic">ãå¤ªæ¥µè¨­è¨çç½è²åè£å¥½åªéï¼å¸¶å»çä¼½èª²ä¹è¢«åçï¼å®å¨æ²æå³çµ±è¥èå³ãã</p>
       </div>
       <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 reveal">
-        <div class="flex items-center space-x-2 mb-3"><i class="fab fa-facebook text-blue-800"></i><span class="font-bold text-sm">FB 團購社團瘋搶</span></div>
-        <p class="text-sm text-gray-600 italic">「+1、+1... 已經是第三次開團了，長輩說這支用起來最乾淨安心！」</p>
+        <div class="flex items-center space-x-2 mb-3"><i class="fab fa-facebook text-blue-800"></i><span class="font-bold text-sm">FB åè³¼ç¤¾åçæ¶</span></div>
+        <p class="text-sm text-gray-600 italic">ã+1ã+1... å·²ç¶æ¯ç¬¬ä¸æ¬¡éåäºï¼é·è¼©èªªéæ¯ç¨èµ·ä¾æä¹¾æ·¨å®å¿ï¼ã</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 媒體報導 -->
+<!-- åªé«å ±å° -->
 <section class="py-16 bg-amber-50 border-y border-amber-100">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-10 reveal">
-      <h2 class="text-2xl font-bold deep-text">媒體爭相報導</h2>
-      <p class="text-gray-500 mt-2 italic">Yahoo新聞、各大媒體一致好評推薦</p>
+      <h2 class="text-2xl font-bold deep-text">åªé«ç­ç¸å ±å°</h2>
+      <p class="text-gray-500 mt-2 italic">Yahooæ°èãåå¤§åªé«ä¸è´å¥½è©æ¨è¦</p>
     </div>
     <div class="grid md:grid-cols-2 gap-6 items-center">
-      <img src="照片/行銷圖8_Yahoo新聞寬.jpg" alt="Yahoo新聞報導" class="rounded-2xl shadow-lg w-full object-cover reveal" loading="lazy">
-      <img src="照片/行銷圖9_Yahoo新聞方.jpg" alt="Yahoo新聞報導2" class="rounded-2xl shadow-lg w-full object-cover reveal" loading="lazy">
+      <img src="ç§ç/è¡é·å8_Yahooæ°èå¯¬.jpg" alt="Yahooæ°èå ±å°" class="rounded-2xl shadow-lg w-full object-cover reveal" loading="lazy">
+      <img src="ç§ç/è¡é·å9_Yahooæ°èæ¹.jpg" alt="Yahooæ°èå ±å°2" class="rounded-2xl shadow-lg w-full object-cover reveal" loading="lazy">
     </div>
   </div>
 </section>
 
-<!-- 行銷圖5、6、7 -->
+<!-- è¡é·å5ã6ã7 -->
 <section class="py-4 bg-white">
   <div class="max-w-6xl mx-auto px-4">
-    <img src="照片/行銷圖5_不是每支.jpg" alt="不是每支一條根都一樣" class="rounded-2xl shadow-xl w-full max-w-2xl mx-auto block" loading="lazy">
+    <img src="ç§ç/è¡é·å5_ä¸æ¯æ¯æ¯.jpg" alt="ä¸æ¯æ¯æ¯èæ¬èç·©èé½ä¸æ¨£" class="rounded-2xl shadow-xl w-full max-w-2xl mx-auto block" loading="lazy">
   </div>
 </section>
 <section class="py-4 bg-amber-50/30">
   <div class="max-w-6xl mx-auto px-4">
-    <img src="照片/行銷圖6_瓶口不再髒黏.jpg" alt="瓶口不再髒黏" class="rounded-2xl shadow-xl w-full max-w-2xl mx-auto block" loading="lazy">
+    <img src="ç§ç/è¡é·å6_ç¶å£ä¸åé«é».jpg" alt="ç¶å£ä¸åé«é»" class="rounded-2xl shadow-xl w-full max-w-2xl mx-auto block" loading="lazy">
   </div>
 </section>
 <section class="py-4 bg-white">
   <div class="max-w-6xl mx-auto px-4">
-    <img src="照片/行銷圖7_你家的藥膏.jpg" alt="你家的藥膏瓶口" class="rounded-2xl shadow-xl w-full max-w-2xl mx-auto block" loading="lazy">
+    <img src="ç§ç/è¡é·å7_ä½ å®¶çè¥è.jpg" alt="ä½ å®¶çè¥èç¶å£" class="rounded-2xl shadow-xl w-full max-w-2xl mx-auto block" loading="lazy">
   </div>
 </section>
 
 
-<!-- 痛點場景 -->
+<!-- çé»å ´æ¯ -->
 <section id="pain" class="py-20 bg-amber-50/60">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-12 reveal">
-      <h2 class="text-3xl md:text-4xl font-black deep-text mb-3">你是哪一種人？</h2>
-      <p class="text-slate-500 text-base">這些日常不舒服，你一定有感</p>
+      <h2 class="text-3xl md:text-4xl font-black deep-text mb-3">ä½ æ¯åªä¸ç¨®äººï¼</h2>
+      <p class="text-slate-500 text-base">éäºæ¥å¸¸ä¸èæï¼ä½ ä¸å®ææ</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
       <div class="pain-card bg-white p-5 shadow-sm reveal">
-        <img src="照片/久坐上班族.jpg" alt="久坐上班族" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-1">久坐上班族</h3>
-        <p class="text-sm text-slate-500">坐一整天，肩頸硬得像石頭，下班後只想躺平。</p>
+        <img src="ç§ç/ä¹åä¸ç­æ.jpg" alt="ä¹åä¸ç­æ" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-1">ä¹åä¸ç­æ</h3>
+        <p class="text-sm text-slate-500">åä¸æ´å¤©ï¼è©é ¸ç¡¬å¾åç³é ­ï¼ä¸ç­å¾åªæ³èººå¹³ã</p>
       </div>
       <div class="pain-card bg-white p-5 shadow-sm reveal">
-        <img src="照片/開車族腰背.jpg" alt="開車族" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-1">開車族</h3>
-        <p class="text-sm text-slate-500">長時間開車，腰背緊繃，停車後動作都卡。</p>
+        <img src="ç§ç/éè»æè°è.jpg" alt="éè»æ" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-1">éè»æ</h3>
+        <p class="text-sm text-slate-500">é·æééè»ï¼è°èç·ç¹ï¼åè»å¾åä½é½å¡ã</p>
       </div>
       <div class="pain-card bg-white p-5 shadow-sm reveal">
-        <img src="照片/做家事腰背.jpg" alt="家務族" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-1">家務族</h3>
-        <p class="text-sm text-slate-500">做家事、抱小孩，手腕肩膀容易緊繃痠痛。</p>
+        <img src="ç§ç/åå®¶äºè°è.jpg" alt="å®¶åæ" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-1">å®¶åæ</h3>
+        <p class="text-sm text-slate-500">åå®¶äºãæ±å°å­©ï¼æèè©èå®¹æç·ç¹ç çã</p>
       </div>
       <div class="pain-card bg-white p-5 shadow-sm reveal">
-        <img src="照片/運動族跑步.jpg" alt="運動族" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-1">運動族</h3>
-        <p class="text-sm text-slate-500">跑步、重訓後，肌肉需要放鬆，清涼感很舒服。</p>
+        <img src="ç§ç/éåæè·æ­¥.jpg" alt="éåæ" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-1">éåæ</h3>
+        <p class="text-sm text-slate-500">è·æ­¥ãéè¨å¾ï¼èèéè¦æ¾é¬ï¼æ¸æ¶¼æå¾èæã</p>
       </div>
       <div class="pain-card bg-white p-5 shadow-sm reveal">
-        <img src="照片/長輩日常保養.jpg" alt="長輩族" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-1">長輩族</h3>
-        <p class="text-sm text-slate-500">日常保養，擠壓瓶方便取用，清涼舒適家常備。</p>
+        <img src="ç§ç/é·è¼©æ¥å¸¸ä¿é¤.jpg" alt="é·è¼©æ" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-1">é·è¼©æ</h3>
+        <p class="text-sm text-slate-500">æ¥å¸¸ä¿é¤ï¼æ å£ç¶æ¹ä¾¿åç¨ï¼æ¸æ¶¼èé©å®¶å¸¸åã</p>
       </div>
       <div class="pain-card bg-white p-5 shadow-sm reveal">
-        <img src="照片/搬重物工作者.jpg" alt="搬重物工作者" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-1">搬重物工作者</h3>
-        <p class="text-sm text-slate-500">工作後腰背與手腳容易疲勞，需要局部放鬆。</p>
+        <img src="ç§ç/æ¬éç©å·¥ä½è.jpg" alt="æ¬éç©å·¥ä½è" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-1">æ¬éç©å·¥ä½è</h3>
+        <p class="text-sm text-slate-500">å·¥ä½å¾è°èèæè³å®¹æç²åï¼éè¦å±é¨æ¾é¬ã</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 產品特色 -->
+<!-- ç¢åç¹è² -->
 <section class="py-20 bg-white">
   <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-12 reveal">
-      <h2 class="text-3xl md:text-4xl font-black deep-text mb-3">為什麼選金牌一條根？</h2>
-      <p class="text-slate-500">草本植萃，真材實料，不是涼感劑的廉價快感</p>
+      <h2 class="text-3xl md:text-4xl font-black deep-text mb-3">çºä»éº¼é¸éå¤ªæ¥µï¼</h2>
+      <p class="text-slate-500">èæ¬æ¤èï¼çæå¯¦æï¼ä¸æ¯æ¶¼æåçå»å¹å¿«æ</p>
     </div>
     <div class="grid md:grid-cols-2 gap-10 items-center">
       <div class="space-y-5 reveal">
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-full gold-bg flex-shrink-0 flex items-center justify-center text-white"><i class="fas fa-leaf"></i></div>
-          <div><h3 class="font-bold deep-text mb-1">草本植萃配方</h3><p class="text-sm text-slate-500">嚴選一條根草本精華，GMP中藥廠監製，成分透明。</p></div>
+          <div><h3 class="font-bold deep-text mb-1">èæ¬æ¤èéæ¹</h3><p class="text-sm text-slate-500">å´é¸èæ¬ç²¾è¯ï¼GMPä¸­è¥å» ç£è£½ï¼æåéæã</p></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-full gold-bg flex-shrink-0 flex items-center justify-center text-white"><i class="fas fa-wind"></i></div>
-          <div><h3 class="font-bold deep-text mb-1">清涼舒爽感</h3><p class="text-sm text-slate-500">塗抹後清涼感明顯，搭配按摩幫助局部放鬆。</p></div>
+          <div><h3 class="font-bold deep-text mb-1">æ¸æ¶¼èç½æ</h3><p class="text-sm text-slate-500">å¡æ¹å¾æ¸æ¶¼ææé¡¯ï¼æ­éææ©å¹«å©å±é¨æ¾é¬ã</p></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-full gold-bg flex-shrink-0 flex items-center justify-center text-white"><i class="fas fa-hand-sparkles"></i></div>
-          <div><h3 class="font-bold deep-text mb-1">好推開、不黏膩</h3><p class="text-sm text-slate-500">膏體細膩，推開快，不油膩，隨時隨地都方便使用。</p></div>
+          <div><h3 class="font-bold deep-text mb-1">å¥½æ¨éãä¸é»è©</h3><p class="text-sm text-slate-500">èé«ç´°è©ï¼æ¨éå¿«ï¼ä¸æ²¹è©ï¼é¨æé¨å°é½æ¹ä¾¿ä½¿ç¨ã</p></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-full gold-bg flex-shrink-0 flex items-center justify-center text-white"><i class="fas fa-syringe"></i></div>
-          <div><h3 class="font-bold deep-text mb-1">專利擠壓瓶設計</h3><p class="text-sm text-slate-500">用多少擠多少，瓶口乾淨，長輩取用省力，衛生不污染。</p></div>
+          <div><h3 class="font-bold deep-text mb-1">ç¨å®¶è¨­è¨æ å£ç¶</h3><p class="text-sm text-slate-500">ç¨å¤å°æ å¤å°ï¼ç¶å£ä¹¾æ·¨ï¼é·è¼©åç¨çåï¼è¡çä¸æ±¡æã</p></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-full gold-bg flex-shrink-0 flex items-center justify-center text-white"><i class="fas fa-home"></i></div>
-          <div><h3 class="font-bold deep-text mb-1">家庭常備首選</h3><p class="text-sm text-slate-500">居家、外出、辦公室都適用，3+1組合整家分享最划算。</p></div>
+          <div><h3 class="font-bold deep-text mb-1">å®¶åº­å¸¸åé¦é¸</h3><p class="text-sm text-slate-500">å±å®¶ãå¤åºãè¾¦å¬å®¤é½é©ç¨ï¼3+1çµåæ´å®¶åäº«æåç®ã</p></div>
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 rounded-full bg-red-500 flex-shrink-0 flex items-center justify-center text-white"><i class="fas fa-shield-alt"></i></div>
-          <div><h3 class="font-bold deep-text mb-1">衛署成字第 015614 號</h3><p class="text-sm text-slate-500">通過衛生福利部食品藥物管理署廣告核准，合法、安全、有保障，不是來路不明的偏方。</p></div>
+          <div><h3 class="font-bold deep-text mb-1">è¡ç½²æå­ç¬¬ 015614 è</h3><p class="text-sm text-slate-500">ééè¡çç¦å©é¨é£åè¥ç©ç®¡çç½²å»£åæ ¸åï¼åæ³ãå®å¨ãæä¿éï¼ä¸æ¯ä¾è·¯ä¸æçåæ¹ã</p></div>
         </div>
       </div>
-      <div class="reveal"><img src="照片/草本配方示意圖.jpg" alt="草本配方" class="rounded-2xl shadow-xl w-full"></div>
+      <div class="reveal"><img src="ç§ç/èæ¬éæ¹ç¤ºæå.jpg" alt="èæ¬éæ¹" class="rounded-2xl shadow-xl w-full"></div>
     </div>
   </div>
 </section>
 
-<!-- 使用教學 -->
+<!-- ä½¿ç¨æå­¸ -->
 <section class="py-16 bg-amber-50/50">
   <div class="max-w-4xl mx-auto px-4 text-center">
-    <h2 class="text-2xl md:text-3xl font-black deep-text mb-10 reveal">3 步驟，簡單舒緩</h2>
+    <h2 class="text-2xl md:text-3xl font-black deep-text mb-10 reveal">3 æ­¥é©ï¼ç°¡å®èç·©</h2>
     <div class="grid md:grid-cols-3 gap-6">
       <div class="bg-white rounded-2xl p-6 shadow-sm reveal">
         <div class="w-12 h-12 gold-bg rounded-full flex items-center justify-center text-white font-black text-lg mx-auto mb-4">1</div>
-        <img src="照片/使用方式1_取適量塗抹.jpg" alt="取適量塗抹" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-2">取適量塗抹</h3>
-        <p class="text-sm text-slate-500">輕擠適量，塗抹於肩頸、腰背、手腳等緊繃部位。</p>
+        <img src="ç§ç/ä½¿ç¨æ¹å¼1_åé©éå¡æ¹.jpg" alt="åé©éå¡æ¹" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-2">åé©éå¡æ¹</h3>
+        <p class="text-sm text-slate-500">è¼æ é©éï¼å¡æ¹æ¼è©é ¸ãè°èãæè³ç­ç·ç¹é¨ä½ã</p>
       </div>
       <div class="bg-white rounded-2xl p-6 shadow-sm reveal">
         <div class="w-12 h-12 gold-bg rounded-full flex items-center justify-center text-white font-black text-lg mx-auto mb-4">2</div>
-        <img src="照片/使用方式2_畫圈按摩.jpg" alt="畫圈按摩" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-2">畫圈按摩</h3>
-        <p class="text-sm text-slate-500">以畫圈方式輕輕按摩 30～60 秒，幫助局部放鬆。</p>
+        <img src="ç§ç/ä½¿ç¨æ¹å¼2_ç«åææ©.jpg" alt="ç«åææ©" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-2">ç«åææ©</h3>
+        <p class="text-sm text-slate-500">ä»¥ç«åæ¹å¼è¼è¼ææ© 30ï½60 ç§ï¼å¹«å©å±é¨æ¾é¬ã</p>
       </div>
       <div class="bg-white rounded-2xl p-6 shadow-sm reveal">
         <div class="w-12 h-12 gold-bg rounded-full flex items-center justify-center text-white font-black text-lg mx-auto mb-4">3</div>
-        <img src="照片/使用方式3_適時使用.jpg" alt="適時使用" class="w-full rounded-xl mb-4 object-contain">
-        <h3 class="font-bold deep-text mb-2">適時使用</h3>
-        <p class="text-sm text-slate-500">久坐後、運動後、睡前或工作後，依需要使用。</p>
+        <img src="ç§ç/ä½¿ç¨æ¹å¼3_é©æä½¿ç¨.jpg" alt="é©æä½¿ç¨" class="w-full rounded-xl mb-4 object-contain">
+        <h3 class="font-bold deep-text mb-2">é©æä½¿ç¨</h3>
+        <p class="text-sm text-slate-500">ä¹åå¾ãéåå¾ãç¡åæå·¥ä½å¾ï¼ä¾éè¦ä½¿ç¨ã</p>
       </div>
     </div>
-    <p class="mt-6 text-xs text-slate-400">⚠️ 請勿用於傷口、潰爛或過敏部位。孕婦、嬰幼兒及特殊疾病者，請先諮詢醫師或藥師。</p>
+    <p class="mt-6 text-xs text-slate-400">â ï¸ è«å¿ç¨æ¼å·å£ãæ½°çæéæé¨ä½ãå­å©¦ãå¬°å¹¼ååç¹æ®ç¾çèï¼è«åè«®è©¢é«å¸«æè¥å¸«ã</p>
   </div>
 </section>
 
-<!-- 訂單追蹤說明 -->
+<!-- è¨å®è¿½è¹¤èªªæ -->
 <section id="member" class="py-16 bg-gradient-to-br from-stone-800 to-stone-900 text-white">
   <div class="max-w-4xl mx-auto px-4 text-center reveal">
-    <div class="text-4xl mb-4">📦</div>
-    <h2 class="text-2xl md:text-3xl font-black mb-3">下單後，隨時查詢出貨進度</h2>
-    <p class="text-stone-300 text-base mb-8">填寫訂單時請留下真實手機號碼，訂單成立後即可用<strong class="text-amber-400">訂單編號 + 手機末三碼</strong>查詢目前的出貨狀態。</p>
+    <div class="text-4xl mb-4">ð¦</div>
+    <h2 class="text-2xl md:text-3xl font-black mb-3">ä¸å®å¾ï¼é¨ææ¥è©¢åºè²¨é²åº¦</h2>
+    <p class="text-stone-300 text-base mb-8">å¡«å¯«è¨å®æè«çä¸çå¯¦ææ©èç¢¼ï¼è¨å®æç«å¾å³å¯ç¨<strong class="text-amber-400">è¨å®ç·¨è + ææ©æ«ä¸ç¢¼</strong>æ¥è©¢ç®åçåºè²¨çæã</p>
     <div class="grid md:grid-cols-3 gap-4 mb-8 text-left">
       <div class="bg-white/8 backdrop-blur rounded-2xl p-5">
-        <div class="text-2xl mb-2">📋</div>
-        <h3 class="font-bold text-amber-300 mb-1">訂單成立</h3>
-        <p class="text-stone-300 text-sm">下單後系統自動通知業務部，您會在頁面收到訂單編號。</p>
+        <div class="text-2xl mb-2">ð</div>
+        <h3 class="font-bold text-amber-300 mb-1">è¨å®æç«</h3>
+        <p class="text-stone-300 text-sm">ä¸å®å¾ç³»çµ±èªåéç¥æ¥­åé¨ï¼æ¨æå¨é é¢æ¶å°è¨å®ç·¨èã</p>
       </div>
       <div class="bg-white/8 backdrop-blur rounded-2xl p-5">
-        <div class="text-2xl mb-2">🚚</div>
-        <h3 class="font-bold text-amber-300 mb-1">備貨出貨</h3>
-        <p class="text-stone-300 text-sm">業務部確認後 1-2 個工作天出貨，並更新物流追蹤號。</p>
+        <div class="text-2xl mb-2">ð</div>
+        <h3 class="font-bold text-amber-300 mb-1">åè²¨åºè²¨</h3>
+        <p class="text-stone-300 text-sm">æ¥­åé¨ç¢ºèªå¾ 1-2 åå·¥ä½å¤©åºè²¨ï¼ä¸¦æ´æ°ç©æµè¿½è¹¤èã</p>
       </div>
       <div class="bg-white/8 backdrop-blur rounded-2xl p-5">
-        <div class="text-2xl mb-2">🔍</div>
-        <h3 class="font-bold text-amber-300 mb-1">隨時查詢</h3>
-        <p class="text-stone-300 text-sm">點下方「查詢訂單進度」，輸入訂單編號即可查看最新狀態。</p>
+        <div class="text-2xl mb-2">ð</div>
+        <h3 class="font-bold text-amber-300 mb-1">é¨ææ¥è©¢</h3>
+        <p class="text-stone-300 text-sm">é»ä¸æ¹ãæ¥è©¢è¨å®é²åº¦ãï¼è¼¸å¥è¨å®ç·¨èå³å¯æ¥çææ°çæã</p>
       </div>
     </div>
     <a href="order-tracking.html" class="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-stone-900 font-black px-8 py-4 rounded-2xl text-lg transition transform hover:scale-105 shadow-xl">
-      <i class="fas fa-search"></i> 查詢我的訂單進度
+      <i class="fas fa-search"></i> æ¥è©¢æçè¨å®é²åº¦
     </a>
   </div>
 </section>
 
-<!-- LINE 加入優惠 + 累點回饋 -->
+<!-- LINE å å¥åªæ  + ç´¯é»åé¥ -->
 <section class="py-20 bg-gradient-to-br from-emerald-800 to-emerald-600 text-white">
   <div class="max-w-5xl mx-auto px-4">
     <div class="text-center mb-12 reveal">
-      <span class="bg-white/20 text-white text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider">LINE 會員獨家</span>
-      <h2 class="text-3xl md:text-4xl font-black mt-4 mb-2">加入 LINE，解鎖會員專屬福利</h2>
-      <p class="text-emerald-200 text-base">首次加入即獲 <strong class="text-yellow-300 text-xl">$50</strong> 折抵券，下次購買可折抵運費或直接抵用</p>
+      <span class="bg-white/20 text-white text-xs font-black px-4 py-1 rounded-full uppercase tracking-wider">LINE æå¡ç¨å®¶</span>
+      <h2 class="text-3xl md:text-4xl font-black mt-4 mb-2">å å¥ LINEï¼ä¸å®ææä¾åªæ æ´»å</h2>
+      <p class="text-emerald-200 text-base">é¦æ¬¡å å¥å³ç² <strong class="text-yellow-300 text-xl">$50</strong> ææµå¸ï¼ä¸æ¬¡è³¼è²·å¯ææµéè²»æç´æ¥æµç¨</p>
     </div>
 
-    <!-- 即時優惠 -->
+    <!-- å³æåªæ  -->
     <div class="grid md:grid-cols-2 gap-6 mb-10">
       <div class="bg-white/10 backdrop-blur rounded-3xl p-7 reveal">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center text-emerald-900 font-black text-xl">$50</div>
-          <h3 class="font-black text-xl">加入即送 $50 折抵券</h3>
+          <h3 class="font-black text-xl">å å¥å³é $50 ææµå¸</h3>
         </div>
         <ul class="space-y-2 text-emerald-100 text-sm">
-          <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-300"></i> 可折抵任何訂單的運費（$100→$50）</li>
-          <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-300"></i> 或與下次任意訂單折抵 $50</li>
-          <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-300"></i> 永久有效，下次再用也可以</li>
-          <li class="flex items-center gap-2"><i class="fas fa-times text-red-300"></i> 每位會員限領一次</li>
+          <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-300"></i> å¯ææµä»»ä½è¨å®çéè²»ï¼$100â$50ï¼</li>
+          <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-300"></i> æèä¸æ¬¡ä»»æè¨å®ææµ $50</li>
+          <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-300"></i> æ°¸ä¹ææï¼ä¸æ¬¡åç¨ä¹å¯ä»¥</li>
+          <li class="flex items-center gap-2"><i class="fas fa-times text-red-300"></i> æ¯ä½æå¡éé ä¸æ¬¡</li>
         </ul>
         <div class="mt-5 bg-white/15 rounded-2xl p-4 text-center">
-          <p class="text-xs text-emerald-200 mb-1">加入LINE後傳送「領取折抵券」</p>
+          <p class="text-xs text-emerald-200 mb-1">å å¥LINEå¾å³éãé åææµå¸ã</p>
           <div class="font-mono font-black text-yellow-300 text-2xl tracking-widest">LINE50</div>
         </div>
       </div>
@@ -714,248 +714,248 @@
       <div class="bg-white/10 backdrop-blur rounded-3xl p-7 reveal">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-12 h-12 bg-amber-400 rounded-2xl flex items-center justify-center text-white font-black text-lg"><i class="fas fa-coins"></i></div>
-          <h3 class="font-black text-xl">累積消費・自動升級回饋</h3>
+          <h3 class="font-black text-xl">ç´¯ç©æ¶è²»ã»èªååç´åé¥</h3>
         </div>
         <div class="space-y-3">
           <div class="bg-white/10 rounded-2xl p-4 flex items-center justify-between">
             <div>
-              <p class="text-xs text-emerald-300 uppercase font-bold">銀級會員</p>
-              <p class="font-black text-lg">累消 <span class="text-yellow-300">$2,000</span></p>
-              <p class="text-xs text-emerald-200 mt-1">即相當於下一單 <span class="text-yellow-300 font-bold">折 $100</span></p>
+              <p class="text-xs text-emerald-300 uppercase font-bold">éç´æå¡</p>
+              <p class="font-black text-lg">ç´¯æ¶ <span class="text-yellow-300">$2,000</span></p>
+              <p class="text-xs text-emerald-200 mt-1">å³ç¸ç¶æ¼ä¸ä¸å® <span class="text-yellow-300 font-bold">æ $100</span></p>
             </div>
             <div class="text-right">
               <div class="text-3xl font-black text-yellow-300">$100</div>
-              <div class="text-xs text-emerald-300">購物金回饋</div>
+              <div class="text-xs text-emerald-300">è³¼ç©éåé¥</div>
             </div>
           </div>
           <div class="bg-gradient-to-r from-yellow-400/20 to-amber-400/20 border border-yellow-400/30 rounded-2xl p-4 flex items-center justify-between">
             <div>
-              <p class="text-xs text-yellow-300 uppercase font-bold">金級會員 ⭐</p>
-              <p class="font-black text-lg">累消 <span class="text-yellow-300">$5,000</span></p>
-              <p class="text-xs text-emerald-200 mt-1">累計回饋達 <span class="text-yellow-300 font-bold">$300</span>，約6折一罐</p>
+              <p class="text-xs text-yellow-300 uppercase font-bold">éç´æå¡ â­</p>
+              <p class="font-black text-lg">ç´¯æ¶ <span class="text-yellow-300">$5,000</span></p>
+              <p class="text-xs text-emerald-200 mt-1">ç´¯è¨åé¥é <span class="text-yellow-300 font-bold">$300</span>ï¼ç´6æä¸ç½</p>
             </div>
             <div class="text-right">
               <div class="text-3xl font-black text-yellow-300">$300</div>
-              <div class="text-xs text-yellow-300">累積購物金</div>
+              <div class="text-xs text-yellow-300">ç´¯ç©è³¼ç©é</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 回饋說明 -->
+    <!-- åé¥èªªæ -->
     <div class="bg-white/8 backdrop-blur rounded-2xl p-5 mb-8 text-sm text-emerald-200 reveal">
-      <p class="font-bold text-white mb-2"><i class="fas fa-info-circle mr-2 text-yellow-300"></i>回饋計算說明</p>
+      <p class="font-bold text-white mb-2"><i class="fas fa-info-circle mr-2 text-yellow-300"></i>åé¥è¨ç®èªªæ</p>
       <div class="grid md:grid-cols-3 gap-4">
         <div>
-          <p class="text-yellow-300 font-bold mb-1">範例A・2次購買</p>
-          <p>4罐×2次 = 消費 <strong class="text-white">$2,000</strong><br>→ 獲得 <strong class="text-yellow-300">$100 購物金</strong><br>→ 第3次購買只要 $900</p>
+          <p class="text-yellow-300 font-bold mb-1">ç¯ä¾Aã»2æ¬¡è³¼è²·</p>
+          <p>4ç½Ã2æ¬¡ = æ¶è²» <strong class="text-white">$2,000</strong><br>â ç²å¾ <strong class="text-yellow-300">$100 è³¼ç©é</strong><br>â ç¬¬3æ¬¡è³¼è²·åªè¦ $900</p>
         </div>
         <div>
-          <p class="text-yellow-300 font-bold mb-1">範例B・5次購買</p>
-          <p>4罐×5次 = 消費 <strong class="text-white">$5,000</strong><br>→ 累積 <strong class="text-yellow-300">$300 購物金</strong><br>→ 兌換後約等於6罐免費</p>
+          <p class="text-yellow-300 font-bold mb-1">ç¯ä¾Bã»5æ¬¡è³¼è²·</p>
+          <p>4ç½Ã5æ¬¡ = æ¶è²» <strong class="text-white">$5,000</strong><br>â ç´¯ç© <strong class="text-yellow-300">$300 è³¼ç©é</strong><br>â åæå¾ç´ç­æ¼6ç½åè²»</p>
         </div>
         <div>
-          <p class="text-yellow-300 font-bold mb-1">為何這樣設計？</p>
-          <p>回購率是電商命脈。回饋越多，您越願意繼續信任我們的草本品質，這才是<strong class="text-white">長期共贏</strong>。</p>
+          <p class="text-yellow-300 font-bold mb-1">çºä½éæ¨£è¨­è¨ï¼</p>
+          <p>åè³¼çæ¯é»åå½èãåé¥è¶å¤ï¼æ¨è¶é¡æç¹¼çºä¿¡ä»»æåçèæ¬åè³ªï¼éææ¯<strong class="text-white">é·æå±è´</strong>ã</p>
         </div>
       </div>
     </div>
 
     <div class="text-center reveal">
       <button onclick="openLineModal()" class="inline-flex items-center gap-3 bg-[#06c755] hover:bg-[#05b34b] text-white font-black px-10 py-4 rounded-2xl text-lg transition transform hover:scale-105 shadow-2xl bounce-slow">
-        <i class="fab fa-line text-2xl"></i> 加入LINE，立即領 $50 折抵券
+        <i class="fab fa-line text-2xl"></i> å å¥LINEï¼ç«å³é  $50 ææµå¸
       </button>
-      <p class="mt-4 text-emerald-300 text-sm">加入後傳「領取折抵券」取得專屬碼 · 購物金由業務部手動發放確認</p>
+      <p class="mt-4 text-emerald-300 text-sm">å å¥å¾å³ãé åææµå¸ãåå¾å°å±¬ç¢¼ Â· è³¼ç©éç±æ¥­åé¨æåç¼æ¾ç¢ºèª</p>
     </div>
   </div>
 </section>
 
 
-<!-- 商品方案 -->
+<!-- ååæ¹æ¡ -->
 <section id="product" class="py-20 bg-gray-50">
   <div class="max-w-5xl mx-auto px-4">
     <div class="text-center mb-12 reveal">
-      <h2 class="text-3xl md:text-4xl font-black deep-text mb-3">選擇你的方案</h2>
-      <p class="text-slate-500">3+1 家庭分享組為主推方案，加入會員享最優惠價格</p>
+      <h2 class="text-3xl md:text-4xl font-black deep-text mb-3">é¸æä½ çæ¹æ¡</h2>
+      <p class="text-slate-500">3+1 å®¶åº­åäº«çµçºä¸»æ¨æ¹æ¡ï¼å å¥æå¡äº«æåªæ å¹æ ¼</p>
     </div>
     <div class="grid md:grid-cols-3 gap-6 items-start">
       <div class="product-card bg-white p-6 shadow-sm border border-gray-100">
-        <h3 class="font-bold deep-text text-lg mb-1">單支體驗組</h3>
-        <p class="text-xs text-slate-400 mb-4">初次嘗試 · 60g/瓶</p>
+        <h3 class="font-bold deep-text text-lg mb-1">å®æ¯é«é©çµ</h3>
+        <p class="text-xs text-slate-400 mb-4">åæ¬¡åè©¦ Â· 60g/ç¶</p>
         <div class="text-3xl font-black text-slate-600 mb-1">$350</div>
-        <p class="text-xs text-red-400 mb-4">+ 運費 $100，合計 $450</p>
+        <p class="text-xs text-red-400 mb-4">+ éè²» $100ï¼åè¨ $450</p>
         <ul class="text-sm text-slate-500 space-y-2 mb-6">
-          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> 台灣製造，草本植萃</li>
-          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> 專利擠壓瓶設計</li>
-          <li class="flex items-center gap-2"><i class="fas fa-times text-red-300"></i> 需另加運費 $100</li>
-          <li class="flex items-center gap-2"><i class="fas fa-times text-red-300"></i> 不適用會員優惠碼</li>
+          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> å°ç£è£½é ï¼èæ¬æ¤è</li>
+          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> ç¨å®¶è¨­è¨æ å£ç¶</li>
+          <li class="flex items-center gap-2"><i class="fas fa-times text-red-300"></i> éå¦å éè²» $100</li>
+          <li class="flex items-center gap-2"><i class="fas fa-times text-red-300"></i> ä¸é©ç¨æ´»ååªæ </li>
         </ul>
-        <button onclick="openOrderModal('single')" class="btn-outline w-full py-3 rounded-xl font-bold text-sm">選擇單支體驗</button>
+        <button onclick="openOrderModal('single')" class="btn-outline w-full py-3 rounded-xl font-bold text-sm">é¸æå®æ¯é«é©</button>
       </div>
       <div class="product-card featured bg-white p-7 shadow-2xl relative overflow-hidden">
-        <div class="absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-black px-5 py-1.5 rounded-full shadow-md whitespace-nowrap">🔥 最多人選擇・限量優惠</div>
+        <div class="absolute -top-1 left-1/2 -translate-x-1/2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-black px-5 py-1.5 rounded-full shadow-md whitespace-nowrap">ð¥ æå¤äººé¸æã»ééåªæ </div>
         <div class="mt-4">
           <div class="flex gap-2 flex-wrap mb-2">
-            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-0.5 rounded">會員限定</span>
-            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">貨到付款</span>
-            <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded">滿額免運</span>
+            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-0.5 rounded">æå¡éå®</span>
+            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">è²¨å°ä»æ¬¾</span>
+            <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded">æ»¿é¡åé</span>
           </div>
-          <h3 class="font-black deep-text text-xl mb-1">3+1 家庭分享組</h3>
-          <p class="text-xs text-amber-600 font-bold mb-4">買3送1 · 60g×4瓶 · 家庭分享首選</p>
-          <div class="text-sm text-slate-400 line-through mb-1">原價 $1,400</div>
+          <h3 class="font-black deep-text text-xl mb-1">3+1 å®¶åº­åäº«çµ</h3>
+          <p class="text-xs text-amber-600 font-bold mb-4">è²·3é1 Â· 60gÃ4ç¶ Â· å®¶åº­åäº«é¦é¸</p>
+          <div class="text-sm text-slate-400 line-through mb-1">åå¹ $1,400</div>
           <div class="text-5xl font-black gold-text mb-1">$1,000</div>
-          <p class="text-xs text-emerald-600 font-bold mb-5">輸入會員專屬舒緩碼享折扣 · 平均每瓶 $250</p>
+          <p class="text-xs text-emerald-600 font-bold mb-5">æå¡éå®åªæ  Â· å¹³åæ¯ç¶ $250</p>
           <ul class="text-sm text-slate-600 space-y-2 mb-6">
-            <li class="flex items-center gap-2"><i class="fas fa-gift gold-text"></i> <strong>買3送1，共4瓶</strong></li>
-            <li class="flex items-center gap-2"><i class="fas fa-truck gold-text"></i> 全台免運，省 $100</li>
-            <li class="flex items-center gap-2"><i class="fas fa-user-friends gold-text"></i> 家庭分享、長輩保養最適合</li>
-            <li class="flex items-center gap-2"><i class="fas fa-mobile-alt gold-text"></i> 可查詢出貨進度</li>
-            <li class="flex items-center gap-2"><i class="fas fa-share-alt gold-text"></i> 購買後取得推薦碼</li>
+            <li class="flex items-center gap-2"><i class="fas fa-gift gold-text"></i> <strong>è²·3é1ï¼å±4ç¶</strong></li>
+            <li class="flex items-center gap-2"><i class="fas fa-truck gold-text"></i> å¨å°åéï¼ç $100</li>
+            <li class="flex items-center gap-2"><i class="fas fa-user-friends gold-text"></i> å®¶åº­åäº«ãé·è¼©ä¿é¤æé©å</li>
+            <li class="flex items-center gap-2"><i class="fas fa-mobile-alt gold-text"></i> å¯æ¥è©¢åºè²¨é²åº¦</li>
+            <li class="flex items-center gap-2"><i class="fas fa-share-alt gold-text"></i> è³¼è²·å¾åå¾æ¨è¦ç¢¼</li>
           </ul>
           <button onclick="openOrderModal('combo')" class="btn-primary w-full py-4 rounded-xl font-black text-lg btn-pulse">
-            立即下單 3+1 組合 $1000
-            <div class="text-xs font-normal mt-0.5 opacity-90">貨到付款 · 可查訂單進度</div>
+            ç«å³ä¸å® 3+1 çµå $1000
+            <div class="text-xs font-normal mt-0.5 opacity-90">è²¨å°ä»æ¬¾ Â· å¯æ¥è¨å®é²åº¦</div>
           </button>
         </div>
       </div>
       <div class="product-card bg-white p-6 shadow-sm border border-gray-100">
-        <h3 class="font-bold deep-text text-lg mb-1">家庭常備大組</h3>
-        <p class="text-xs text-slate-400 mb-4">60g×6瓶 · 親友分享大包裝</p>
+        <h3 class="font-bold deep-text text-lg mb-1">å®¶åº­å¸¸åå¤§çµ</h3>
+        <p class="text-xs text-slate-400 mb-4">60gÃ6ç¶ Â· è¦ªååäº«å¤§åè£</p>
         <div class="text-3xl font-black text-slate-600 mb-4">$1,800</div>
         <ul class="text-sm text-slate-500 space-y-2 mb-6">
-          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> 6瓶超值，長輩最愛</li>
-          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> 全台免運</li>
-          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> 適合家庭常備或親友禮送</li>
+          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> 6ç¶è¶å¼ï¼é·è¼©ææ</li>
+          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> å¨å°åé</li>
+          <li class="flex items-center gap-2"><i class="fas fa-check text-green-400"></i> é©åå®¶åº­å¸¸åæè¦ªåç¦®é</li>
         </ul>
-        <button onclick="openOrderModal('family')" class="btn-outline w-full py-3 rounded-xl font-bold text-sm">選擇家庭大組</button>
+        <button onclick="openOrderModal('family')" class="btn-outline w-full py-3 rounded-xl font-bold text-sm">é¸æå®¶åº­å¤§çµ</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 貨到付款說明 -->
+<!-- è²¨å°ä»æ¬¾èªªæ -->
 <section id="cod" class="py-16 bg-white">
   <div class="max-w-4xl mx-auto px-4">
     <div class="text-center mb-10 reveal">
-      <h2 class="text-2xl md:text-3xl font-black deep-text mb-2">貨到付款，安心購買</h2>
-      <p class="text-slate-500">不需先付款，商品送達後再收款，流程透明可追蹤</p>
+      <h2 class="text-2xl md:text-3xl font-black deep-text mb-2">è²¨å°ä»æ¬¾ï¼å®å¿è³¼è²·</h2>
+      <p class="text-slate-500">ä¸éåä»æ¬¾ï¼ååééå¾åæ¶æ¬¾ï¼æµç¨éæå¯è¿½è¹¤</p>
     </div>
     <div class="grid grid-cols-5 gap-2 mb-8 reveal text-center">
-      <div><div class="w-10 h-10 gold-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">1</div><p class="text-xs font-bold deep-text">填寫下單</p></div>
-      <div><div class="w-10 h-10 gold-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">2</div><p class="text-xs font-bold deep-text">系統建立訂單</p></div>
-      <div><div class="w-10 h-10 gold-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">3</div><p class="text-xs font-bold deep-text">業務安排出貨</p></div>
-      <div><div class="w-10 h-10 gold-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">4</div><p class="text-xs font-bold deep-text">物流配送</p></div>
-      <div><div class="w-10 h-10 herb-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">5</div><p class="text-xs font-bold deep-text">到貨付款</p></div>
+      <div><div class="w-10 h-10 gold-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">1</div><p class="text-xs font-bold deep-text">å¡«å¯«ä¸å®</p></div>
+      <div><div class="w-10 h-10 gold-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">2</div><p class="text-xs font-bold deep-text">ç³»çµ±å»ºç«è¨å®</p></div>
+      <div><div class="w-10 h-10 gold-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">3</div><p class="text-xs font-bold deep-text">æ¥­åå®æåºè²¨</p></div>
+      <div><div class="w-10 h-10 gold-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">4</div><p class="text-xs font-bold deep-text">ç©æµéé</p></div>
+      <div><div class="w-10 h-10 herb-bg rounded-full flex items-center justify-center text-white font-black mx-auto mb-2 text-sm">5</div><p class="text-xs font-bold deep-text">å°è²¨ä»æ¬¾</p></div>
     </div>
     <div class="grid md:grid-cols-2 gap-4 reveal">
       <div class="bg-amber-50 rounded-2xl p-5 flex items-start gap-3">
         <i class="fas fa-phone text-amber-500 text-xl mt-0.5"></i>
-        <div><h4 class="font-bold deep-text text-sm mb-1">請保持手機暢通</h4><p class="text-xs text-slate-500">物流人員會在配送前電話聯絡，若資料填寫不完整，業務部可能先電話確認。</p></div>
+        <div><h4 class="font-bold deep-text text-sm mb-1">è«ä¿æææ©æ¢é</h4><p class="text-xs text-slate-500">ç©æµäººå¡æå¨ééåé»è©±è¯çµ¡ï¼è¥è³æå¡«å¯«ä¸å®æ´ï¼æ¥­åé¨å¯è½åé»è©±ç¢ºèªã</p></div>
       </div>
       <div class="bg-blue-50 rounded-2xl p-5 flex items-start gap-3">
         <i class="fas fa-search text-blue-500 text-xl mt-0.5"></i>
-        <div><h4 class="font-bold deep-text text-sm mb-1">訂單進度隨時查</h4><p class="text-xs text-slate-500">下單後可用訂單編號+手機末三碼查詢出貨進度，<a href="order-tracking.html" class="text-blue-600 underline">點此查詢</a>。</p></div>
+        <div><h4 class="font-bold deep-text text-sm mb-1">è¨å®é²åº¦é¨ææ¥</h4><p class="text-xs text-slate-500">ä¸å®å¾å¯ç¨è¨å®ç·¨è+ææ©æ«ä¸ç¢¼æ¥è©¢åºè²¨é²åº¦ï¼<a href="order-tracking.html" class="text-blue-600 underline">é»æ­¤æ¥è©¢</a>ã</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 訂單查詢入口 -->
+<!-- è¨å®æ¥è©¢å¥å£ -->
 <section id="tracking" class="py-16 bg-slate-800 text-white">
   <div class="max-w-4xl mx-auto px-4 text-center">
     <div class="reveal mb-8">
-      <h2 class="text-2xl md:text-3xl font-black mb-3">即時查詢你的貨品進度</h2>
-      <p class="text-slate-300 text-sm">輸入訂單編號與手機末三碼，隨時掌握出貨狀況</p>
+      <h2 class="text-2xl md:text-3xl font-black mb-3">å³ææ¥è©¢ä½ çè²¨åé²åº¦</h2>
+      <p class="text-slate-300 text-sm">è¼¸å¥è¨å®ç·¨èèææ©æ«ä¸ç¢¼ï¼é¨æææ¡åºè²¨çæ³</p>
     </div>
     <div class="bg-white/10 backdrop-blur rounded-2xl p-5 mb-8 reveal overflow-x-auto">
-      <p class="text-xs text-slate-400 mb-4 font-bold uppercase tracking-wider">出貨進度範例</p>
+      <p class="text-xs text-slate-400 mb-4 font-bold uppercase tracking-wider">åºè²¨é²åº¦ç¯ä¾</p>
       <div class="flex items-start justify-between min-w-[400px]">
-        <div class="progress-step done min-w-[60px]"><div class="step-dot done"><i class="fas fa-check text-xs"></i></div><div class="step-label done">訂單成立</div></div>
-        <div class="progress-step done min-w-[60px]"><div class="step-dot done"><i class="fas fa-check text-xs"></i></div><div class="step-label done">業務確認</div></div>
-        <div class="progress-step done min-w-[60px]"><div class="step-dot done"><i class="fas fa-check text-xs"></i></div><div class="step-label done">備貨中</div></div>
-        <div class="progress-step active min-w-[60px]"><div class="step-dot active"><i class="fas fa-truck text-xs"></i></div><div class="step-label active">已出貨</div></div>
-        <div class="progress-step pending min-w-[60px]"><div class="step-dot pending">5</div><div class="step-label">配送中</div></div>
-        <div class="progress-step pending min-w-[60px]"><div class="step-dot pending">6</div><div class="step-label">已送達</div></div>
+        <div class="progress-step done min-w-[60px]"><div class="step-dot done"><i class="fas fa-check text-xs"></i></div><div class="step-label done">è¨å®æç«</div></div>
+        <div class="progress-step done min-w-[60px]"><div class="step-dot done"><i class="fas fa-check text-xs"></i></div><div class="step-label done">æ¥­åç¢ºèª</div></div>
+        <div class="progress-step done min-w-[60px]"><div class="step-dot done"><i class="fas fa-check text-xs"></i></div><div class="step-label done">åè²¨ä¸­</div></div>
+        <div class="progress-step active min-w-[60px]"><div class="step-dot active"><i class="fas fa-truck text-xs"></i></div><div class="step-label active">å·²åºè²¨</div></div>
+        <div class="progress-step pending min-w-[60px]"><div class="step-dot pending">5</div><div class="step-label">ééä¸­</div></div>
+        <div class="progress-step pending min-w-[60px]"><div class="step-dot pending">6</div><div class="step-label">å·²éé</div></div>
       </div>
     </div>
     <div class="bg-white/10 backdrop-blur rounded-2xl p-6 reveal max-w-md mx-auto">
-      <h3 class="font-bold mb-4">快速查詢訂單</h3>
+      <h3 class="font-bold mb-4">å¿«éæ¥è©¢è¨å®</h3>
       <div class="space-y-3 text-left">
-        <input type="text" id="quick-order-num" placeholder="訂單編號 (例：ORDER-20241120-0001)" class="form-input text-slate-800 text-sm">
-        <input type="text" id="quick-phone-last3" placeholder="手機末三碼 (例：678)" maxlength="3" class="form-input text-slate-800 text-sm">
-        <button onclick="quickTrack()" class="btn-primary w-full py-3 rounded-xl font-bold">查詢出貨進度</button>
+        <input type="text" id="quick-order-num" placeholder="è¨å®ç·¨è (ä¾ï¼ORDER-20241120-0001)" class="form-input text-slate-800 text-sm">
+        <input type="text" id="quick-phone-last3" placeholder="ææ©æ«ä¸ç¢¼ (ä¾ï¼678)" maxlength="3" class="form-input text-slate-800 text-sm">
+        <button onclick="quickTrack()" class="btn-primary w-full py-3 rounded-xl font-bold">æ¥è©¢åºè²¨é²åº¦</button>
       </div>
-      <p class="text-xs text-slate-400 mt-3">或前往 <a href="order-tracking.html" class="text-amber-300 underline">完整訂單查詢頁</a></p>
+      <p class="text-xs text-slate-400 mt-3">æåå¾ <a href="order-tracking.html" class="text-amber-300 underline">å®æ´è¨å®æ¥è©¢é </a></p>
     </div>
   </div>
 </section>
 
-<!-- 推薦碼裂變 -->
+<!-- æ¨è¦ç¢¼è£è® -->
 <section class="py-16 bg-gradient-to-br from-amber-50 to-yellow-50">
   <div class="max-w-4xl mx-auto px-4 text-center reveal">
-    <h2 class="text-2xl md:text-3xl font-black deep-text mb-3">推薦朋友，雙方都受益</h2>
-    <p class="text-slate-500 mb-8">購買後取得個人推薦碼，推薦親友購買 3+1 組合</p>
+    <h2 class="text-2xl md:text-3xl font-black deep-text mb-3">æ¨è¦æåï¼éæ¹é½åç</h2>
+    <p class="text-slate-500 mb-8">è³¼è²·å¾åå¾åäººæ¨è¦ç¢¼ï¼æ¨è¦è¦ªåè³¼è²· 3+1 çµå</p>
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-2xl p-6 shadow-sm"><div class="text-4xl mb-3">🛒</div><h3 class="font-bold deep-text mb-2">你完成購買</h3><p class="text-sm text-slate-500">下單成功後，系統自動產生你的個人專屬推薦碼</p></div>
-      <div class="bg-white rounded-2xl p-6 shadow-sm"><div class="text-4xl mb-3">📤</div><h3 class="font-bold deep-text mb-2">分享給朋友</h3><p class="text-sm text-slate-500">把推薦碼傳給朋友，朋友下單時輸入你的推薦碼</p></div>
-      <div class="bg-white rounded-2xl p-6 shadow-sm"><div class="text-4xl mb-3">🎁</div><h3 class="font-bold deep-text mb-2">雙方都獲益</h3><p class="text-sm text-slate-500">朋友享 <strong class="text-green-600">$50 折扣</strong>，你獲得 <strong class="gold-text">$50 購物金</strong>（下次消費使用）</p></div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm"><div class="text-4xl mb-3">ð</div><h3 class="font-bold deep-text mb-2">ä½ å®æè³¼è²·</h3><p class="text-sm text-slate-500">ä¸å®æåå¾ï¼ç³»çµ±èªåç¢çä½ çåäººå°å±¬æ¨è¦ç¢¼</p></div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm"><div class="text-4xl mb-3">ð¤</div><h3 class="font-bold deep-text mb-2">åäº«çµ¦æå</h3><p class="text-sm text-slate-500">æç¢åä»ç´¹åäº«çµ¦æéè¦çæåï¼è®æ´å¤äººäº«åèæ¬èç·©</p></div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm"><div class="text-4xl mb-3">ð</div><h3 class="font-bold deep-text mb-2">å å¥LINEææ¡åªæ </h3><p class="text-sm text-slate-500">å å¥LINFå®æ¹å¸³èï¼ä¸å®ææä¾æå¡åªæ æ´»åï¼æ´»åæéä¸»åéç¥</p></div>
     </div>
     <div class="mt-6 bg-amber-100 rounded-xl p-4 text-sm text-amber-800 max-w-lg mx-auto">
-      <i class="fas fa-info-circle mr-1"></i> 推薦回饋為<strong>購物金</strong>，不直接退現金，下次購買時自動抵用。推薦碼僅限 3+1 組合包使用。
+      <i class="fas fa-info-circle mr-1"></i> æ¨è¦åé¥çº<strong>è³¼ç©é</strong>ï¼ä¸ç´æ¥éç¾éï¼ä¸æ¬¡è³¼è²·æèªåæµç¨ãæ¨è¦ç¢¼åé 3+1 çµååä½¿ç¨ã
     </div>
   </div>
 </section>
 
-<!-- 顧客見證 -->
+<!-- é¡§å®¢è¦è­ -->
 <section id="reviews" class="py-20 bg-white">
   <div class="max-w-4xl mx-auto px-4">
     <div class="text-center mb-10 reveal">
-      <h2 class="text-2xl md:text-3xl font-black deep-text mb-2">真實用家見證</h2>
+      <h2 class="text-2xl md:text-3xl font-black deep-text mb-2">çå¯¦ç¨å®¶è¦è­</h2>
       <div class="gold-text font-bold flex items-center justify-center gap-1 mt-1">
         <i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i><i class="fas fa-star text-sm"></i>
-        <span class="text-sm text-slate-400 font-normal ml-2">超過 1.2 萬名會員推薦</span>
+        <span class="text-sm text-slate-400 font-normal ml-2">è¶é 1.2 è¬åæå¡æ¨è¦</span>
       </div>
     </div>
     <div class="grid md:grid-cols-2 gap-5">
       <div class="bg-amber-50 rounded-2xl p-5 reveal">
-        <div class="flex items-center gap-3 mb-3"><img src="照片/用家實拍1.jpg" class="w-10 h-10 rounded-full object-cover border-2 border-amber-200"><div><p class="font-bold text-sm">阿振（馬拉松跑者）</p><div class="text-amber-400 text-xs">★★★★★</div></div></div>
-        <p class="text-sm text-slate-600">「上班久坐後，睡前擦一點再按摩，肩頸比較放鬆。貨到付款不用先匯款，還能查訂單進度，感覺比較安心。」</p>
+        <div class="flex items-center gap-3 mb-3"><img src="ç§ç/ç¨å®¶å¯¦æ1.jpg" class="w-10 h-10 rounded-full object-cover border-2 border-amber-200"><div><p class="font-bold text-sm">é¿æ¯ï¼é¦¬ææ¾è·èï¼</p><div class="text-amber-400 text-xs">âââââ</div></div></div>
+        <p class="text-sm text-slate-600">ãä¸ç­ä¹åå¾ï¼ç¡åæ¦ä¸é»åææ©ï¼è©é ¸æ¯è¼æ¾é¬ãè²¨å°ä»æ¬¾ä¸ç¨åå¯æ¬¾ï¼éè½æ¥è¨å®é²åº¦ï¼æè¦ºæ¯è¼å®å¿ãã</p>
       </div>
       <div class="bg-amber-50 rounded-2xl p-5 reveal">
-        <div class="flex items-center gap-3 mb-3"><img src="照片/用家實拍2.jpg" class="w-10 h-10 rounded-full object-cover border-2 border-amber-200"><div><p class="font-bold text-sm">美玲姐（家事達人）</p><div class="text-amber-400 text-xs">★★★★★</div></div></div>
-        <p class="text-sm text-slate-600">「家裡長輩喜歡清涼感，放客廳很方便，一按就出來，乾乾淨淨。買了 3+1 組，婆婆、老公都在用。」</p>
+        <div class="flex items-center gap-3 mb-3"><img src="ç§ç/ç¨å®¶å¯¦æ2.jpg" class="w-10 h-10 rounded-full object-cover border-2 border-amber-200"><div><p class="font-bold text-sm">ç¾ç²å§ï¼å®¶äºéäººï¼</p><div class="text-amber-400 text-xs">âââââ</div></div></div>
+        <p class="text-sm text-slate-600">ãå®¶è£¡é·è¼©åæ­¡æ¸æ¶¼æï¼æ¾å®¢å»³å¾æ¹ä¾¿ï¼ä¸æå°±åºä¾ï¼ä¹¾ä¹¾æ·¨æ·¨ãè²·äº 3+1 çµï¼å©å©ãèå¬é½å¨ç¨ãã</p>
       </div>
       <div class="bg-amber-50 rounded-2xl p-5 reveal">
-        <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-bold">王</div><div><p class="font-bold text-sm">王大偉（路跑愛好者）</p><div class="text-amber-400 text-xs">★★★★★</div></div></div>
-        <p class="text-sm text-slate-600">「運動後拿來按摩小腿，涼涼的很舒服。朋友推薦用推薦碼，買的時候還有折扣，很划算。」</p>
+        <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-bold">ç</div><div><p class="font-bold text-sm">çå¤§åï¼è·¯è·æå¥½èï¼</p><div class="text-amber-400 text-xs">âââââ</div></div></div>
+        <p class="text-sm text-slate-600">ãéåå¾æ¿ä¾ææ©å°è¿ï¼æ¶¼æ¶¼çå¾èæãæåæ¨è¦ç¨æ¨è¦ç¢¼ï¼è²·çæåéæææ£ï¼å¾åç®ãã</p>
       </div>
       <div class="bg-amber-50 rounded-2xl p-5 reveal">
-        <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-500 font-bold">李</div><div><p class="font-bold text-sm">李小姐（上班族）</p><div class="text-amber-400 text-xs">★★★★★</div></div></div>
-        <p class="text-sm text-slate-600">「加LINE領優惠碼超方便，3+1 組才 $1000 免運，比去藥局買還划算。貨到付款讓我感覺比較放心。」</p>
+        <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-500 font-bold">æ</div><div><p class="font-bold text-sm">æå°å§ï¼ä¸ç­æï¼</p><div class="text-amber-400 text-xs">âââââ</div></div></div>
+        <p class="text-sm text-slate-600">ãå LINEè¶æ¹ä¾¿ï¼3+1 çµæ $1000 åéï¼æ¯å»è¥å±è²·éåç®ãè²¨å°ä»æ¬¾è®ææè¦ºæ¯è¼æ¾å¿ãã</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 信任強化 -->
+<!-- ä¿¡ä»»å¼·å -->
 <section class="py-16 bg-slate-50">
   <div class="max-w-5xl mx-auto px-4">
     <div class="grid md:grid-cols-2 gap-6">
       <div class="bg-white rounded-2xl p-6 shadow-sm flex flex-col items-center text-center gap-4 reveal">
-        <img src="照片/金牌一條根_網站實體圖_依圖意命名/張醫師_醫學顧問.png" class="w-36 h-36 rounded-2xl object-cover shadow-md border-4 border-amber-100">
+        <img src="ç§ç/éå¤ªæ¥µ_ç¶²ç«å¯¦é«å_ä¾åæå½å/å¼µé«å¸«_é«å­¸é¡§å.png" class="w-36 h-36 rounded-2xl object-cover shadow-md border-4 border-amber-100">
         <div>
-          <p class="text-xs font-bold gold-text uppercase tracking-widest mb-1">醫學顧問</p>
-          <h4 class="font-bold deep-text text-lg mb-2">張醫師</h4>
-          <p class="text-sm text-slate-500 italic leading-relaxed">「具備 GMP 規範與清楚來源的草本產品，對於日常舒緩保養是更安心可靠的選擇。」</p>
+          <p class="text-xs font-bold gold-text uppercase tracking-widest mb-1">é«å­¸é¡§å</p>
+          <h4 class="font-bold deep-text text-lg mb-2">å¼µé«å¸«</h4>
+          <p class="text-sm text-slate-500 italic leading-relaxed">ãå·å GMP è¦ç¯èæ¸æ¥ä¾æºçèæ¬ç¢åï¼å°æ¼æ¥å¸¸èç·©ä¿é¤æ¯æ´å®å¿å¯é çé¸æãã</p>
         </div>
       </div>
       <div class="bg-white rounded-2xl p-6 shadow-sm flex flex-col items-center text-center gap-4 reveal">
-        <img src="照片/金牌一條根_網站實體圖_依圖意命名/林藥師_專業藥師.png" class="w-36 h-36 rounded-2xl object-cover shadow-md border-4 border-amber-100">
+        <img src="ç§ç/éå¤ªæ¥µ_ç¶²ç«å¯¦é«å_ä¾åæå½å/æè¥å¸«_å°æ¥­è¥å¸«.png" class="w-36 h-36 rounded-2xl object-cover shadow-md border-4 border-amber-100">
         <div>
-          <p class="text-xs font-bold gold-text uppercase tracking-widest mb-1">專業藥師</p>
-          <h4 class="font-bold deep-text text-lg mb-2">林藥師</h4>
-          <p class="text-sm text-slate-500 italic leading-relaxed">「回歸真草本萃取，對於皮膚敏感或需要長期日常保養的人，這才是最安心的選擇。」</p>
+          <p class="text-xs font-bold gold-text uppercase tracking-widest mb-1">å°æ¥­è¥å¸«</p>
+          <h4 class="font-bold deep-text text-lg mb-2">æè¥å¸«</h4>
+          <p class="text-sm text-slate-500 italic leading-relaxed">ãåæ­¸çèæ¬èåï¼å°æ¼ç®èæææéè¦é·ææ¥å¸¸ä¿é¤çäººï¼éææ¯æå®å¿çé¸æãã</p>
         </div>
       </div>
     </div>
@@ -965,21 +965,21 @@
 <!-- FAQ -->
 <section id="faq" class="py-20 bg-white">
   <div class="max-w-5xl mx-auto px-4">
-    <h2 class="text-2xl md:text-3xl font-black deep-text text-center mb-10 reveal">常見問題</h2>
+    <h2 class="text-2xl md:text-3xl font-black deep-text text-center mb-10 reveal">å¸¸è¦åé¡</h2>
     <div class="grid md:grid-cols-2 gap-3" id="faq-list"></div>
   </div>
 </section>
 
-<!-- 底部 CTA -->
+<!-- åºé¨ CTA -->
 <section class="py-20 bg-gradient-to-br from-amber-900 to-amber-700 text-white text-center">
   <div class="max-w-2xl mx-auto px-4 reveal">
-    <h2 class="text-3xl md:text-4xl font-black mb-4">現在加入會員，領取你的專屬舒緩碼</h2>
-    <p class="text-amber-200 text-base mb-8">3+1 組合優惠價 $1000 · 貨到付款 · 可查詢出貨進度 · 推薦朋友再得購物金</p>
+    <h2 class="text-3xl md:text-4xl font-black mb-4">ç¾å¨å å¥LINEï¼ææ¡ä¸å®æåªæ æ´»å</h2>
+    <p class="text-amber-200 text-base mb-8">3+1 çµååªæ å¹ $1000 Â· è²¨å°ä»æ¬¾ Â· å¯æ¥è©¢åºè²¨é²åº¦ Â· æ¨è¦æååå¾è³¼ç©é</p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <button onclick="openLineModal()" class="btn-line px-8 py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-3 bounce-slow"><i class="fab fa-line text-2xl"></i> 加入LINE，領優惠碼</button>
-      <button onclick="openOrderModal('combo')" class="btn-primary px-8 py-4 rounded-2xl font-black text-lg">直接下單 3+1 $1000</button>
+      <button onclick="openLineModal()" class="btn-line px-8 py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-3 bounce-slow"><i class="fab fa-line text-2xl"></i> å å¥LINEï¼è§£éæå¡ç¦å©</button>
+      <button onclick="openOrderModal('combo')" class="btn-primary px-8 py-4 rounded-2xl font-black text-lg">ç´æ¥ä¸å® 3+1 $1000</button>
     </div>
-    <p class="mt-6 text-amber-300 text-sm"><i class="fas fa-search mr-1"></i> 已下單？<a href="order-tracking.html" class="underline hover:text-white">點此查詢出貨進度</a></p>
+    <p class="mt-6 text-amber-300 text-sm"><i class="fas fa-search mr-1"></i> å·²ä¸å®ï¼<a href="order-tracking.html" class="underline hover:text-white">é»æ­¤æ¥è©¢åºè²¨é²åº¦</a></p>
   </div>
 </section>
 
@@ -987,176 +987,171 @@
 <footer class="bg-gray-900 text-white py-12">
   <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-sm">
     <div>
-      <h4 class="font-bold text-lg mb-3">金牌一條根</h4>
-      <p class="text-gray-400 text-xs leading-relaxed">GMP中藥廠監製 · 台灣在地草本品牌<br>台南市新營區嘉芳街 235 號<br>藥商執照：南市藥販字第 6205011116 號</p>
+      <h4 class="font-bold text-lg mb-3">éå¤ªæ¥µ</h4>
+      <p class="text-gray-400 text-xs leading-relaxed">GMPä¸­è¥å» ç£è£½ Â· å°ç£å¨å°èæ¬åç<br>å°åå¸æ°çååè³è¡ 235 è<br>è¥åå·ç§ï¼åå¸è¥è²©å­ç¬¬ 6205011116 è</p>
     </div>
     <div>
-      <h4 class="font-bold mb-3">快速連結</h4>
+      <h4 class="font-bold mb-3">å¿«éé£çµ</h4>
       <ul class="space-y-2 text-gray-400 text-xs">
-        <li><a href="order-tracking.html" class="hover:text-white">訂單進度查詢</a></li>
-        <li><a href="#member" class="hover:text-white">加入LINE領優惠</a></li>
-        <li><a href="#faq" class="hover:text-white">常見問題</a></li>
-        <li><a href="admin-dashboard.html" class="hover:text-white text-gray-600">後台管理 <span class="admin-link-badge">Admin</span></a></li>
+        <li><a href="order-tracking.html" class="hover:text-white">è¨å®é²åº¦æ¥è©¢</a></li>
+        <li><a href="#member" class="hover:text-white">å å¥LINEé åªæ </a></li>
+        <li><a href="#faq" class="hover:text-white">å¸¸è¦åé¡</a></li>
+        <li><a href="admin-dashboard.html" class="hover:text-white text-gray-600">å¾å°ç®¡ç <span class="admin-link-badge">Admin</span></a></li>
       </ul>
     </div>
     <div>
-      <h4 class="font-bold mb-3">使用說明</h4>
-      <p class="text-gray-400 text-xs leading-relaxed">本產品為外用保養品，請依產品標示使用。若為 2 歲以下兒童、孕婦、特殊疾病患者、皮膚過敏、傷口潰爛或嚴重不適，請先諮詢醫師或藥師。本網站文案均以舒緩、保養為訴求，不作任何醫療宣稱。</p>
-      <p class="text-gray-600 text-xs mt-3">⚠️ 本站目前為前端 prototype</p>
+      <h4 class="font-bold mb-3">ä½¿ç¨èªªæ</h4>
+      <p class="text-gray-400 text-xs leading-relaxed">æ¬ç¢åçºå¤ç¨ä¿é¤åï¼è«ä¾ç¢åæ¨ç¤ºä½¿ç¨ãè¥çº 2 æ­²ä»¥ä¸åç«¥ãå­å©¦ãç¹æ®ç¾çæ£èãç®èéæãå·å£æ½°çæå´éä¸é©ï¼è«åè«®è©¢é«å¸«æè¥å¸«ãæ¬ç¶²ç«ææ¡åä»¥èç·©ãä¿é¤çºè¨´æ±ï¼ä¸ä½ä»»ä½é«çå®£ç¨±ã</p>
+      <p class="text-gray-600 text-xs mt-3">â ï¸ æ¬ç«ç®åçºåç«¯ prototype</p>
     </div>
   </div>
-  <div class="text-center text-gray-600 text-xs mt-8 pt-6 border-t border-gray-800">© 2024 金牌一條根 版權所有 · 個人資料依個資法規定保護</div>
+  <div class="text-center text-gray-600 text-xs mt-8 pt-6 border-t border-gray-800">Â© 2024 éå¤ªæ¥µ çæ¬ææ Â· åäººè³æä¾åè³æ³è¦å®ä¿è­·</div>
 </footer>
 
-<!-- 手機版底部 Sticky Bar -->
+<!-- ææ©çåºé¨ Sticky Bar -->
 <div class="sticky-bar">
-  <button onclick="openLineModal()" class="btn-line flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2"><i class="fab fa-line"></i> 領$50券</button>
-  <button onclick="openOrderModal()" class="btn-primary flex-1 py-3 rounded-xl font-bold text-sm btn-pulse">立即下單</button>
+  <button onclick="openLineModal()" class="btn-line flex-1 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2"><i class="fab fa-line"></i> é $50å¸</button>
+  <button onclick="openOrderModal()" class="btn-primary flex-1 py-3 rounded-xl font-bold text-sm btn-pulse">ç«å³ä¸å®</button>
 </div>
 
-<!-- Modal：LINE 領券 -->
+<!-- Modalï¼LINE é å¸ -->
 <div id="line-modal" class="modal-overlay modal-hidden">
   <div class="modal-box">
     <div class="bg-[#06c755] p-5 text-white flex justify-between items-center">
-      <div class="flex items-center gap-3"><i class="fab fa-line text-3xl"></i><h3 class="text-xl font-black">加入LINE，領取專屬舒緩碼</h3></div>
+      <div class="flex items-center gap-3"><i class="fab fa-line text-3xl"></i><h3 class="text-xl font-black">å å¥LINEå®æ¹å¸³è</h3></div>
       <button onclick="closeLineModal()" class="text-2xl hover:opacity-70">&times;</button>
     </div>
     <div class="p-6 space-y-5">
       <div class="text-center">
         <div class="coupon-code mb-2">RELIEF2024</div>
-        <p class="text-xs text-slate-400">這是範例舒緩碼，加入LINE後取得你的個人專屬碼</p>
+        <p class="text-xs text-slate-400">å å¥å¾å³å¯äº«åä¸å®æåªæ æ´»å</p>
       </div>
       <div class="bg-amber-50 rounded-xl p-4 text-sm text-amber-800 space-y-1">
-        <p class="font-bold mb-2">優惠碼使用說明：</p>
-        <p>✅ 限 3+1 家庭分享組使用</p>
-        <p>✅ 優惠後組合價 <strong>$1000</strong>（原價 $1400）</p>
-        <p>✅ 滿 $1000 全台免運，貨到付款適用</p>
-        <p>❌ 每位會員限用一次，不可與其他優惠併用</p>
+        <p class="font-bold mb-2">å å¥å¥½åèªªæï¼</p>
+        <p>â é 3+1 å®¶åº­åäº«çµä½¿ç¨</p>
+        <p>â åªæ å¾çµåå¹ <strong>$1000</strong>ï¼åå¹ $1400ï¼</p>
+        <p>â æ»¿ $1000 å¨å°åéï¼è²¨å°ä»æ¬¾é©ç¨</p>
+        <p>â æ¯ä½æå¡éç¨ä¸æ¬¡ï¼ä¸å¯èå¶ä»åªæ ä½µç¨</p>
       </div>
       <a href="https://line.me/R/ti/p/@111wrvef" target="_blank" class="btn-line w-full py-4 rounded-xl font-black text-lg flex items-center justify-center gap-3 block text-center text-white no-underline">
-        <i class="fab fa-line text-2xl"></i> 立即加入LINE官方帳號
+        <i class="fab fa-line text-2xl"></i> ç«å³å å¥LINEå®æ¹å¸³è
       </a>
-      <p class="text-center text-xs text-slate-400">加入後發送「領取優惠碼」即可取得個人舒緩碼</p>
+      <p class="text-center text-xs text-slate-400">å å¥å¾å°ä¸å®ææ¶å°åªæ æ´»åéç¥</p>
       <hr class="border-gray-100">
-      <button onclick="closeLineModal(); openOrderModal('combo')" class="btn-outline w-full py-3 rounded-xl font-bold">直接前往下單</button>
+      <button onclick="closeLineModal(); openOrderModal('combo')" class="btn-outline w-full py-3 rounded-xl font-bold">ç´æ¥åå¾ä¸å®</button>
     </div>
   </div>
 </div>
 
-<!-- Modal：下單表單 -->
+<!-- Modalï¼ä¸å®è¡¨å® -->
 <div id="order-modal" class="modal-overlay modal-hidden">
   <div class="modal-box">
     <div class="gold-bg p-5 text-white flex justify-between items-center">
-      <h3 class="text-lg font-black">填寫下單資料</h3>
+      <h3 class="text-lg font-black">å¡«å¯«ä¸å®è³æ</h3>
       <button onclick="closeOrderModal()" class="text-2xl hover:opacity-70">&times;</button>
     </div>
     <div class="p-6 space-y-4">
-      <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-800">⚠️ PROTOTYPE — 資料儲存於瀏覽器 localStorage，正式上線需接後端 + Email SMTP</div>
+      <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-800">â ï¸ PROTOTYPE â è³æå²å­æ¼çè¦½å¨ localStorageï¼æ­£å¼ä¸ç·éæ¥å¾ç«¯ + Email SMTP</div>
       <div>
-        <label class="form-label">選擇購買數量 <span class="text-red-500">*</span></label>
+        <label class="form-label">é¸æè³¼è²·æ¸é <span class="text-red-500">*</span></label>
         <div class="grid grid-cols-4 gap-2 mt-1" id="qty-buttons">
           <button type="button" onclick="selectQty(1)" id="qty-1" class="qty-btn border-2 rounded-xl py-3 text-center transition" data-qty="1">
-            <div class="font-black text-lg deep-text">1罐</div>
+            <div class="font-black text-lg deep-text">1ç½</div>
             <div class="text-xs text-slate-400 mt-0.5">$350</div>
-            <div class="text-xs text-red-400">+運費$100</div>
+            <div class="text-xs text-red-400">+éè²»$100</div>
           </button>
           <button type="button" onclick="selectQty(2)" id="qty-2" class="qty-btn border-2 rounded-xl py-3 text-center transition" data-qty="2">
-            <div class="font-black text-lg deep-text">2罐</div>
+            <div class="font-black text-lg deep-text">2ç½</div>
             <div class="text-xs text-slate-400 mt-0.5">$700</div>
-            <div class="text-xs text-red-400">+運費$100</div>
+            <div class="text-xs text-red-400">+éè²»$100</div>
           </button>
           <button type="button" onclick="selectQty(3)" id="qty-3" class="qty-btn border-2 rounded-xl py-3 text-center transition" data-qty="3">
-            <div class="font-black text-lg deep-text">3罐</div>
+            <div class="font-black text-lg deep-text">3ç½</div>
             <div class="text-xs text-slate-400 mt-0.5">$1,050</div>
-            <div class="text-xs text-green-600 font-bold">免運</div>
+            <div class="text-xs text-green-600 font-bold">åé</div>
           </button>
           <button type="button" onclick="selectQty(4)" id="qty-4" class="qty-btn border-2 border-amber-400 bg-amber-50 rounded-xl py-3 text-center transition" data-qty="4">
-            <div class="font-black text-lg gold-text">4罐</div>
+            <div class="font-black text-lg gold-text">4ç½</div>
             <div class="text-xs text-slate-400 mt-0.5 line-through">$1,400</div>
-            <div class="text-xs text-green-600 font-bold">$1,000免運</div>
-            <div class="text-[9px] bg-red-500 text-white rounded px-1 mt-0.5 inline-block">主推</div>
+            <div class="text-xs text-green-600 font-bold">$1,000åé</div>
+            <div class="text-[9px] bg-red-500 text-white rounded px-1 mt-0.5 inline-block">ä¸»æ¨</div>
           </button>
         </div>
         <input type="hidden" id="order-qty" value="4">
       </div>
       <div>
-        <label class="form-label">收件人姓名 <span class="text-red-500">*</span></label>
-        <input type="text" id="order-name" class="form-input" placeholder="請輸入真實姓名">
+        <label class="form-label">æ¶ä»¶äººå§å <span class="text-red-500">*</span></label>
+        <input type="text" id="order-name" class="form-input" placeholder="è«è¼¸å¥çå¯¦å§å">
       </div>
       <div>
-        <label class="form-label">手機號碼 <span class="text-red-500">*</span></label>
+        <label class="form-label">ææ©èç¢¼ <span class="text-red-500">*</span></label>
         <input type="tel" id="order-phone" class="form-input" placeholder="09XXXXXXXX">
       </div>
       <div>
-        <label class="form-label">Email（接收訂單確認信）</label>
+        <label class="form-label">Emailï¼æ¥æ¶è¨å®ç¢ºèªä¿¡ï¼</label>
         <input type="email" id="order-email" class="form-input" placeholder="your@email.com">
       </div>
       <div>
-        <label class="form-label">收件地址 <span class="text-red-500">*</span></label>
-        <input type="text" id="order-address" class="form-input" placeholder="縣市+區+詳細地址">
+        <label class="form-label">æ¶ä»¶å°å <span class="text-red-500">*</span></label>
+        <input type="text" id="order-address" class="form-input" placeholder="ç¸£å¸+å+è©³ç´°å°å">
       </div>
       <div>
-        <label class="form-label">LINE 折抵券碼 <span class="text-xs text-slate-400">（加入LINE後領取，折抵 $50）</span></label>
+        <label class="form-label">LINE ææµå¸ç¢¼ <span class="text-xs text-slate-400">ï¼å å¥LINEå¾é åï¼ææµ $50ï¼</span></label>
         <div class="flex gap-2">
-          <input type="text" id="order-coupon" class="form-input flex-1" placeholder="例：LINE50" style="text-transform:uppercase">
-          <button onclick="applyCoupon()" class="bg-emerald-500 text-white px-4 rounded-xl text-sm font-bold hover:bg-emerald-600 transition whitespace-nowrap">套用</button>
+          <input type="text" id="order-coupon" class="form-input flex-1" placeholder="ä¾ï¼LINE50" style="text-transform:uppercase">
+          <button onclick="applyCoupon()" class="bg-emerald-500 text-white px-4 rounded-xl text-sm font-bold hover:bg-emerald-600 transition whitespace-nowrap">å¥ç¨</button>
         </div>
         <div id="coupon-result" class="text-xs mt-1 hidden"></div>
       </div>
       <div>
-        <label class="form-label">推薦碼 <span class="text-xs text-slate-400">（選填，朋友推薦碼）</span></label>
-        <input type="text" id="order-referral" class="form-input" placeholder="（選填）">
+        <label class="form-label">æ¨è¦ç¢¼ <span class="text-xs text-slate-400">ï¼é¸å¡«ï¼æåæ¨è¦ç¢¼ï¼</span></label>
+        <input type="text" id="order-referral" class="form-input" placeholder="ï¼é¸å¡«ï¼">
       </div>
       <div>
-        <label class="form-label">備註</label>
-        <textarea id="order-note" class="form-input" rows="2" placeholder="特殊需求或給業務部的說明"></textarea>
+        <label class="form-label">åè¨»</label>
+        <textarea id="order-note" class="form-input" rows="2" placeholder="ç¹æ®éæ±æçµ¦æ¥­åé¨çèªªæ"></textarea>
       </div>
       <div class="bg-slate-50 rounded-xl p-4">
-        <label class="form-label">付款方式</label>
+        <label class="form-label">ä»æ¬¾æ¹å¼</label>
         <div class="flex items-center gap-3 mt-1">
           <input type="radio" id="cod" name="payment" value="cod" checked>
-          <label for="cod" class="font-bold text-sm text-slate-700">貨到付款 <span class="text-xs text-slate-400 font-normal">（商品送達時付款）</span></label>
+          <label for="cod" class="font-bold text-sm text-slate-700">è²¨å°ä»æ¬¾ <span class="text-xs text-slate-400 font-normal">ï¼ååééæä»æ¬¾ï¼</span></label>
         </div>
       </div>
       <div class="bg-amber-50 rounded-xl p-4 text-sm space-y-1">
-        <div class="flex justify-between"><span>商品金額</span><span id="display-subtotal" class="font-bold">$1,400</span></div>
-        <div class="flex justify-between text-green-600"><span>優惠折扣</span><span id="display-discount">-$0</span></div>
-        <div class="flex justify-between text-green-600"><span>運費</span><span id="display-shipping">免運</span></div>
-        <div class="flex justify-between font-black text-base deep-text border-t border-amber-200 pt-2 mt-1"><span>應付金額（貨到付款）</span><span id="display-total" class="gold-text">$1,400</span></div>
+        <div class="flex justify-between"><span>ååéé¡</span><span id="display-subtotal" class="font-bold">$1,400</span></div>
+        <div class="flex justify-between text-green-600"><span>åªæ ææ£</span><span id="display-discount">-$0ð½ÍÁ¸øð½¥Øø(ñ¥Ø±ÍÌô±à©ÕÍÑ¥äµÑÝ¸ÑáÐµÉ¸´ØÀÀøñÍÁ¸û¦/¢Êìð½ÍÁ¸øñÍÁ¸¥ô¥ÍÁ±äµÍ¡¥ÁÁ¥¹û7¦,ð½ÍÁ¸øð½¥Øø(ñ¥Ø±ÍÌô±à©ÕÍÑ¥äµÑÝ¸½¹Ðµ±¬ÑáÐµÍÀµÑáÐ½ÉÈµÐ½ÉÈµµÈ´ÈÀÀÁÐ´ÈµÐ´ÄøñÍÁ¸û'îc¦G¦7¾ò#¢Ê£"Ãîc²û¾ò$ð½ÍÁ¸øñÍÁ¸¥ô¥ÍÁ±äµÑ½Ñ°±ÍÌô½±µÑáÐøÄ°ÐÀÀð½ÍÁ¸øð½¥Øø(ð½¥Øø(ñ¥Ø±ÍÌôÑáÐµáÌÑáÐµÍ±Ñ´ÔÀÀÍÁµä´Èø(ñ±°±ÍÌô±à¥ÑµÌµÍÑÉÐÀ´Èøñ¥¹ÁÕÐÑåÁô¡­½à¥ô½¹Í¹Ðµ½ÉÈ±ÍÌôµÐ´À¸Ô±àµÍ¡É¥¹¬´ÀøñÍÁ¸û"GB3?ä¾åäººè³æç¨æ¼è¨å®èçèåºè²¨è¯çµ¡ã<span class="text-red-500">*</span></span></label>
+        <label class="flex items-start gap-2"><input type="checkbox" id="consent-marketing"><span>æåææ¥æ¶æå¡åªæ ãç¢åè³è¨èæ´»åéç¥ï¼é¸å¡«ï¼</span></label>
       </div>
-      <div class="text-xs text-slate-500 space-y-2">
-        <label class="flex items-start gap-2"><input type="checkbox" id="consent-order" class="mt-0.5 flex-shrink-0"><span>我同意提供個人資料用於訂單處理與出貨聯絡。<span class="text-red-500">*</span></span></label>
-        <label class="flex items-start gap-2"><input type="checkbox" id="consent-marketing"><span>我同意接收會員優惠、產品資訊與活動通知（選填）</span></label>
-      </div>
-      <button onclick="submitOrder()" class="btn-primary w-full py-4 rounded-xl font-black text-lg btn-pulse">確認下單（貨到付款）</button>
+      <button onclick="submitOrder()" class="btn-primary w-full py-4 rounded-xl font-black text-lg btn-pulse">ç¢ºèªä¸å®ï¼è²¨å°ä»æ¬¾ï¼</button>
     </div>
   </div>
 </div>
 
-<!-- Modal：訂單成立 -->
+<!-- Modalï¼è¨å®æç« -->
 <div id="success-modal" class="modal-overlay modal-hidden">
   <div class="modal-box text-center">
     <div class="p-8 space-y-5">
-      <div class="w-16 h-16 herb-bg rounded-full flex items-center justify-center text-white text-3xl mx-auto">✓</div>
-      <h3 class="text-2xl font-black deep-text">訂單成立！</h3>
+      <div class="w-16 h-16 herb-bg rounded-full flex items-center justify-center text-white text-3xl mx-auto">â</div>
+      <h3 class="text-2xl font-black deep-text">è¨å®æç«ï¼</h3>
       <div class="bg-amber-50 rounded-xl p-4 text-left space-y-1 text-sm">
-        <p class="font-bold deep-text">訂單編號：</p>
+        <p class="font-bold deep-text">è¨å®ç·¨èï¼</p>
         <p id="success-order-num" class="font-mono font-black text-lg gold-text"></p>
-        <p class="text-slate-500 text-xs">請截圖或記下訂單編號，可查詢出貨進度</p>
+        <p class="text-slate-500 text-xs">è«æªåæè¨ä¸è¨å®ç·¨èï¼å¯æ¥è©¢åºè²¨é²åº¦</p>
       </div>
       <div class="space-y-2 text-sm text-slate-600">
-        <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> 業務部已收到訂單通知</p>
-        <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> 請保持手機暢通，物流人員會來電</p>
-        <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> 商品送達時再付款，當面驗貨</p>
+        <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> æ¥­åé¨å·²æ¶å°è¨å®éç¥</p>
+        <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> è«ä¿æææ©æ¢éï¼ç©æµäººå¡æä¾é»</p>
+        <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> ååééæåä»æ¬¾ï¼ç¶é¢é©è²¨</p>
       </div>
       <div class="bg-blue-50 rounded-xl p-4 text-sm text-blue-700">
-        <p class="font-bold mb-1">你的推薦碼（購買後解鎖）</p>
+        <p class="font-bold mb-1">ä½ çæ¨è¦ç¢¼ï¼è³¼è²·å¾è§£éï¼</p>
         <div id="success-referral-code" class="font-mono font-black text-lg text-blue-800 bg-blue-100 rounded-lg px-4 py-2 inline-block"></div>
-        <p class="text-xs mt-2 text-blue-500">推薦朋友購買3+1組合，朋友享$50折，你得$50購物金</p>
+        <p class="text-xs mt-2 text-blue-500">å å¥LINEå®æ¹å¸³èï¼ä¸å®ææä¾åªæ æ´»å</p>
       </div>
       <div class="flex flex-col gap-3">
-        <a id="track-link" href="order-tracking.html" class="btn-primary w-full py-3 rounded-xl font-bold block text-center no-underline">查詢出貨進度</a>
-        <button onclick="closeSuccessModal()" class="btn-outline w-full py-3 rounded-xl font-bold">返回首頁</button>
+        <a id="track-link" href="order-tracking.html" class="btn-primary w-full py-3 rounded-xl font-bold block text-center no-underline">æ¥è©¢åºè²¨é²åº¦</a>
+        <button onclick="closeSuccessModal()" class="btn-outline w-full py-3 rounded-xl font-bold">è¿åé¦é </button>
       </div>
     </div>
   </div>
@@ -1164,22 +1159,22 @@
 
 <script>
 const faqs=[
-  {q:'一條根草本舒緩膏什麼時候使用？',a:'適合久坐後、開車後、運動後、工作後感到肩頸腰背緊繃時，以及睡前日常保養使用。'},
-  {q:'可以每天使用嗎？',a:'可以，適合日常保養，依個人需要使用即可。'},
-  {q:'適合哪些部位？',a:'肩頸、腰背、手腕、小腿、膝蓋周圍等常見緊繃部位均適用。請避免眼睛周圍、黏膜、傷口及過敏部位。'},
-  {q:'長輩可以使用嗎？',a:'可以。專利擠壓瓶設計讓長輩取用更省力，清涼舒爽感也適合日常保養。如有特殊疾病請先諮詢醫師。'},
-  {q:'皮膚敏感可以使用嗎？',a:'建議先在手腕內側少量試用，確認無不適後再正常使用。如有皮膚疾病或過敏，請先詢問藥師。'},
-  {q:'孕婦、嬰幼兒或傷口處可以使用嗎？',a:'不建議。孕婦、2歲以下幼兒、傷口、潰爛皮膚或嚴重皮膚疾病者，請勿使用，並先諮詢醫師。'},
-  {q:'會員優惠碼怎麼取得？',a:'加入LINE官方帳號（發送「領取優惠碼」）或完成會員註冊後即可取得。'},
-  {q:'3+1 組合怎麼計算？',a:'購買 3 瓶金牌一條根草本舒緩膏（60g），加贈 1 瓶，共 4 瓶。輸入會員專屬舒緩碼享優惠價 $1000（原價 $1400），全台免運。'},
-  {q:'貨到付款怎麼付款？',a:'商品由物流人員送達時，現場以現金支付即可。請準備好貨款，保持手機暢通方便聯絡。'},
-  {q:'下單後多久出貨？',a:'通常 1～3 個工作日內安排出貨，視庫存與物流狀況而定。'},
-  {q:'如何查詢訂單進度？',a:'可前往訂單查詢頁，輸入訂單編號與手機末三碼查詢，或點擊 Email 中的查詢連結。'},
-  {q:'優惠碼可以和其他活動併用嗎？',a:'不可以。會員舒緩碼限 3+1 組合包使用，每位會員限用一次，不得與其他優惠疊加。'},
-  {q:'推薦碼回饋如何計算？',a:'朋友輸入你的推薦碼購買 3+1 組合成立後，朋友享 $50 折扣，你獲得 $50 購物金（下次消費時自動抵用）。'},
-  {q:'如果物流聯絡不到我怎麼辦？',a:'物流人員會嘗試多次聯絡，若無法聯繫可能留通知或由客服協助安排重新配送，請確保填寫資料正確。'},
-  {q:'可以修改收件地址嗎？',a:'下單後若需修改，請儘快聯繫客服（在出貨前可協助修改）。出貨後恕無法更改。'},
-  {q:'如何加入LINE官方帳號領優惠？',a:'點擊頁面上的「加入LINE領優惠」按鈕，加入後發送「領取優惠碼」即可取得你的專屬舒緩碼。'},
+  {q:'hæ¬èç·©èä»éº¼æåä½¿ç¨ï¼',a:'é©åä¹åå¾ãéè»å¾ãéåå¾ãå·¥ä½å¾æå°è©é ¸è°èç·ç¹æï¼ä»¥åç¡åæ¥å¸¸ä¿é¤ä½¿ç¨ã'},
+  {q:'å¯ä»¥æ¯å¤©ä½¿ç¨åï¼',a:'å¯ä»¥ï¼é©åæ¥å¸¸ä¿é¤ï¼ä¾åäººéè¦ä½¿ç¨å³å¯ã'},
+  {q:'é©ååªäºé¨ä½ï¼',a:'è©é ¸ãè°èãæèãå°è¿ãèèå¨åç­å¸¸è¦ç·ç¹é¨ä½åé©ç¨ãè«é¿åç¼çå¨åãé»èãå·å£åéæé¨ä½ã'},
+  {q:'é·è¼©å¯ä»¥ä½¿ç¨åï¼',a:'å¯ä»¥ãç¨å®¶è¨­è¨æ å£ç¶è®é·è¼©åç¨æ´çåï¼æ¸æ¶¼èç½æä¹é©åæ¥å¸¸ä¿é¤ãå¦æç¹æ®ç¾çè«åè«®è©¢é«å¸«ã'},
+  {q:'ç®èææå¯ä»¥ä½¿ç¨åï¼',a:'å»ºè­°åå¨æèå§å´å°éè©¦ç¨ï¼ç¢ºèªç¡ä¸é©å¾åæ­£å¸¸ä½¿ç¨ãå¦æç®èç¾çæéæï¼è«åè©¢åè¥å¸«ã'},
+  {q:'å­å©¦ãå¬°å¹¼åæå·å£èå¯ä»¥ä½¿ç¨åï¼',a:'ä¸å»ºè­°ãå­å©¦ã2æ­²ä»¥ä¸å¹¼åãå·å£ãæ½°çç®èæå´éç®èç¾çèï¼è«å¿ä½¿ç¨ï¼ä¸¦åè«®è©¢é«å¸«ã'},
+  {q:'æä»éº¼æå¡ç¦å©ï¼',a:'å å¥LINEå®æ¹å¸³èå³å¯äº«æä¸å®æåªæ æ´»åï¼æ´»åæéå°ä¸»åéç¥ã'},
+  {q:'3+1 çµåæéº¼è¨ç®ï¼',a:'è³¼è²· 3 ç¶éå¤ªæ¥µèæ¬èç·©èï¼60gï¼ï¼å è´ 1 ç¶ï¼å± 4 ç¶ãåªæ å¹ $1000ï¼åå¹ $1400ï¼ï¼å¨å°åéã'},
+  {q:'è²¨å°ä»æ¬¾æéº¼äº«å¡ä»æ¬¾ï¼',a:'ååç±ç©æµäººå¡ééæï¼ç¾å ´ä»¥ç¾éæ¯ä»å³å¯ãè«æºåå¥½è²¨æ¬¾ï¼ä¿æææ©æ¢éæ¹ä¾¿è¯çµ¡ã'},
+  {q:'ä¸å®å¾å¤ä¹åºè²¨ï¼',a:'éå¸¸ 1ï½3 åå·¥ä½æ¥å§å®æåºè²¨ï¼è¦åº«å­èç©æµçæ³èå®ã'},
+  {q:'å¦ä½æ¥è©¢è¨å®é²åº¦ï¼',a:'å¯åå¾è¨å®æ¥è©¢é ï¼è¼¸å¥è¨å®ç·¨èèææ©æ«ä¸ç¢¼æ¥è©¢ï¼æé»æ Email ä¸­çæ¥è©¢é£çµã'},
+  {q:'åªæ æ´»åå¦ä½å¾ç¥ï¼',a:'å å¥LINEå®æ¹å¸³èå¾ï¼æ´»åæéæä¸»åæ¨æ­éç¥ï¼ä¸å®ææ¨åºéå®åªæ ã'},
+  {q:'å¦ä½äº«ææåªæ çå¹æ ¼ï¼',a:'éé3+1çµåå³äº«æåªæ å®å¹ï¼å å¥LINEå®æ¹å¸³èææ¡ä¸å®æåªæ æ´»åã'},
+  {q:'å¦æç©æµè¯çµ¡ä¸å°ææéº¼è¾¦ï¼',a:'ç©æµäººå¡æåè©¦å¤æ¬¡è¯çµ¡ï¼è¥ç¡æ³è¯ç¹«å¯è½çéç¥æç±å®¢æåå©å®æéæ°ééï¼è«ç¢ºä¿å¡«å¯«è³ææ­£ç¢ºã'},
+  {q:'å¯ä»¥ä¿®æ¹æ¶ä»¶å°ååï¼',a:'ä¸å®å¾è¥éä¿®æ¹ï¼è«åå¿«è¯ç¹«å®¢æï¼å¨åºè²¨åå¯åå©ä¿®æ¹ï¼ãåºè²¨å¾æç¡æ³æ´æ¹ã'},
+  {q:'å¦ä½å å¥LINEå®æ¹å¸³èé åªæ ï¼',a:'é»æé é¢ä¸çãå å¥LINEé åªæ ãæéï¼å å¥å¾å³å¯äº«åä¸å®æåªæ æ´»åã'},
 ];
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -1210,12 +1205,12 @@ function closeSuccessModal(){document.getElementById('success-modal').classList.
 document.addEventListener('click',e=>{if(e.target.classList.contains('modal-overlay'))e.target.classList.add('modal-hidden')});
 
 let line50Applied=false;
-// 罐數定價（1-4罐）
+// ç½æ¸å®å¹ï¼1-4ç½ï¼
 const qtyPricing={
-  1:{sub:350,ship:100,label:'1罐體驗'},
-  2:{sub:700,ship:100,label:'2罐'},
-  3:{sub:1050,ship:0,label:'3罐免運'},
-  4:{sub:1000,ship:0,label:'4罐優惠組（買3送1）'},
+  1:{sub:350,ship:100,label:'1ç½é«é©'},
+  2:{sub:700,ship:100,label:'2ç½'},
+  3:{sub:1050,ship:0,label:'3ç½åé'},
+  4:{sub:1000,ship:0,label:'4ç½åªæ çµï¼è²·3é1ï¼'},
 };
 let selectedQty=4;
 
@@ -1235,11 +1230,11 @@ function selectQty(q){
 function updateOrderSummary(){
   const p=qtyPricing[selectedQty]||qtyPricing[4];
   const lineDsc=line50Applied?50:0;
-  const base4label=selectedQty===4?'買3送1 優惠':'';
-  const discLabel=line50Applied?(base4label?base4label+' + LINE券-$50':'LINE券 -$50'):(base4label||'-$0');
+  const base4label=selectedQty===4?'è²·3é1 åªæ ':'';
+  const discLabel=line50Applied?(base4label?base4label+' + LINEå¸-$50':'LINEå¸ -$50'):(base4label||'-$0');
   document.getElementById('display-subtotal').textContent='$'+p.sub.toLocaleString();
   document.getElementById('display-discount').textContent=discLabel;
-  document.getElementById('display-shipping').textContent=p.ship?'$'+p.ship:'免運';
+  document.getElementById('display-shipping').textContent=p.ship?'$'+p.ship:'åé';
   document.getElementById('display-total').textContent='$'+(p.sub+p.ship-lineDsc).toLocaleString();
 }
 
@@ -1249,11 +1244,11 @@ function applyCoupon(){
   res.classList.remove('hidden');
   if(code==='LINE50'){
     res.className='text-xs mt-1 text-green-600';
-    res.textContent='✅ 折抵券套用成功！本單折抵 $50';
+    res.textContent='â ææµå¸å¥ç¨æåï¼æ¬å®ææµ $50';
     line50Applied=true;
   } else {
     res.className='text-xs mt-1 text-red-500';
-    res.textContent='❌ 折抵碼不正確，請確認後再試';
+    res.textContent='â ææµç¢¼ä¸æ­£ç¢ºï¼è«ç¢ºèªå¾åè©¦';
     line50Applied=false;
   }
   updateOrderSummary();
@@ -1265,9 +1260,9 @@ function submitOrder(){
   const phone=document.getElementById('order-phone').value.trim();
   const address=document.getElementById('order-address').value.trim();
   const consent=document.getElementById('consent-order').checked;
-  if(!name||!phone||!address){alert('請填寫姓名、手機與收件地址');return;}
-  if(!consent){alert('請勾選同意個資使用說明後再送出');return;}
-  if(!/^09\d{8}$/.test(phone)){alert('手機號碼格式不正確，請輸入 09 開頭的 10 碼號碼');return;}
+  if(!name||!phone||!address){alert('è«å¡«å¯«å§åãææ©èæ¶ä»¶å°å');return;}
+  if(!consent){alert('è«å¾é¸åæåè³ä½¿ç¨èªªæå¾åéåº');return;}
+  if(!/^09\d{8}$/.test(phone)){alert('ææ©èç¢¼æ ¼å¼ä¸æ­£ç¢ºï¼è«è¼¸å¥ 09 éé ­ç 10 ç¢¼èç¢¼');return;}
   const prod=selectedQty||4;
   const p=qtyPricing[prod]||qtyPricing[4];
   const discount=line50Applied?50:0;
@@ -1276,8 +1271,8 @@ function submitOrder(){
   const rand=String(Math.floor(Math.random()*9000)+1000);
   const orderNum='ORDER-'+datePart+'-'+rand;
   const refCode=name.slice(0,1).toUpperCase()+'REF'+rand;
-  const pnames={1:'1罐體驗組 60g×1',2:'2罐 60g×2',3:'3罐組合 60g×3',4:'4罐優惠組（買3送1）60g×4'};
-  const order={order_number:orderNum,product:pnames[prod]||pnames[4],customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:'',referral_code:document.getElementById('order-referral')?.value||'',subtotal:p.sub,discount_amount:discount,shipping_fee:p.ship,total:p.sub-discount+p.ship,payment_method:'貨到付款',order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value};
+  const pnames={1:'1ç½é«é©çµ 60gÃ1',2:'2ç½ 60gÃ2',3:'3ç½çµå 60gÃ3',4:'4ç½åªæ çµï¼è²·3é1ï¼60gÃ4'};
+  const order={order_number:orderNum,product:pnames[prod]||pnames[4],customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:'',referral_code:document.getElementById('order-referral')?.value||'',subtotal:p.sub,discount_amount:discount,shipping_fee:p.ship,total:p.sub-discount+p.ship,payment_method:'è²¨å°ä»æ¬¾',order_status:'è¨å®æç«',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value};
   const orders=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
   orders.push(order);
   localStorage.setItem('gbjyg_orders',JSON.stringify(orders));
@@ -1291,23 +1286,23 @@ function submitOrder(){
 function quickTrack(){
   const num=document.getElementById('quick-order-num').value.trim();
   const last3=document.getElementById('quick-phone-last3').value.trim();
-  if(!num||!last3){alert('請填寫訂單編號與手機末三碼');return;}
+  if(!num||!last3){alert('è«å¡«å¯«è¨å®ç·¨èèææ©æ«ä¸ç¢¼');return;}
   window.location.href='order-tracking.html?order='+encodeURIComponent(num)+'&phone='+encodeURIComponent(last3);
 }
 
-const toastMsgs=['來自台北市的 陳*明 剛訂購了 3+1 家庭分享組','來自台中市的 林*玲 剛訂購了 3+1 家庭分享組','來自高雄市的 王*偉 剛訂購了 3+1 家庭分享組','來自新北市的 李*華 剛訂購了 3+1 家庭分享組','來自桃園市的 張*真 剛訂購了家庭常備大組'];
+const toastMsgs=['ä¾èªå°åå¸ç é³*æ åè¨è³¼äº 3+1 å®¶åº­åäº«çµ','ä¾èªå°ä¸­å¸ç æ*ç² åè¨è³¼äº 3+1 å®¶åº­åäº«çµ','ä¾èªé«éå¸ç ç*å åè¨è³¼äº 3+1 å®¶åº­åäº«çµ','ä¾èªæ°åå¸ç æ*è¯ åè¨è³¼äº 3+1 å®¶åº­åäº«çµ','ä¾èªæ¡åå¸ç å¼µ*ç åè¨è³¼äºå®¶åº­å¸¸åå¤§çµ'];
 let ti=0;
 function showToast(){
   const t=document.getElementById('purchase-toast');
-  document.getElementById('toast-text').innerHTML='<strong>'+toastMsgs[ti%toastMsgs.length]+'</strong><br><span style="color:#9ca3af">貨到付款</span>';
+  document.getElementById('toast-text').innerHTML='<strong>'+toastMsgs[ti%toastMsgs.length]+'</strong><br><span style="color:#9ca3af">è²¨å°ä»æ¬¾</span>';
   t.style.display='block';t.style.animation='toastIn .4s ease';
   setTimeout(()=>{t.style.display='none'},5000);ti++;
 }
 
 
-// ═══════════════════════════════════════════════
-//  宇宙太極 Canvas 動畫（升級版：五行八卦）
-// ═══════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââ
+//  å®å®å¤ªæ¥µ Canvas åç«ï¼åç´çï¼äºè¡å«å¦ï¼
+// âââââââââââââââââââââââââââââââââââââââââââââââ
 (function initCosmosCanvas(){
   const canvas = document.getElementById('cosmos-canvas');
   if(!canvas) return;
@@ -1317,7 +1312,7 @@ function showToast(){
   const cx = SIZE/2, cy = SIZE/2;
   const isReduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  // ── Stars ──
+  // ââ Stars ââ
   const stars = Array.from({length:220},()=>({
     x: cx + (Math.random()-0.5)*SIZE*0.92,
     y: cy + (Math.random()-0.5)*SIZE*0.92,
@@ -1327,31 +1322,31 @@ function showToast(){
     phase: Math.random()*Math.PI*2
   }));
 
-  // ── Five element config ──
+  // ââ Five element config ââ
   const ELEMENTS = [
-    { name:'金', color:'#d9a441', glow:'rgba(217,164,65,0.55)', text:'#1a0800', phase:-90 },
-    { name:'木', color:'#40c870', glow:'rgba(64,200,112,0.5)',  text:'#0a2410', phase:-18 },
-    { name:'水', color:'#2898ff', glow:'rgba(40,152,255,0.55)', text:'#001c40', phase: 54 },
-    { name:'火', color:'#ff6020', glow:'rgba(255,96,32,0.55)',  text:'#200000', phase:126 },
-    { name:'土', color:'#b07840', glow:'rgba(176,120,64,0.5)',  text:'#1a0a00', phase:198 },
+    { name:'é', color:'#d9a441', glow:'rgba(217,164,65,0.55)', text:'#1a0800', phase:-90 },
+    { name:'æ¨', color:'#40c870', glow:'rgba(64,200,112,0.5)',  text:'#0a2410', phase:-18 },
+    { name:'æ°´', color:'#2898ff', glow:'rgba(40,152,255,0.55)', text:'#001c40', phase: 54 },
+    { name:'ç«', color:'#ff6020', glow:'rgba(255,96,32,0.55)',  text:'#200000', phase:126 },
+    { name:'å', color:'#b07840', glow:'rgba(176,120,64,0.5)',  text:'#1a0a00', phase:198 },
   ];
   const ORBIT_R = 148;
   const ORBIT_PERIOD = 65000; // ms
 
-  // ── Bagua config ──
+  // ââ Bagua config ââ
   const BAGUA = [
-    { name:'乾', color:'#f5d26b', r:0   },
-    { name:'兌', color:'#8fd7ff', r:45  },
-    { name:'離', color:'#ffb347', r:90  },
-    { name:'震', color:'#4fd37a', r:135 },
-    { name:'坤', color:'#e8c850', r:180 },
-    { name:'巽', color:'#a4ffb5', r:225 },
-    { name:'坎', color:'#38a9ff', r:270 },
-    { name:'艮', color:'#c8a060', r:315 },
+    { name:'ä¹¾', color:'#f5d26b', r:0   },
+    { name:'å', color:'#8fd7ff', r:45  },
+    { name:'é¢', color:'#ffb347', r:90  },
+    { name:'é', color:'#4fd37a', r:135 },
+    { name:'å¤', color:'#e8c850', r:180 },
+    { name:'å·½', color:'#a4ffb5', r:225 },
+    { name:'å', color:'#38a9ff', r:270 },
+    { name:'è®', color:'#c8a060', r:315 },
   ];
   const BAGUA_R = 195;
 
-  // ── Draw helpers ──
+  // ââ Draw helpers ââ
   function drawGlowCircle(x,y,r,color,alpha){
     const g=ctx.createRadialGradient(x,y,0,x,y,r*2.2);
     g.addColorStop(0,color.replace(')',`,${alpha})`).replace('rgb','rgba'));
@@ -1390,10 +1385,10 @@ function showToast(){
     // three yao lines
     const lineColors=['solid','solid','solid'];
     const patterns = {
-      '乾':[[1,1],[1,1],[1,1]], '兌':[[1,1],[1,1],[0,0]],
-      '離':[[1,1],[0,0],[1,1]], '震':[[0,0],[0,0],[1,1]],
-      '坤':[[0,0],[0,0],[0,0]], '巽':[[0,0],[1,1],[1,1]],
-      '坎':[[0,0],[1,1],[0,0]], '艮':[[1,1],[0,0],[0,0]],
+      'ä¹¾':[[1,1],[1,1],[1,1]], 'å':[[1,1],[1,1],[0,0]],
+      'é¢':[[1,1],[0,0],[1,1]], 'é':[[0,0],[0,0],[1,1]],
+      'å¤':[[0,0],[0,0],[0,0]], 'å·½':[[0,0],[1,1],[1,1]],
+      'å':[[0,0],[1,1],[0,0]], 'è®':[[1,1],[0,0],[0,0]],
     };
     const pat = patterns[bg.name] || [[1,1],[1,1],[1,1]];
     ctx.strokeStyle=bg.color; ctx.lineWidth=2; ctx.lineCap='round';
@@ -1424,36 +1419,36 @@ function showToast(){
 
     ctx.clearRect(0,0,SIZE,SIZE);
 
-    // ── Clip to circle ──
+    // ââ Clip to circle ââ
     ctx.save();
     ctx.beginPath(); ctx.arc(cx,cy,SIZE*0.5,0,Math.PI*2); ctx.clip();
 
-    // ── Background ──
+    // ââ Background ââ
     const bg=ctx.createRadialGradient(cx,cy-40,0,cx,cy,SIZE*0.6);
     bg.addColorStop(0,'#0d0828'); bg.addColorStop(0.45,'#08111f'); bg.addColorStop(1,'#050814');
     ctx.fillStyle=bg; ctx.fillRect(0,0,SIZE,SIZE);
 
     // Nebula
     const neb1=ctx.createRadialGradient(cx+60,cy-40,0,cx+60,cy-40,140);
-    neb1.addColorStop(0,'rgba(80,40,180,0.18)'); neb1.addColorStop(1,'transparent');
+    neb1.addColorStop(0,'rgba(80,40,180,0.18)'); neb1.addColorStop(1,"transparent");
     ctx.fillStyle=neb1; ctx.beginPath(); ctx.arc(cx+60,cy-40,140,0,Math.PI*2); ctx.fill();
     const neb2=ctx.createRadialGradient(cx-50,cy+50,0,cx-50,cy+50,110);
     neb2.addColorStop(0,'rgba(20,80,160,0.14)'); neb2.addColorStop(1,'transparent');
     ctx.fillStyle=neb2; ctx.beginPath(); ctx.arc(cx-50,cy+50,110,0,Math.PI*2); ctx.fill();
 
-    // ── Stars ──
+    // ââ Stars ââ
     stars.forEach(s=>{
       const a=s.alpha*(0.55+0.45*Math.sin(t*s.speed+s.phase));
       ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
       ctx.fillStyle=`rgba(255,255,255,${a.toFixed(2)})`; ctx.fill();
     });
 
-    // ── Orbit track ──
+    // ââ Orbit track ââ
     ctx.strokeStyle='rgba(212,175,55,0.07)'; ctx.lineWidth=1.2;
     ctx.setLineDash([4,10]); ctx.beginPath(); ctx.arc(cx,cy,ORBIT_R,0,Math.PI*2); ctx.stroke();
     ctx.setLineDash([]);
 
-    // ── Bagua outer ring ──
+    // ââ Bagua outer ring ââ
     const baguaAngle = -(elapsed/100000)*Math.PI*2;
     // outer rings
     ctx.strokeStyle='rgba(212,175,55,0.13)'; ctx.lineWidth=1.5;
@@ -1469,7 +1464,7 @@ function showToast(){
       drawBaguaSymbol(bx,by,bg,a+Math.PI/2);
     });
 
-    // ── Five element energy lines ──
+    // ââ Five element energy lines ââ
     const orbAngle = (elapsed%ORBIT_PERIOD)/ORBIT_PERIOD*Math.PI*2;
     ELEMENTS.forEach((el,i)=>{
       const angle = orbAngle + el.phase*Math.PI/180;
@@ -1479,7 +1474,7 @@ function showToast(){
       drawEnergyLine(ex,ey,cx,cy,el.color,dashOff);
     });
 
-    // ── Five element balls ──
+    // ââ Five element balls ââ
     ELEMENTS.forEach((el,i)=>{
       const angle = orbAngle + el.phase*Math.PI/180;
       const ex = cx + ORBIT_R*Math.cos(angle);
@@ -1487,7 +1482,7 @@ function showToast(){
       drawElementBall(ex,ey,el);
     });
 
-    // ── Taichi figure silhouettes ──
+    // ââ Taichi figure silhouettes ââ
     const figAlpha=0.12;
     function drawFigure(fx,fy,flip){
       ctx.save(); ctx.globalAlpha=figAlpha;
@@ -1512,14 +1507,14 @@ function showToast(){
     drawFigure(cx-200,cy,false);
     drawFigure(cx+200,cy,true);
 
-    // ── Central taichi halo ──
+    // ââ Central taichi halo ââ
     const haloAlpha = 0.28+0.14*Math.sin(t*0.02);
     const halo=ctx.createRadialGradient(cx,cy,60,cx,cy,100);
     halo.addColorStop(0,`rgba(212,175,55,${haloAlpha})`);
     halo.addColorStop(1,'rgba(212,175,55,0)');
     ctx.fillStyle=halo; ctx.beginPath(); ctx.arc(cx,cy,100,0,Math.PI*2); ctx.fill();
 
-    // ── Central Taichi (yin-yang) ──
+    // ââ Central Taichi (yin-yang) ââ
     const taichiAngle = (elapsed/50000)*Math.PI*2;
     const yyr = SIZE*0.135;
     ctx.save(); ctx.translate(cx,cy); ctx.rotate(taichiAngle);
@@ -1538,7 +1533,7 @@ function showToast(){
     ctx.arc(0,-yyr/2,yyr/2,Math.PI/2,-Math.PI/2,false);
     ctx.closePath();
     const tGrad=ctx.createRadialGradient(-yyr*0.2,-yyr*0.3,0,0,0,yyr);
-    tGrad.addColorStop(0,'#fffbe8'); tGrad.addColorStop(0.6,'#e8c850'); tGrad.addColorStop(1,'#d4af37');
+    tGrad.addColorStop(0,'#ffffe8'); tGrad.addColorStop(0.6,'#e8c850'); tGrad.addColorStop(1,'#d4af37');
     ctx.fillStyle=tGrad; ctx.fill();
 
     // fish-eye dots
@@ -1583,4 +1578,4 @@ function closeModal(){document.getElementById('comparison-modal').classList.add(
 </script>
 </body>
 </html>
-                           
+                  
