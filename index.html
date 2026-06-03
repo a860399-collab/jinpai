@@ -940,31 +940,67 @@
     <div class="p-6 space-y-4">
       <div class="bg-green-50 rounded-xl p-3 text-xs text-green-800">✅ 下單後訂單將自動記錄至系統，可使用訂單編號查詢出貨狀態</div>
       <div>
+        <label class="form-label">🔑 推薦碼 <span class="text-red-500">*</span><span class="text-xs text-slate-400 font-normal ml-1">（輸入推薦碼才能購買 3+1 方案）</span></label>
+        <div class="flex gap-2 mt-1">
+          <input type="text" id="order-referral" class="form-input flex-1" placeholder="例：1688 / JIN1000" style="text-transform:uppercase" oninput="resetReferral()">
+          <button onclick="validateReferral()" class="bg-amber-500 text-white px-4 rounded-xl text-sm font-bold hover:bg-amber-600 transition whitespace-nowrap">驗證</button>
+        </div>
+        <div id="referral-result" class="text-xs mt-1 hidden"></div>
+      </div>
+      <div>
         <label class="form-label">選擇購買數量 <span class="text-red-500">*</span></label>
-        <div class="grid grid-cols-4 gap-2 mt-1" id="qty-buttons">
-          <button type="button" onclick="selectQty(1)" id="qty-1" class="qty-btn border-2 rounded-xl py-3 text-center transition" data-qty="1">
+        <div class="grid grid-cols-3 gap-2 mt-1" id="qty-buttons">
+          <button type="button" onclick="selectQty(1)" id="qty-1" class="qty-btn border-2 rounded-xl py-3 text-center transition border-gray-200 bg-white" data-qty="1">
             <div class="font-black text-lg deep-text">1罐</div>
             <div class="text-xs text-slate-400 mt-0.5">$350</div>
             <div class="text-xs text-red-400">+運費$100</div>
           </button>
-          <button type="button" onclick="selectQty(2)" id="qty-2" class="qty-btn border-2 rounded-xl py-3 text-center transition" data-qty="2">
+          <button type="button" onclick="selectQty(2)" id="qty-2" class="qty-btn border-2 rounded-xl py-3 text-center transition border-gray-200 bg-white" data-qty="2">
             <div class="font-black text-lg deep-text">2罐</div>
             <div class="text-xs text-slate-400 mt-0.5">$700</div>
             <div class="text-xs text-red-400">+運費$100</div>
           </button>
-          <button type="button" onclick="selectQty(3)" id="qty-3" class="qty-btn border-2 rounded-xl py-3 text-center transition" data-qty="3">
+          <button type="button" onclick="selectQty(3)" id="qty-3" class="qty-btn border-2 rounded-xl py-3 text-center transition border-gray-200 bg-white" data-qty="3">
             <div class="font-black text-lg deep-text">3罐</div>
             <div class="text-xs text-slate-400 mt-0.5">$1,050</div>
             <div class="text-xs text-green-600 font-bold">免運</div>
           </button>
-          <button type="button" onclick="selectQty(4)" id="qty-4" class="qty-btn border-2 border-amber-400 bg-amber-50 rounded-xl py-3 text-center transition" data-qty="4">
-            <div class="font-black text-lg gold-text">4罐</div>
-            <div class="text-xs text-slate-400 mt-0.5 line-through">$1,400</div>
-            <div class="text-xs text-green-600 font-bold">$1,000免運</div>
-            <div class="text-[9px] bg-red-500 text-white rounded px-1 mt-0.5 inline-block">主推</div>
-          </button>
         </div>
-        <input type="hidden" id="order-qty" value="4">
+        <div id="set-section-locked" class="mt-2 bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl p-3 text-center text-gray-400 text-xs">
+          🔒 輸入推薦碼後解鎖 3+1 優惠方案（1～5 組）
+        </div>
+        <div id="set-section-open" class="hidden mt-2">
+          <div class="text-xs text-amber-700 font-bold mb-1 bg-amber-50 rounded-lg px-3 py-1.5">🎉 推薦碼驗證成功 — 選擇 3+1 組合數量（買3送1，全台免運）</div>
+          <div class="grid grid-cols-5 gap-1">
+            <button type="button" onclick="selectQty('s1')" id="qty-s1" class="qty-btn border-2 rounded-xl py-2 text-center transition border-gray-200 bg-white" data-qty="s1">
+              <div class="font-black text-sm gold-text">1組</div>
+              <div class="text-[10px] text-slate-400">4罐</div>
+              <div class="text-[10px] text-green-600 font-bold">$1,000</div>
+            </button>
+            <button type="button" onclick="selectQty('s2')" id="qty-s2" class="qty-btn border-2 rounded-xl py-2 text-center transition border-gray-200 bg-white" data-qty="s2">
+              <div class="font-black text-sm gold-text">2組</div>
+              <div class="text-[10px] text-slate-400">8罐</div>
+              <div class="text-[10px] text-green-600 font-bold">$2,000</div>
+            </button>
+            <button type="button" onclick="selectQty('s3')" id="qty-s3" class="qty-btn border-2 rounded-xl py-2 text-center transition border-gray-200 bg-white" data-qty="s3">
+              <div class="font-black text-sm gold-text">3組</div>
+              <div class="text-[10px] text-slate-400">12罐</div>
+              <div class="text-[10px] text-green-600 font-bold">$3,000</div>
+            </button>
+            <button type="button" onclick="selectQty('s4')" id="qty-s4" class="qty-btn border-2 rounded-xl py-2 text-center transition border-gray-200 bg-white" data-qty="s4">
+              <div class="font-black text-sm gold-text">4組</div>
+              <div class="text-[10px] text-slate-400">16罐</div>
+              <div class="text-[10px] text-green-600 font-bold">$4,000</div>
+            </button>
+            <button type="button" onclick="selectQty('s5')" id="qty-s5" class="qty-btn border-2 rounded-xl py-2 text-center transition border-gray-200 bg-white" data-qty="s5">
+              <div class="font-black text-sm gold-text">5組</div>
+              <div class="text-[10px] text-slate-400">20罐</div>
+              <div class="text-[10px] text-green-600 font-bold">$5,000</div>
+              <div class="text-[9px] bg-red-500 text-white rounded px-0.5 mt-0.5 inline-block">最優惠</div>
+            </button>
+          </div>
+        </div>
+        <input type="hidden" id="order-qty" value="1">
       </div>
       <div>
         <label class="form-label">收件人姓名 <span class="text-red-500">*</span></label>
@@ -981,18 +1017,6 @@
       <div>
         <label class="form-label">收件地址 <span class="text-red-500">*</span></label>
         <input type="text" id="order-address" class="form-input" placeholder="縣市+區+詳細地址">
-      </div>
-      <div>
-        <label class="form-label">優惠碼 <span class="text-xs text-slate-400">（如有專屬優惠碼可填寫）</span></label>
-        <div class="flex gap-2">
-          <input type="text" id="order-coupon" class="form-input flex-1" placeholder="例：JIN1000" style="text-transform:uppercase">
-          <button onclick="applyCoupon()" class="bg-emerald-500 text-white px-4 rounded-xl text-sm font-bold hover:bg-emerald-600 transition whitespace-nowrap">套用</button>
-        </div>
-        <div id="coupon-result" class="text-xs mt-1 hidden"></div>
-      </div>
-      <div>
-        <label class="form-label">推薦碼 <span class="text-xs text-slate-400">（選填，朋友推薦碼）</span></label>
-        <input type="text" id="order-referral" class="form-input" placeholder="（選填）">
       </div>
       <div>
         <label class="form-label">備註</label>
@@ -1060,7 +1084,7 @@ const faqs=[
 
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('.qty-btn').forEach(btn=>btn.classList.add('border-gray-200','bg-white'));
-  selectQty(4);
+  selectQty(1);
   const list=document.getElementById('faq-list');
   faqs.forEach((f,i)=>{
     list.innerHTML+=`<div class="faq-item border border-gray-100 rounded-xl overflow-hidden"><button onclick="toggleFaq(${i})" class="w-full flex items-center justify-between p-5 text-left hover:bg-amber-50 transition"><span class="font-bold text-sm deep-text pr-4">${f.q}</span><span class="faq-icon text-amber-500 flex-shrink-0 text-lg font-light">+</span></button><div class="faq-answer"><p class="px-5 pb-5 text-sm text-slate-600 leading-relaxed">${f.a}</p></div></div>`;
@@ -1078,27 +1102,71 @@ function openLineModal(){document.getElementById('line-modal').classList.remove(
 function closeLineModal(){document.getElementById('line-modal').classList.add('modal-hidden')}
 function openOrderModal(){
   document.getElementById('order-modal').classList.remove('modal-hidden');
-  selectQty(selectedQty);
+  referralValid=false; usedReferralCode='';
+  document.getElementById('order-referral').value='';
+  document.getElementById('referral-result').classList.add('hidden');
+  document.getElementById('set-section-locked').classList.remove('hidden');
+  document.getElementById('set-section-open').classList.add('hidden');
+  selectQty(1);
   updateOrderSummary();
 }
 function closeOrderModal(){document.getElementById('order-modal').classList.add('modal-hidden')}
 function closeSuccessModal(){document.getElementById('success-modal').classList.add('modal-hidden')}
 document.addEventListener('click',e=>{if(e.target.classList.contains('modal-overlay'))e.target.classList.add('modal-hidden')});
 
-// 罐數定價（1-4罐）
+// 有效推薦碼
+const VALID_CODES=['JIN1000','1688','2588','5208','6688'];
+let referralValid=false;
+let usedReferralCode='';
+
+// 定價
 const qtyPricing={
-  1:{sub:350,ship:100,label:'1罐體驗'},
-  2:{sub:700,ship:100,label:'2罐'},
-  3:{sub:1050,ship:0,label:'3罐免運'},
-  4:{sub:1000,ship:0,label:'4罐優惠組（買3送1）'},
+  1:{sub:350,ship:100,qty:1,label:'1罐體驗組 60g×1'},
+  2:{sub:700,ship:100,qty:2,label:'2罐 60g×2'},
+  3:{sub:1050,ship:0,qty:3,label:'3罐組合 60g×3'},
+  's1':{sub:1000,ship:0,qty:4,label:'3+1組合×1（共4罐）'},
+  's2':{sub:2000,ship:0,qty:8,label:'3+1組合×2（共8罐）'},
+  's3':{sub:3000,ship:0,qty:12,label:'3+1組合×3（共12罐）'},
+  's4':{sub:4000,ship:0,qty:16,label:'3+1組合×4（共16罐）'},
+  's5':{sub:5000,ship:0,qty:20,label:'3+1組合×5（共20罐）'},
 };
-let selectedQty=4;
+let selectedQty=1;
+
+function validateReferral(){
+  const code=document.getElementById('order-referral').value.trim().toUpperCase();
+  const res=document.getElementById('referral-result');
+  res.classList.remove('hidden');
+  if(VALID_CODES.includes(code)){
+    referralValid=true;
+    usedReferralCode=code;
+    res.className='text-xs mt-1 text-green-600';
+    res.textContent='✅ 推薦碼驗證成功，已解鎖 3+1 優惠方案！';
+    document.getElementById('set-section-locked').classList.add('hidden');
+    document.getElementById('set-section-open').classList.remove('hidden');
+    selectQty('s1');
+  } else {
+    referralValid=false;
+    res.className='text-xs mt-1 text-red-500';
+    res.textContent='❌ 推薦碼不正確，請向業務人員確認後再填入';
+    document.getElementById('set-section-locked').classList.remove('hidden');
+    document.getElementById('set-section-open').classList.add('hidden');
+  }
+}
+
+function resetReferral(){
+  referralValid=false;
+  usedReferralCode='';
+  document.getElementById('referral-result').classList.add('hidden');
+  document.getElementById('set-section-locked').classList.remove('hidden');
+  document.getElementById('set-section-open').classList.add('hidden');
+  if(String(selectedQty).startsWith('s')) selectQty(1);
+}
 
 function selectQty(q){
   selectedQty=q;
   document.getElementById('order-qty').value=q;
   document.querySelectorAll('.qty-btn').forEach(btn=>{
-    const isSelected=parseInt(btn.dataset.qty)===q;
+    const isSelected=btn.dataset.qty===String(q);
     btn.classList.toggle('border-amber-400',isSelected);
     btn.classList.toggle('bg-amber-50',isSelected);
     btn.classList.toggle('border-gray-200',!isSelected);
@@ -1108,28 +1176,12 @@ function selectQty(q){
 }
 
 function updateOrderSummary(){
-  const p=qtyPricing[selectedQty]||qtyPricing[4];
-  const base4label=selectedQty===4?'買3送1 優惠':'';
-  const discLabel=base4label||'-$0';
+  const p=qtyPricing[selectedQty]||qtyPricing[1];
+  const isSet=String(selectedQty).startsWith('s');
   document.getElementById('display-subtotal').textContent='$'+p.sub.toLocaleString();
-  document.getElementById('display-discount').textContent=discLabel;
+  document.getElementById('display-discount').textContent=isSet?'買3送1 優惠':'-$0';
   document.getElementById('display-shipping').textContent=p.ship?'$'+p.ship:'免運';
   document.getElementById('display-total').textContent='$'+(p.sub+p.ship).toLocaleString();
-}
-
-function applyCoupon(){
-  const code=document.getElementById('order-coupon').value.trim().toUpperCase();
-  const res=document.getElementById('coupon-result');
-  res.classList.remove('hidden');
-  if(code==='JIN1000'){
-    res.className='text-xs mt-1 text-green-600';
-    res.textContent='優惠碼確認成功：3+1 組合 NT$1000 免運';
-    selectQty(4);
-  } else {
-    res.className='text-xs mt-1 text-red-500';
-    res.textContent='❌ 折抵碼不正確，請確認後再試';
-  }
-  updateOrderSummary();
 }
 
 
@@ -1141,20 +1193,17 @@ function submitOrder(){
   if(!name||!phone||!address){alert('請填寫姓名、手機與收件地址');return;}
   if(!consent){alert('請勾選同意個資使用說明後再送出');return;}
   if(!/^09\d{8}$/.test(phone)){alert('手機號碼格式不正確，請輸入 09 開頭的 10 碼號碼');return;}
-  const prod=selectedQty||4;
-  const p=qtyPricing[prod]||qtyPricing[4];
-  const discount=0;
+  if(String(selectedQty).startsWith('s')&&!referralValid){alert('購買 3+1 方案需輸入有效推薦碼，請向業務人員索取');return;}
+  const p=qtyPricing[selectedQty]||qtyPricing[1];
   const now=new Date();
   const datePart=now.toISOString().slice(0,10).replace(/-/g,'');
   const rand=String(Math.floor(Math.random()*9000)+1000);
   const orderNum='ORDER-'+datePart+'-'+rand;
   const refCode=name.slice(0,1).toUpperCase()+'REF'+rand;
-  const pnames={1:'1罐體驗組 60g×1',2:'2罐 60g×2',3:'3罐組合 60g×3',4:'4罐優惠組（買3送1）60g×4'};
-  const order={order_number:orderNum,product:pnames[prod]||pnames[4],customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:'',referral_code:document.getElementById('order-referral')?.value||'',subtotal:p.sub,discount_amount:discount,shipping_fee:p.ship,total:p.sub-discount+p.ship,payment_method:'貨到付款',order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value};
+  const order={order_number:orderNum,product:p.label,customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:usedReferralCode,referral_code:usedReferralCode,quantity:p.qty,subtotal:p.sub,discount_amount:0,shipping_fee:p.ship,total:p.sub+p.ship,payment_method:'貨到付款',order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value,source:'website'};
   const orders=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
   orders.push(order);
   localStorage.setItem('gbjyg_orders',JSON.stringify(orders));
-  // 同步寫入 Google Sheets
   const SCRIPT_URL='https://script.google.com/macros/s/AKfycbzcfmGsqTKcnRkOnRrJgPCyATIhYTJD9gK8cteWTPUtZtu588ZjvUY-eshi5Ktde5E0/exec';
   if(SCRIPT_URL){fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'addorder',order:order})}).catch(()=>{});}
   closeOrderModal();
