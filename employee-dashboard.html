@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>員工業績查詢｜金牌一條根</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+    body{font-family:'Noto Sans TC',sans-serif;background:#f8fafc}
+    .gold-bg{background:linear-gradient(135deg,#d4af37,#f59e0b)}
+    .herb-bg{background:#2d6a4f}
+    .gold-text{color:#b45309}
+    .form-input{width:100%;border:1.5px solid #d1d5db;border-radius:12px;padding:12px 16px;font-size:20px;outline:none;transition:all .2s;background:white;text-align:center;letter-spacing:8px;font-weight:900}
+    .form-input:focus{border-color:#d4af37;box-shadow:0 0 0 3px rgba(212,175,55,.15)}
+    .btn-primary{background:linear-gradient(90deg,#d4af37,#f59e0b);color:white;font-weight:900;border-radius:12px;padding:14px;width:100%;font-size:16px;cursor:pointer;border:none;transition:all .3s}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(180,83,9,.3)}
+    .spinner{display:inline-block;width:28px;height:28px;border:3px solid #e5e7eb;border-top-color:#d4af37;border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .stat-card{background:white;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid #f3f4f6}
+    .confirmed-card{background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:1px solid #86efac}
+    .pending-card{background:linear-gradient(135deg,#fef9c3,#fde68a);border:1px solid #fcd34d}
+    .revenue-card{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border:1px solid #93c5fd}
+    .status-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+    .badge-confirmed{background:#dcfce7;color:#14532d}
+    .badge-pending{background:#fef9c3;color:#854d0e}
+    .badge-shipping{background:#f3e8ff;color:#7e22ce}
+    .badge-cancel{background:#fee2e2;color:#991b1b}
+    .badge-default{background:#f1f5f9;color:#475569}
+  </style>
+</head>
+<body class="min-h-screen">
+
+<nav style="background:white;border-bottom:1px solid #fde68a;padding:12px 16px">
+  <div class="max-w-xl mx-auto flex justify-between items-center">
+    <span class="font-black text-lg" style="color:#451a03">金牌<span style="color:#b45309">一條根</span><span class="text-xs font-normal text-slate-400 ml-2">員工業績</span></span>
+    <a href="index.html" class="text-sm text-slate-500 hover:text-amber-600 transition" style="text-decoration:none"><i class="fas fa-arrow-left text-xs mr-1"></i>返回首頁</a>
+  </div>
+</nav>
+
+<div class="max-w-xl mx-auto px-4 py-10">
+
+  <!-- 登入區 -->
+  <div id="login-section">
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 gold-bg rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+        <i class="fas fa-chart-line text-2xl text-white"></i>
+      </div>
+      <h1 class="text-2xl font-black mb-2" style="color:#451a03">員工業績查詢</h1>
+      <p class="text-slate-500 text-sm">請輸入推薦碼，查看個人業績報表</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+      <label class="block text-sm font-bold text-slate-700 mb-3 text-center">
+        <i class="fas fa-key text-amber-500 mr-1"></i>推薦碼
+      </label>
+      <input type="text" id="input-code" class="form-input mb-4" placeholder="例：1688"
+        maxlength="10" oninput="this.value=this.value.toUpperCase()"
+        onkeydown="if(event.key==='Enter')login()">
+      <button onclick="login()" class="btn-primary">
+        <i class="fas fa-sign-in-alt mr-2"></i>查詢我的業績
+      </button>
+      <p id="login-error" class="text-red-500 text-sm text-center mt-3 hidden"></p>
+    </div>
+  </div>
+
+  <!-- 載入中 -->
+  <div id="loading-section" class="hidden text-center py-20">
+    <div class="spinner mx-auto mb-4"></div>
+    <p class="text-slate-400 text-sm">載入業績資料中...</p>
+  </div>
+
+  <!-- 業績看板 -->
+  <div id="dashboard-section" class="hidden space-y-4">
+
+    <!-- 頂部資訊列 -->
+    <div class="gold-bg rounded-2xl p-5 text-white">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="text-xs opacity-80 mb-1">推薦碼</p>
+          <p id="d-code" class="text-3xl font-black tracking-widest"></p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs opacity-80 mb-1">更新時間</p>
+          <p id="d-time" class="text-sm font-bold"></p>
+          <button onclick="refreshData()" class="mt-2 text-xs bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg px-3 py-1 transition">
+            <i class="fas fa-sync-alt mr-1"></i>重新整理
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 業績說明 -->
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800">
+      <i class="fas fa-info-circle mr-1"></i>
+      <strong>業績計算說明：</strong>實際業績以客戶「已送達／已收款／已入帳」為準；
+      待確認為已出貨但尚未完成收款的金額。
+    </div>
+
+    <!-- 三大業績卡片 -->
+    <div class="space-y-3">
+      <!-- 實際業績（最重要） -->
+      <div class="confirmed-card rounded-2xl p-5">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-xs text-green-700 font-bold mb-1"><i class="fas fa-check-circle mr-1"></i>✅ 實際業績（已收款）</p>
+            <p id="d-confirmed-amount" class="text-3xl font-black text-green-800">$0</p>
+            <p id="d-confirmed-orders" class="text-xs text-green-600 mt-1">0 筆已完成訂單</p>
+          </div>
+          <div class="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center">
+            <i class="fas fa-dollar-sign text-white text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- 待確認 -->
+      <div class="pending-card rounded-2xl p-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-xs text-yellow-700 font-bold mb-1"><i class="fas fa-clock mr-1"></i>⏳ 待確認（出貨中/配送中）</p>
+            <p id="d-pending-amount" class="text-2xl font-black text-yellow-800">$0</p>
+            <p id="d-pending-orders" class="text-xs text-yellow-600 mt-1">0 筆進行中</p>
+          </div>
+          <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+            <i class="fas fa-truck text-white text-lg"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- 總營業額 -->
+      <div class="revenue-card rounded-2xl p-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-xs text-blue-700 font-bold mb-1"><i class="fas fa-chart-bar mr-1"></i>📊 總推薦營業額（含所有狀態）</p>
+            <p id="d-total-amount" class="text-2xl font-black text-blue-800">$0</p>
+            <p id="d-total-orders" class="text-xs text-blue-600 mt-1">共 0 筆推薦訂單</p>
+          </div>
+          <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center">
+            <i class="fas fa-users text-white text-lg"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本月統計 -->
+    <div class="stat-card">
+      <h3 class="text-xs font-bold text-slate-500 mb-3"><i class="fas fa-calendar text-amber-500 mr-1"></i>本月業績</h3>
+      <div class="grid grid-cols-3 gap-3 text-center">
+        <div>
+          <p class="text-xs text-slate-400">本月訂單</p>
+          <p id="d-month-orders" class="text-xl font-black gold-text">0</p>
+        </div>
+        <div>
+          <p class="text-xs text-slate-400">本月業績</p>
+          <p id="d-month-confirmed" class="text-xl font-black text-green-600">$0</p>
+        </div>
+        <div>
+          <p class="text-xs text-slate-400">本月待確認</p>
+          <p id="d-month-pending" class="text-xl font-black text-yellow-600">$0</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 訂單明細 -->
+    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+      <div class="px-5 py-4 border-b border-gray-100 flex justify-between items-center">
+        <h3 class="font-bold text-sm" style="color:#451a03"><i class="fas fa-list text-amber-500 mr-2"></i>訂單明細</h3>
+        <span id="d-order-count" class="text-xs text-slate-400"></span>
+      </div>
+      <div id="d-orders-list" class="divide-y divide-gray-50 max-h-96 overflow-y-auto"></div>
+      <div id="d-no-orders" class="hidden text-center py-8 text-slate-400 text-sm">
+        <i class="fas fa-inbox text-2xl mb-2 block"></i>目前尚無推薦訂單
+      </div>
+    </div>
+
+    <!-- 底部按鈕 -->
+    <button onclick="logout()" class="w-full py-3 rounded-xl font-bold text-slate-500 border border-gray-200 bg-white hover:border-amber-300 hover:text-amber-600 transition text-sm">
+      <i class="fas fa-sign-out-alt mr-2"></i>切換帳號
+    </button>
+  </div>
+
+</div>
+
+<script>
+const SCRIPT_URL  = 'https://script.google.com/macros/s/AKfycbzcfmGsqTKcnRkOnRrJgPCyATIhYTJD9gK8cteWTPUtZtu588ZjvUY-eshi5Ktde5E0/exec';
+const VALID_CODES = ['1688','2588','5208','6688','JIN1000'];
+const PAID_STATUS = ['已送達','已收款完成','已收款','已入帳','已結案'];
+
+const statusBadge = s => {
+  if (PAID_STATUS.includes(s)) return 'badge-confirmed';
+  if (['取消訂單'].includes(s))  return 'badge-cancel';
+  if (['已出貨','出貨中','配送中'].includes(s)) return 'badge-shipping';
+  return 'badge-pending';
+};
+
+// 頁面載入時，若 URL 有推薦碼自動查詢
+window.addEventListener('DOMContentLoaded', () => {
+  const p = new URLSearchParams(location.search);
+  const code = p.get('code');
+  if (code && VALID_CODES.includes(code.toUpperCase())) {
+    document.getElementById('input-code').value = code.toUpperCase();
+    login();
+  }
+});
+
+async function login() {
+  const code = document.getElementById('input-code').value.trim().toUpperCase();
+  if (!code) { showError('請輸入推薦碼'); return; }
+  if (!VALID_CODES.includes(code)) { showError('推薦碼不正確，請向管理員確認'); return; }
+  // 更新 URL（重整後自動登入）
+  history.replaceState(null, '', location.pathname + '?code=' + code);
+  await loadData(code);
+}
+
+async function loadData(code) {
+  document.getElementById('login-section').classList.add('hidden');
+  document.getElementById('dashboard-section').classList.add('hidden');
+  document.getElementById('loading-section').classList.remove('hidden');
+  try {
+    const res  = await fetch(`${SCRIPT_URL}?action=getemployeestats&code=${encodeURIComponent(code)}`);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || '查詢失敗');
+    renderDashboard(data);
+  } catch(e) {
+    document.getElementById('loading-section').classList.add('hidden');
+    document.getElementById('login-section').classList.remove('hidden');
+    showError('查詢失敗：' + e.message);
+  }
+}
+
+function refreshData() {
+  const p = new URLSearchParams(location.search);
+  const code = p.get('code');
+  if (code) loadData(code.toUpperCase());
+}
+
+function renderDashboard(data) {
+  document.getElementById('loading-section').classList.add('hidden');
+  document.getElementById('d-code').textContent   = data.referral_code;
+  document.getElementById('d-time').textContent   = new Date().toLocaleString('zh-TW', {timeZone:'Asia/Taipei'});
+
+  // 實際業績
+  document.getElementById('d-confirmed-amount').textContent = 'NT$ ' + Number(data.confirmed_amount||0).toLocaleString();
+  document.getElementById('d-confirmed-orders').textContent = (data.confirmed_orders||0) + ' 筆已完成訂單';
+
+  // 待確認
+  document.getElementById('d-pending-amount').textContent   = 'NT$ ' + Number(data.pending_amount||0).toLocaleString();
+  document.getElementById('d-pending-orders').textContent   = (data.pending_orders||0) + ' 筆進行中';
+
+  // 總營業額
+  document.getElementById('d-total-amount').textContent     = 'NT$ ' + Number(data.total_amount||0).toLocaleString();
+  document.getElementById('d-total-orders').textContent     = '共 ' + (data.total_orders||0) + ' 筆推薦訂單';
+
+  // 本月
+  const monthStr = new Date().toISOString().slice(0,7);
+  const monthOrders = (data.orders||[]).filter(o => String(o.created_at).startsWith(monthStr));
+  const monthConf   = monthOrders.filter(o => PAID_STATUS.includes(o.order_status));
+  const monthPend   = monthOrders.filter(o => !PAID_STATUS.includes(o.order_status) && o.order_status !== '取消訂單');
+  document.getElementById('d-month-orders').textContent    = monthOrders.length;
+  document.getElementById('d-month-confirmed').textContent = 'NT$ ' + monthConf.reduce((a,o)=>a+Number(o.total||0),0).toLocaleString();
+  document.getElementById('d-month-pending').textContent   = 'NT$ ' + monthPend.reduce((a,o)=>a+Number(o.total||0),0).toLocaleString();
+
+  // 訂單明細
+  const orders = data.orders || [];
+  document.getElementById('d-order-count').textContent = '共 ' + orders.length + ' 筆';
+  const listEl = document.getElementById('d-orders-list');
+  if (orders.length === 0) {
+    document.getElementById('d-no-orders').classList.remove('hidden');
+  } else {
+    document.getElementById('d-no-orders').classList.add('hidden');
+    listEl.innerHTML = orders.map(o => {
+      const isPaid = PAID_STATUS.includes(o.order_status);
+      return `<div class="px-5 py-3 hover:bg-amber-50 transition">
+        <div class="flex justify-between items-start">
+          <div class="flex-1">
+            <p class="font-mono text-xs text-slate-400">${o.order_number||'—'}</p>
+            <p class="text-sm font-bold text-slate-700 mt-0.5">${o.product||'商品'} × ${o.quantity||1}</p>
+            <p class="text-xs text-slate-400 mt-0.5">${String(o.created_at||'').slice(0,10)}</p>
+          </div>
+          <div class="text-right ml-3">
+            <p class="font-black text-base ${isPaid ? 'text-green-700' : 'text-slate-400'}">
+              ${isPaid ? '✅ ' : ''}NT$ ${Number(o.total||0).toLocaleString()}
+            </p>
+            <span class="status-badge ${statusBadge(o.order_status)} mt-1 block">${o.order_status||'—'}</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('dashboard-section').classList.remove('hidden');
+}
+
+function showError(msg) {
+  const el = document.getElementById('login-error');
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+
+function logout() {
+  history.replaceState(null, '', location.pathname);
+  document.getElementById('dashboard-section').classList.add('hidden');
+  document.getElementById('login-section').classList.remove('hidden');
+  document.getElementById('input-code').value = '';
+  document.getElementById('login-error').classList.add('hidden');
+}
+</script>
+</body>
+</html>
