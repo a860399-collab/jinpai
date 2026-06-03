@@ -2,13 +2,13 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>會員名冊｜金牌一條根 Admin</title>
+  <title>會員名冊｜金太極後台</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
     body{font-family:'Noto Sans TC',sans-serif;background:#0f172a;color:#e2e8f0}
-    .sidebar{width:220px;flex-shrink:0}
+    .sidebar{width:224px;flex-shrink:0;min-height:100vh}
     .nav-link{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;color:#94a3b8;font-size:13px;transition:all .2s;text-decoration:none}
     .nav-link:hover,.nav-link.active{background:#334155;color:#e2e8f0}
     .card{background:#1e293b;border-radius:12px;border:1px solid #334155}
@@ -16,111 +16,144 @@
     .form-input:focus{border-color:#d4af37}
     .btn-sm{padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s}
     .tag{font-size:10px;padding:2px 7px;border-radius:999px;font-weight:700;background:#334155;color:#94a3b8}
+    .spinner{display:inline-block;width:14px;height:14px;border:2px solid #334155;border-top-color:#d4af37;border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body class="min-h-screen">
-  <div style="background:#f59e0b;color:#1e293b;text-align:center;font-size:11px;padding:4px 8px;font-weight:700">
-    ⚠️ PROTOTYPE — 會員名冊為前端模擬，正式上線須接後端資料庫，匯出功能僅限 Admin 帳號
-  </div>
-  <div class="flex min-h-screen">
-    <div class="sidebar bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-1">
-      <div class="mb-6 px-2"><p class="text-xs text-slate-500 mb-1">ADMIN</p><h1 class="font-black text-white text-sm">金牌一條根後台</h1></div>
-      <a href="admin-dashboard.html" class="nav-link"><i class="fas fa-chart-bar w-4"></i> 總覽</a>
-      <a href="admin-orders.html" class="nav-link"><i class="fas fa-box w-4"></i> 訂單管理</a>
-      <a href="admin-members.html" class="nav-link active"><i class="fas fa-users w-4"></i> 會員名冊</a>
-      <div class="my-2 border-t border-slate-800"></div>
-      <a href="order-tracking.html" class="nav-link"><i class="fas fa-search w-4"></i> 訂單查詢頁</a>
-      <a href="index.html" class="nav-link"><i class="fas fa-home w-4"></i> 前台首頁</a>
+<div id="config-banner" style="background:#7c3aed;color:white;text-align:center;font-size:12px;padding:6px 12px;display:none">
+  ⚙️ 尚未設定 Google Sheets — 請在程式碼中填入 CONFIG.SCRIPT_URL
+</div>
+<div class="flex">
+  <div class="sidebar bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-1 sticky top-0 h-screen overflow-y-auto">
+    <div class="mb-6 px-2">
+      <p class="text-xs text-slate-500 mb-0.5">ADMIN PANEL</p>
+      <h1 class="font-black text-white text-sm leading-tight">金牌一條根<br><span class="text-amber-400">生物科技</span></h1>
     </div>
-    <div class="flex-1 p-6 overflow-auto">
-      <div class="flex flex-wrap gap-3 justify-between items-center mb-5">
+    <a href="admin-dashboard.html" class="nav-link"><i class="fas fa-chart-bar w-4 text-center"></i> 總覽</a>
+    <a href="admin-orders.html" class="nav-link"><i class="fas fa-box w-4 text-center"></i> 訂單管理</a>
+    <a href="admin-members.html" class="nav-link active"><i class="fas fa-users w-4 text-center"></i> 會員名冊</a>
+    <div class="my-2 border-t border-slate-800"></div>
+    <a href="order-tracking.html" target="_blank" class="nav-link text-slate-500"><i class="fas fa-search w-4 text-center"></i> 客戶查詢頁 ↗</a>
+    <a href="index.html" target="_blank" class="nav-link text-slate-500"><i class="fas fa-home w-4 text-center"></i> 前台首頁 ↗</a>
+    <div class="mt-auto pt-4 border-t border-slate-800">
+      <div id="sync-status" class="text-xs text-slate-500 px-2"></div>
+    </div>
+  </div>
+
+  <div class="flex-1 p-6 overflow-auto">
+    <div class="flex flex-wrap gap-3 justify-between items-center mb-5">
+      <div class="flex items-center gap-3">
         <h2 class="text-xl font-black text-white">會員名冊</h2>
-        <div class="flex gap-2">
-          <input type="text" id="search-box" placeholder="搜尋姓名 / 手機 / Email" class="form-input" oninput="renderMembers()">
-          <button onclick="exportCSV()" class="btn-sm bg-emerald-600 hover:bg-emerald-500 text-white">匯出 CSV <span style="font-size:10px;background:#065f46;padding:1px 4px;border-radius:4px;margin-left:3px">Admin only</span></button>
-        </div>
+        <div id="loading-icon" class="spinner hidden"></div>
       </div>
+      <div class="flex gap-2">
+        <input type="text" id="search-box" placeholder="🔍 搜尋姓名 / 手機 / Email" class="form-input w-56" oninput="renderMembers()">
+        <button onclick="loadData(true)" class="btn-sm bg-slate-700 hover:bg-slate-600 text-white"><i class="fas fa-sync mr-1"></i>重新整理</button>
+        <button onclick="exportCSV()" class="btn-sm bg-emerald-700 hover:bg-emerald-600 text-white"><i class="fas fa-download mr-1"></i>匯出 CSV</button>
+      </div>
+    </div>
 
-      <!-- 統計 -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5" id="member-stats"></div>
+    <!-- 統計卡片 -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5" id="member-stats">
+      <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:14px">
+        <p class="text-xs text-slate-400">會員總數</p><p class="text-2xl font-black text-purple-400" id="st-total">—</p>
+      </div>
+      <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:14px">
+        <p class="text-xs text-slate-400">LINE 已加入</p><p class="text-2xl font-black text-green-400" id="st-line">—</p>
+      </div>
+      <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:14px">
+        <p class="text-xs text-slate-400">回購客</p><p class="text-2xl font-black text-yellow-400" id="st-repeat">—</p>
+      </div>
+      <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:14px">
+        <p class="text-xs text-slate-400">行銷同意</p><p class="text-2xl font-black text-blue-400" id="st-marketing">—</p>
+      </div>
+    </div>
 
-      <div class="card overflow-x-auto">
-        <table class="w-full text-xs">
-          <thead><tr class="text-slate-400 border-b border-slate-700 text-left">
+    <div class="card overflow-x-auto">
+      <table class="w-full text-xs">
+        <thead>
+          <tr class="text-slate-400 border-b border-slate-700 text-left">
             <th class="p-3">ID</th>
             <th class="p-3">姓名</th>
             <th class="p-3">手機</th>
+            <th class="p-3">Email</th>
             <th class="p-3">LINE</th>
             <th class="p-3">來源</th>
             <th class="p-3">推薦人</th>
-            <th class="p-3">訂單數</th>
-            <th class="p-3">消費總額</th>
+            <th class="p-3 text-center">訂單數</th>
+            <th class="p-3 text-right">消費總額</th>
             <th class="p-3">標籤</th>
-            <th class="p-3">行銷同意</th>
-          </tr></thead>
-          <tbody id="members-tbody" class="divide-y divide-slate-800"></tbody>
-        </table>
-        <div id="empty-msg" class="hidden text-center py-8 text-slate-500 text-sm">無符合條件的會員</div>
+            <th class="p-3 text-center">行銷</th>
+            <th class="p-3">加入時間</th>
+          </tr>
+        </thead>
+        <tbody id="members-tbody" class="divide-y divide-slate-800/60"></tbody>
+      </table>
+      <div id="empty-msg" class="hidden text-center py-12 text-slate-500">
+        <i class="fas fa-users text-4xl mb-3 text-slate-700 block"></i>
+        無符合條件的會員
       </div>
-      <p class="text-xs text-slate-500 mt-3" id="count-label"></p>
     </div>
+    <p class="text-xs text-slate-500 mt-3" id="count-label"></p>
   </div>
+</div>
 
 <script>
-let allMembers=[];
-async function load(){
-  try{const res=await fetch('mock-data.json');const d=await res.json();allMembers=d.members||[];}catch(e){}
-  renderStats();renderMembers();
+const CONFIG = {
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzcfmGsqTKcnRkOnRrJgPCyATIhYTJD9gK8cteWTPUtZtu588ZjvUY-eshi5Ktde5E0/exec', // 填入 Apps Script URL
+};
+
+let allMembers = [];
+
+async function loadData(force = false) {
+  document.getElementById('loading-icon').classList.remove('hidden');
+  if (!CONFIG.SCRIPT_URL) document.getElementById('config-banner').style.display = 'block';
+
+  if (CONFIG.SCRIPT_URL) {
+    try {
+      const r = await fetch(CONFIG.SCRIPT_URL + '?action=getMembers&t=' + Date.now());
+      const d = await r.json();
+      if (d.ok) {
+        allMembers = d.members;
+        document.getElementById('sync-status').textContent = '✓ 已同步 ' + new Date().toLocaleTimeString('zh-TW');
+      } else throw new Error(d.error);
+    } catch(e) {
+      allMembers = JSON.parse(localStorage.getItem('gbjyg_members') || '[]');
+      document.getElementById('sync-status').textContent = '⚠ 使用本機資料';
+    }
+  } else {
+    // 從訂單資料推導會員（如果沒有 Sheets）
+    const orders = JSON.parse(localStorage.getItem('gbjyg_orders') || '[]');
+    const phoneMap = {};
+    orders.forEach(o => {
+      const k = o.customer_phone || '';
+      if (!k) return;
+      if (!phoneMap[k]) phoneMap[k] = {
+        id: 'M' + String(Object.keys(phoneMap).length + 1).padStart(4, '0'),
+        name: o.customer_name || '',
+        phone: k,
+        email: o.customer_email || '',
+        line_status: '未加入',
+        source: o.source || '',
+        referred_by: o.referral_code || '',
+        total_orders: 0,
+        total_spent: 0,
+        marketing_consent: o.marketing_consent ? '是' : '否',
+        created_at: o.created_at || '',
+      };
+      phoneMap[k].total_orders++;
+      phoneMap[k].total_spent += Number(o.total) || 0;
+    });
+    allMembers = Object.values(phoneMap);
+  }
+
+  renderStats();
+  renderMembers();
+  document.getElementById('loading-icon').classList.add('hidden');
 }
 
-function renderStats(){
-  const stats=document.getElementById('member-stats');
-  const lineJoined=allMembers.filter(m=>m.line_status==='已加入').length;
-  const withOrders=allMembers.filter(m=>m.total_orders>0).length;
-  const repeat=allMembers.filter(m=>m.total_orders>1).length;
-  const marketing=allMembers.filter(m=>m.marketing_consent).length;
-  stats.innerHTML=`
-    <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:12px"><p class="text-xs text-slate-400">會員總數</p><p class="text-2xl font-black text-purple-400">${allMembers.length}</p></div>
-    <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:12px"><p class="text-xs text-slate-400">LINE 名單</p><p class="text-2xl font-black text-green-400">${lineJoined}</p></div>
-    <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:12px"><p class="text-xs text-slate-400">回購客</p><p class="text-2xl font-black text-yellow-400">${repeat}</p></div>
-    <div style="background:#1e293b;border-radius:10px;border:1px solid #334155;padding:12px"><p class="text-xs text-slate-400">行銷同意</p><p class="text-2xl font-black text-blue-400">${marketing}</p></div>`;
-}
-
-function renderMembers(){
-  const q=(document.getElementById('search-box').value||'').toLowerCase();
-  const filtered=allMembers.filter(m=>!q||(m.name||'').toLowerCase().includes(q)||(m.phone||'').includes(q)||(m.email||'').toLowerCase().includes(q));
-  const tbody=document.getElementById('members-tbody');
-  tbody.innerHTML='';
-  if(!filtered.length){document.getElementById('empty-msg').classList.remove('hidden');}
-  else{document.getElementById('empty-msg').classList.add('hidden');}
-  filtered.forEach(m=>{
-    const tags=(m.customer_tags||[]).map(t=>`<span class="tag">${t}</span>`).join(' ');
-    tbody.innerHTML+=`<tr class="hover:bg-slate-800/50 transition">
-      <td class="p-3 font-mono text-amber-400">${m.id}</td>
-      <td class="p-3 text-white font-medium">${m.name}</td>
-      <td class="p-3 text-slate-300">${maskPhone(m.phone)}</td>
-      <td class="p-3"><span class="${m.line_status==='已加入'?'text-green-400':'text-slate-500'}">${m.line_status==='已加入'?'✓ 已加入':'未加入'}</span></td>
-      <td class="p-3 text-slate-400">${m.source||'—'}</td>
-      <td class="p-3 font-mono text-purple-300 text-xs">${m.referred_by||'—'}</td>
-      <td class="p-3 text-center font-bold text-white">${m.total_orders||0}</td>
-      <td class="p-3 font-bold text-green-400">$${(m.total_spent||0).toLocaleString()}</td>
-      <td class="p-3">${tags}</td>
-      <td class="p-3 text-center">${m.marketing_consent?'<span class="text-green-400">✓</span>':'<span class="text-slate-500">✕</span>'}</td>
-    </tr>`;
-  });
-  document.getElementById('count-label').textContent='共 '+filtered.length+' 位會員';
-}
-
-function maskPhone(p){if(!p)return'—';return p.slice(0,4)+'***'+p.slice(-3);}
-
-function exportCSV(){
-  if(!allMembers.length){alert('無會員資料');return;}
-  const headers=['ID','姓名','手機','Email','LINE狀態','來源','推薦人','訂單數','消費總額','標籤','行銷同意','建立時間'];
-  const rows=allMembers.map(m=>[m.id,m.name,m.phone,m.email,m.line_status||'',m.source||'',m.referred_by||'',(m.total_orders||0),(m.total_spent||0),(m.customer_tags||[]).join(';'),m.marketing_consent?'是':'否',m.created_at||'']);
-  const csv=[headers,...rows].map(r=>r.map(c=>'"'+(c||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,﻿'+encodeURIComponent(csv);a.download='金牌一條根會員名冊_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
-}
-load();
-</script>
-</body>
-</html>
+function renderStats() {
+  const total     = allMembers.length;
+  const lineJ     = allMembers.filter(m => (m['LINE狀態'] || m.line_status) === '已加入').length;
+  const repeat    = allMembers.filter(m => Numbe

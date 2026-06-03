@@ -2,197 +2,243 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>訂單管理｜金牌一條根 Admin</title>
+  <title>訂單管理｜金太極後台</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
     body{font-family:'Noto Sans TC',sans-serif;background:#0f172a;color:#e2e8f0}
-    .sidebar{width:220px;flex-shrink:0}
+    .sidebar{width:224px;flex-shrink:0;min-height:100vh}
     .nav-link{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;color:#94a3b8;font-size:13px;transition:all .2s;text-decoration:none}
     .nav-link:hover,.nav-link.active{background:#334155;color:#e2e8f0}
     .card{background:#1e293b;border-radius:12px;border:1px solid #334155}
-    .filter-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #334155;color:#94a3b8;background:#1e293b;transition:all .2s}
-    .filter-btn.active{background:#334155;color:white;border-color:#475569}
+    .filter-btn{padding:5px 13px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #334155;color:#94a3b8;background:#1e293b;transition:all .2s;white-space:nowrap}
+    .filter-btn.active{background:#334155;color:white;border-color:#d4af37}
     .form-input{background:#0f172a;border:1px solid #334155;color:#e2e8f0;border-radius:8px;padding:6px 12px;font-size:13px;outline:none;transition:border-color .2s}
     .form-input:focus{border-color:#d4af37}
     .btn-sm{padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s}
+    .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:999px;font-weight:700}
+    .spinner{display:inline-block;width:16px;height:16px;border:2px solid #334155;border-top-color:#d4af37;border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;display:none;align-items:center;justify-content:center;padding:16px}
+    .modal-overlay.show{display:flex}
+    tr:hover td{background:rgba(255,255,255,.03)}
   </style>
 </head>
 <body class="min-h-screen">
-  <div style="background:#f59e0b;color:#1e293b;text-align:center;font-size:11px;padding:4px 8px;font-weight:700">
-    ⚠️ PROTOTYPE — 資料來自 mock-data.json + localStorage
-  </div>
-  <div class="flex min-h-screen">
-    <div class="sidebar bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-1">
-      <div class="mb-6 px-2"><p class="text-xs text-slate-500 mb-1">ADMIN</p><h1 class="font-black text-white text-sm">金牌一條根後台</h1></div>
-      <a href="admin-dashboard.html" class="nav-link"><i class="fas fa-chart-bar w-4"></i> 總覽</a>
-      <a href="admin-orders.html" class="nav-link active"><i class="fas fa-box w-4"></i> 訂單管理</a>
-      <a href="admin-members.html" class="nav-link"><i class="fas fa-users w-4"></i> 會員名冊</a>
-      <div class="my-2 border-t border-slate-800"></div>
-      <a href="order-tracking.html" class="nav-link"><i class="fas fa-search w-4"></i> 訂單查詢頁</a>
-      <a href="index.html" class="nav-link"><i class="fas fa-home w-4"></i> 前台首頁</a>
+
+<!-- 設定提示橫幅 -->
+<div id="config-banner" style="background:#7c3aed;color:white;text-align:center;font-size:12px;padding:6px 12px;display:none">
+  ⚙️ 尚未設定 Google Sheets — 資料來自 localStorage。
+  請在程式碼中填入 <code style="background:rgba(255,255,255,.2);padding:1px 5px;border-radius:3px">CONFIG.SCRIPT_URL</code>
+  <a href="google-apps-script.gs" download class="underline ml-2">下載 Apps Script ↓</a>
+</div>
+
+<div class="flex">
+  <!-- 側邊欄 -->
+  <div class="sidebar bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-1 sticky top-0 h-screen overflow-y-auto">
+    <div class="mb-6 px-2">
+      <p class="text-xs text-slate-500 mb-0.5">ADMIN PANEL</p>
+      <h1 class="font-black text-white text-sm leading-tight">金牌一條根<br><span class="text-amber-400">生物科技</span></h1>
     </div>
-    <div class="flex-1 p-6 overflow-auto">
-      <div class="flex flex-wrap gap-3 justify-between items-center mb-5">
+    <a href="admin-dashboard.html" class="nav-link"><i class="fas fa-chart-bar w-4 text-center"></i> 總覽</a>
+    <a href="admin-orders.html" class="nav-link active"><i class="fas fa-box w-4 text-center"></i> 訂單管理</a>
+    <a href="admin-members.html" class="nav-link"><i class="fas fa-users w-4 text-center"></i> 會員名冊</a>
+    <div class="my-2 border-t border-slate-800"></div>
+    <a href="order-tracking.html" target="_blank" class="nav-link text-slate-500"><i class="fas fa-search w-4 text-center"></i> 客戶查詢頁 ↗</a>
+    <a href="index.html" target="_blank" class="nav-link text-slate-500"><i class="fas fa-home w-4 text-center"></i> 前台首頁 ↗</a>
+    <div class="mt-auto pt-4 border-t border-slate-800">
+      <div id="sync-status" class="text-xs text-slate-500 px-2"></div>
+    </div>
+  </div>
+
+  <!-- 主內容 -->
+  <div class="flex-1 p-6 overflow-auto min-h-screen">
+    <!-- 標題列 -->
+    <div class="flex flex-wrap gap-3 justify-between items-center mb-5">
+      <div class="flex items-center gap-3">
         <h2 class="text-xl font-black text-white">訂單管理</h2>
-        <div class="flex gap-2">
-          <input type="text" id="search-box" placeholder="搜尋訂單編號 / 客戶名稱" class="form-input" oninput="renderOrders()">
-          <button onclick="exportCSV()" class="btn-sm bg-emerald-600 hover:bg-emerald-500 text-white">匯出 CSV</button>
-        </div>
+        <div id="loading-icon" class="spinner hidden"></div>
+        <span id="total-badge" class="badge bg-slate-700 text-slate-300 hidden"></span>
       </div>
-      <!-- 狀態篩選 -->
-      <div class="flex flex-wrap gap-2 mb-5" id="filter-btns">
-        <button class="filter-btn active" onclick="setFilter('全部',this)">全部</button>
-        <button class="filter-btn" onclick="setFilter('訂單成立',this)">訂單成立</button>
-        <button class="filter-btn" onclick="setFilter('業務部確認',this)">業務確認</button>
-        <button class="filter-btn" onclick="setFilter('備貨中',this)">備貨中</button>
-        <button class="filter-btn" onclick="setFilter('已出貨',this)">已出貨</button>
-        <button class="filter-btn" onclick="setFilter('配送中',this)">配送中</button>
-        <button class="filter-btn" onclick="setFilter('已送達',this)">已送達</button>
-        <button class="filter-btn" onclick="setFilter('已結案',this)">已結案</button>
-        <button class="filter-btn" onclick="setFilter('取消訂單',this)">取消</button>
+      <div class="flex gap-2 flex-wrap">
+        <input type="text" id="search-box" placeholder="🔍 搜尋訂單編號 / 客戶名稱 / 手機" class="form-input w-64" oninput="renderOrders()">
+        <button onclick="loadData(true)" class="btn-sm bg-slate-700 hover:bg-slate-600 text-white"><i class="fas fa-sync mr-1"></i>重新整理</button>
+        <button onclick="exportCSV()" class="btn-sm bg-emerald-700 hover:bg-emerald-600 text-white"><i class="fas fa-download mr-1"></i>匯出 CSV</button>
       </div>
-      <div class="card overflow-x-auto">
-        <table class="w-full text-xs">
-          <thead><tr class="text-slate-400 border-b border-slate-700 text-left">
-            <th class="p-3">訂單編號</th>
-            <th class="p-3">日期</th>
+    </div>
+
+    <!-- 狀態篩選 -->
+    <div class="flex flex-wrap gap-2 mb-5" id="filter-area">
+      <button class="filter-btn active" onclick="setFilter('全部',this)">全部 <span id="cnt-all" class="opacity-60"></span></button>
+      <button class="filter-btn" onclick="setFilter('訂單成立',this)">訂單成立 <span id="cnt-0" class="opacity-60"></span></button>
+      <button class="filter-btn" onclick="setFilter('業務部確認',this)">業務確認 <span id="cnt-1" class="opacity-60"></span></button>
+      <button class="filter-btn" onclick="setFilter('備貨中',this)">備貨中 <span id="cnt-2" class="opacity-60"></span></button>
+      <button class="filter-btn" onclick="setFilter('已出貨',this)">已出貨 <span id="cnt-3" class="opacity-60"></span></button>
+      <button class="filter-btn" onclick="setFilter('配送中',this)">配送中 <span id="cnt-4" class="opacity-60"></span></button>
+      <button class="filter-btn" onclick="setFilter('已送達',this)">已送達 <span id="cnt-5" class="opacity-60"></span></button>
+      <button class="filter-btn" onclick="setFilter('已結案',this)">已結案 <span id="cnt-6" class="opacity-60"></span></button>
+      <button class="filter-btn" onclick="setFilter('取消訂單',this)">取消 <span id="cnt-7" class="opacity-60"></span></button>
+    </div>
+
+    <!-- 表格 -->
+    <div class="card overflow-x-auto">
+      <table class="w-full text-xs">
+        <thead>
+          <tr class="text-slate-400 border-b border-slate-700 text-left select-none">
+            <th class="p-3 cursor-pointer hover:text-white" onclick="sortBy('order_number')">訂單編號 <i class="fas fa-sort text-slate-600 ml-1"></i></th>
+            <th class="p-3 cursor-pointer hover:text-white" onclick="sortBy('created_at')">日期 <i class="fas fa-sort text-slate-600 ml-1"></i></th>
             <th class="p-3">客戶</th>
             <th class="p-3">手機</th>
             <th class="p-3">商品</th>
-            <th class="p-3">金額</th>
+            <th class="p-3 cursor-pointer hover:text-white" onclick="sortBy('total')">金額 <i class="fas fa-sort text-slate-600 ml-1"></i></th>
             <th class="p-3">優惠碼</th>
             <th class="p-3">來源</th>
             <th class="p-3">狀態</th>
-            <th class="p-3">Email通知</th>
-            <th class="p-3">操作</th>
-          </tr></thead>
-          <tbody id="orders-tbody" class="divide-y divide-slate-800"></tbody>
-        </table>
-        <div id="empty-msg" class="hidden text-center py-8 text-slate-500 text-sm">無符合條件的訂單</div>
+            <th class="p-3">物流</th>
+            <th class="p-3 text-center">操作</th>
+          </tr>
+        </thead>
+        <tbody id="orders-tbody" class="divide-y divide-slate-800/60"></tbody>
+      </table>
+      <div id="empty-msg" class="hidden text-center py-12 text-slate-500">
+        <i class="fas fa-box-open text-4xl mb-3 text-slate-700 block"></i>
+        無符合條件的訂單
       </div>
-      <p class="text-xs text-slate-500 mt-3" id="count-label"></p>
     </div>
+    <p class="text-xs text-slate-500 mt-3" id="count-label"></p>
   </div>
+</div>
 
-  <!-- 訂單詳情 Modal -->
-  <div id="detail-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:16px">
-    <div style="background:#1e293b;border-radius:16px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;border:1px solid #334155">
-      <div style="background:linear-gradient(90deg,#d4af37,#f59e0b);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-radius:16px 16px 0 0">
-        <h3 class="font-bold text-white" id="modal-title">訂單詳情</h3>
-        <button onclick="closeDetail()" class="text-white text-xl">&times;</button>
-      </div>
-      <div id="modal-content" class="p-5"></div>
+<!-- ── 訂單詳情 Modal ── -->
+<div id="detail-modal" class="modal-overlay" onclick="if(event.target===this)closeDetail()">
+  <div style="background:#1e293b;border-radius:16px;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;border:1px solid #334155">
+    <div style="background:linear-gradient(90deg,#b45309,#d97706);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-radius:16px 16px 0 0">
+      <h3 class="font-black text-white text-base" id="modal-title">訂單詳情</h3>
+      <button onclick="closeDetail()" class="text-white text-xl opacity-80 hover:opacity-100">&times;</button>
     </div>
+    <div id="modal-content" class="p-5 space-y-4"></div>
   </div>
+</div>
 
 <script>
-const statusColors={'訂單成立':'text-blue-400','已通知業務部':'text-blue-400','業務部確認':'text-yellow-400','備貨中':'text-orange-400','已出貨':'text-purple-400','配送中':'text-indigo-400','已送達':'text-green-400','已收款完成':'text-green-300','已結案':'text-slate-400','取消訂單':'text-red-400'};
-let allOrders=[];
-let currentFilter='全部';
+// ══════════════════════════════════════════════════
+//  CONFIG — 填入你的 Apps Script 網頁應用程式 URL
+// ══════════════════════════════════════════════════
+const CONFIG = {
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzcfmGsqTKcnRkOnRrJgPCyATIhYTJD9gK8cteWTPUtZtu588ZjvUY-eshi5Ktde5E0/exec', // 例：'https://script.google.com/macros/s/AKfycbx.../exec'
+};
 
-async function load(){
-  let orders=[];
-  try{const res=await fetch('mock-data.json');const d=await res.json();orders=d.orders||[];}catch(e){}
-  const local=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
-  allOrders=[...orders,...local].sort((a,b)=>b.created_at>a.created_at?1:-1);
+const STATUS_COLORS = {
+  '訂單成立':    'text-blue-400',
+  '已通知業務部':'text-blue-400',
+  '業務部確認':  'text-yellow-400',
+  '備貨中':      'text-orange-400',
+  '已出貨':      'text-purple-400',
+  '配送中':      'text-indigo-400',
+  '已送達':      'text-green-400',
+  '已收款完成':  'text-green-300',
+  '已結案':      'text-slate-400',
+  '取消訂單':    'text-red-400',
+};
+const STATUS_BADGES = {
+  '訂單成立':    'bg-blue-900/50 text-blue-300',
+  '業務部確認':  'bg-yellow-900/50 text-yellow-300',
+  '備貨中':      'bg-orange-900/50 text-orange-300',
+  '已出貨':      'bg-purple-900/50 text-purple-300',
+  '配送中':      'bg-indigo-900/50 text-indigo-300',
+  '已送達':      'bg-green-900/50 text-green-300',
+  '已結案':      'bg-slate-700 text-slate-400',
+  '取消訂單':    'bg-red-900/50 text-red-400',
+};
+const ALL_STATUSES = ['訂單成立','已通知業務部','業務部確認','備貨中','已出貨','配送中','已送達','已收款完成','已結案','取消訂單'];
+
+let allOrders = [];
+let currentFilter = '全部';
+let sortKey = 'created_at';
+let sortAsc = false;
+const useSheets = () => !!CONFIG.SCRIPT_URL;
+
+async function loadData(force = false) {
+  setLoading(true);
+  if (!useSheets()) {
+    document.getElementById('config-banner').style.display = 'block';
+    allOrders = loadLocalOrders();
+  } else {
+    try {
+      const r = await fetch(CONFIG.SCRIPT_URL + '?action=getOrders&t=' + Date.now());
+      const d = await r.json();
+      if (d.ok) {
+        allOrders = d.orders;
+        document.getElementById('sync-status').textContent = '✓ 已同步 Google Sheets ' + new Date().toLocaleTimeString('zh-TW');
+      } else throw new Error(d.error);
+    } catch(e) {
+      allOrders = loadLocalOrders();
+      document.getElementById('sync-status').textContent = '⚠ Sheets 連線失敗，使用本機資料';
+    }
+  }
+  updateCounts();
   renderOrders();
+  setLoading(false);
 }
 
-function setFilter(f,btn){
-  currentFilter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+function loadLocalOrders() {
+  return JSON.parse(localStorage.getItem('gbjyg_orders') || '[]')
+    .sort((a, b) => (b.created_at > a.created_at ? 1 : -1));
+}
+
+function setLoading(v) {
+  document.getElementById('loading-icon').classList.toggle('hidden', !v);
+}
+
+function updateCounts() {
+  const map = { '全部': allOrders.length,
+    '訂單成立': 0, '業務部確認': 0, '備貨中': 0, '已出貨': 0,
+    '配送中': 0, '已送達': 0, '已結案': 0, '取消訂單': 0 };
+  allOrders.forEach(o => {
+    const s = o.order_status || '';
+    if (map[s] !== undefined) map[s]++;
+    else if (['訂單成立','已通知業務部'].includes(s)) map['訂單成立']++;
+  });
+  document.getElementById('cnt-all').textContent = map['全部'];
+  ['訂單成立','業務部確認','備貨中','已出貨','配送中','已送達','已結案','取消訂單']
+    .forEach((s, i) => {
+      const el = document.getElementById('cnt-' + i);
+      if (el) el.textContent = map[s] || '';
+    });
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderOrders();
 }
 
-function renderOrders(){
-  const q=(document.getElementById('search-box').value||'').toLowerCase();
-  const filtered=allOrders.filter(o=>{
-    const matchFilter=currentFilter==='全部'||o.order_status===currentFilter;
-    const matchSearch=!q||(o.order_number||'').toLowerCase().includes(q)||(o.customer_name||'').toLowerCase().includes(q);
-    return matchFilter&&matchSearch;
+function sortBy(key) {
+  if (sortKey === key) sortAsc = !sortAsc;
+  else { sortKey = key; sortAsc = false; }
+  renderOrders();
+}
+
+function renderOrders() {
+  const q = (document.getElementById('search-box').value || '').toLowerCase();
+  let filtered = allOrders.filter(o => {
+    const matchFilter = currentFilter === '全部' || o.order_status === currentFilter ||
+      (currentFilter === '訂單成立' && o.order_status === '已通知業務部');
+    const matchSearch = !q ||
+      (o.order_number || '').toLowerCase().includes(q) ||
+      (o.customer_name || '').toLowerCase().includes(q) ||
+      (o.customer_phone || '').includes(q);
+    return matchFilter && matchSearch;
   });
-  const tbody=document.getElementById('orders-tbody');
-  tbody.innerHTML='';
-  if(!filtered.length){document.getElementById('empty-msg').classList.remove('hidden');}
-  else{document.getElementById('empty-msg').classList.add('hidden');}
-  filtered.forEach(o=>{
-    const emailOK=o.business_email_sent_at?'<span class="text-green-400">✓ 已發</span>':'<span class="text-slate-500">未發</span>';
-    tbody.innerHTML+=`<tr class="hover:bg-slate-800/50 transition">
-      <td class="p-3 font-mono text-amber-400 text-xs">${o.order_number}</td>
-      <td class="p-3 text-slate-400">${(o.created_at||'').slice(0,10)}</td>
-      <td class="p-3 font-medium text-white">${o.customer_name}</td>
-      <td class="p-3 text-slate-300">${maskPhone(o.customer_phone)}</td>
-      <td class="p-3 text-slate-300 max-w-[120px] truncate">${o.product||'3+1組合'}</td>
-      <td class="p-3 font-bold text-green-400">$${(o.total||o.total_amount||0).toLocaleString()}</td>
-      <td class="p-3 font-mono text-yellow-300 text-xs">${o.discount_code||'—'}</td>
-      <td class="p-3 text-slate-400">${o.source||'—'}</td>
-      <td class="p-3"><span class="${statusColors[o.order_status]||'text-slate-300'} font-bold">${o.order_status||'—'}</span></td>
-      <td class="p-3">${emailOK}</td>
-      <td class="p-3"><button onclick="showDetail('${o.order_number}')" class="btn-sm bg-slate-700 hover:bg-slate-600 text-white">詳情</button></td>
-    </tr>`;
+
+  // 排序
+  filtered.sort((a, b) => {
+    let va = a[sortKey] || '', vb = b[sortKey] || '';
+    if (sortKey === 'total') { va = Number(va); vb = Number(vb); }
+    return sortAsc ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
   });
-  document.getElementById('count-label').textContent='共 '+filtered.length+' 筆訂單';
-}
 
-function maskPhone(p){if(!p)return'—';return p.slice(0,4)+'***'+p.slice(-3);}
-
-function showDetail(num){
-  const o=allOrders.find(x=>x.order_number===num);if(!o)return;
-  document.getElementById('modal-title').textContent='訂單 '+num;
-  const c=document.getElementById('modal-content');
-  c.innerHTML=`
-  <div class="grid grid-cols-2 gap-3 text-sm mb-4">
-    <div class="text-slate-400">客戶姓名</div><div class="text-white font-bold">${o.customer_name}</div>
-    <div class="text-slate-400">手機</div><div class="text-white">${o.customer_phone}</div>
-    <div class="text-slate-400">Email</div><div class="text-blue-400 text-xs">${o.customer_email||'—'}</div>
-    <div class="text-slate-400">收件地址</div><div class="text-white text-xs">${o.shipping_address||o.customer_address||'—'}</div>
-    <div class="text-slate-400">商品</div><div class="text-white">${o.product||'3+1家庭分享組'}</div>
-    <div class="text-slate-400">優惠碼</div><div class="text-yellow-300 font-mono">${o.discount_code||'—'}</div>
-    <div class="text-slate-400">推薦碼</div><div class="text-purple-300 font-mono">${o.referral_code||'—'}</div>
-    <div class="text-slate-400">來源</div><div class="text-white">${o.source||'—'}</div>
-    <div class="text-slate-400">原價</div><div class="text-white">$${(o.subtotal||0).toLocaleString()}</div>
-    <div class="text-slate-400">折扣</div><div class="text-green-400">-$${(o.discount_amount||0).toLocaleString()}</div>
-    <div class="text-slate-400">運費</div><div class="text-white">${(o.shipping_fee||0)===0?'免運':'$'+(o.shipping_fee||0)}</div>
-    <div class="text-slate-400">應付金額</div><div class="text-green-300 font-black text-lg">$${(o.total||o.total_amount||0).toLocaleString()}</div>
-    <div class="text-slate-400">訂單狀態</div><div class="${statusColors[o.order_status]||'text-white'} font-bold">${o.order_status||'—'}</div>
-    <div class="text-slate-400">物流公司</div><div class="text-white">${o.logistics_company||'—'}</div>
-    <div class="text-slate-400">物流單號</div><div class="text-white font-mono">${o.tracking_number||'—'}</div>
-    <div class="text-slate-400">備註</div><div class="text-white text-xs">${o.notes||'—'}</div>
-  </div>
-  <div class="bg-slate-800 rounded-xl p-4 mt-2">
-    <p class="text-xs text-slate-400 mb-2">更新訂單狀態（Prototype）</p>
-    <select id="update-status-sel" class="form-input w-full mb-2">
-      ${['訂單成立','已通知業務部','業務部確認','備貨中','已出貨','配送中','已送達','已收款完成','已結案','取消訂單'].map(s=>`<option ${s===o.order_status?'selected':''}>${s}</option>`).join('')}
-    </select>
-    <button onclick="updateStatus('${num}')" class="btn-sm bg-amber-600 hover:bg-amber-500 text-white w-full py-2">更新狀態</button>
-  </div>`;
-  document.getElementById('detail-modal').style.display='flex';
-}
-
-function closeDetail(){document.getElementById('detail-modal').style.display='none';}
-
-function updateStatus(num){
-  const newStatus=document.getElementById('update-status-sel').value;
-  const orders=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
-  const idx=orders.findIndex(o=>o.order_number===num);
-  if(idx>=0){orders[idx].order_status=newStatus;localStorage.setItem('gbjyg_orders',JSON.stringify(orders));}
-  const aIdx=allOrders.findIndex(o=>o.order_number===num);
-  if(aIdx>=0)allOrders[aIdx].order_status=newStatus;
-  alert('狀態已更新為：'+newStatus+'\n（正式後端需同步更新資料庫並發送 Email 通知）');
-  closeDetail();renderOrders();
-}
-
-function exportCSV(){
-  if(!allOrders.length){alert('無訂單資料');return;}
-  const headers=['訂單編號','日期','客戶','手機','金額','優惠碼','來源','狀態'];
-  const rows=allOrders.map(o=>[o.order_number,(o.created_at||'').slice(0,10),o.customer_name,o.customer_phone,(o.total||o.total_amount||0),o.discount_code||'',o.source||'',o.order_status]);
-  const csv=[headers,...rows].map(r=>r.map(c=>'"'+(c||'').toString().replace(/"/g,'""')+'"').join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,﻿'+encodeURIComponent(csv);a.download='金牌一條根訂單_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
-}
-load();
-</script>
-</body>
-</html>
+  const tbody = document.getElementById('orders-tbody');
+  tbody.innerHTML = '

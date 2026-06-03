@@ -938,7 +938,7 @@
       <button onclick="closeOrderModal()" class="text-2xl hover:opacity-70">&times;</button>
     </div>
     <div class="p-6 space-y-4">
-      <div class="bg-amber-50 rounded-xl p-3 text-xs text-amber-800">⚠️ PROTOTYPE — 資料儲存於瀏覽器 localStorage，正式上線需接後端 + Email SMTP</div>
+      <div class="bg-green-50 rounded-xl p-3 text-xs text-green-800">✅ 下單後訂單將自動記錄至系統，可使用訂單編號查詢出貨狀態</div>
       <div>
         <label class="form-label">選擇購買數量 <span class="text-red-500">*</span></label>
         <div class="grid grid-cols-4 gap-2 mt-1" id="qty-buttons">
@@ -1154,6 +1154,9 @@ function submitOrder(){
   const orders=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
   orders.push(order);
   localStorage.setItem('gbjyg_orders',JSON.stringify(orders));
+  // 同步寫入 Google Sheets
+  const SCRIPT_URL='https://script.google.com/macros/s/AKfycbzcfmGsqTKcnRkOnRrJgPCyATIhYTJD9gK8cteWTPUtZtu588ZjvUY-eshi5Ktde5E0/exec';
+  if(SCRIPT_URL){fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify({action:'addorder',order:order})}).catch(()=>{});}
   closeOrderModal();
   document.getElementById('success-order-num').textContent=orderNum;
   const referralEl=document.getElementById('success-referral-code'); if(referralEl) referralEl.textContent=refCode;
