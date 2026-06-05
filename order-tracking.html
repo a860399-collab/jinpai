@@ -62,8 +62,22 @@
     <p class="text-slate-500 text-sm">輸入訂單編號與手機末三碼，即時查詢出貨狀況</p>
   </div>
 
-  <!-- 查詢表單 -->
+  <!-- 查詢模式切換 -->
+  <div class="flex rounded-2xl overflow-hidden border border-gray-200 mb-5 bg-white shadow-sm">
+    <button id="tab-order" onclick="switchTab('order')"
+      class="flex-1 py-3 text-sm font-bold transition"
+      style="background:linear-gradient(90deg,#d4af37,#f59e0b);color:white">
+      <i class="fas fa-hashtag mr-1"></i>訂單號查詢
+    </button>
+    <button id="tab-phone" onclick="switchTab('phone')"
+      class="flex-1 py-3 text-sm font-bold transition text-slate-500 bg-white">
+      <i class="fas fa-mobile-alt mr-1"></i>手機號碼查詢
+    </button>
+  </div>
+
+  <!-- 訂單號查詢表單 -->
   <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-5" id="search-form">
+    <p class="text-xs text-slate-400 mb-4">輸入下單時的訂單編號與手機末三碼</p>
     <div class="space-y-4">
       <div>
         <label class="block text-sm font-bold text-slate-700 mb-1.5">
@@ -85,6 +99,40 @@
         <i class="fas fa-search mr-2"></i>查詢訂單進度
       </button>
       <p id="search-error" class="text-red-500 text-sm text-center hidden"></p>
+    </div>
+  </div>
+
+  <!-- 手機號碼查詢表單 -->
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-5 hidden" id="phone-form">
+    <p class="text-xs text-slate-400 mb-4">輸入下單時的完整手機號碼，查看所有訂單紀錄</p>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-bold text-slate-700 mb-1.5">
+          <i class="fas fa-mobile-alt text-amber-500 mr-1"></i>手機號碼 <span class="text-red-500">*</span>
+        </label>
+        <input type="tel" id="input-phone-full" class="form-input" placeholder="例：0912345678" maxlength="10"
+          oninput="this.value=this.value.replace(/\D/g,'')"
+          onkeydown="if(event.key==='Enter')searchByPhone()">
+      </div>
+      <button onclick="searchByPhone()" id="search-phone-btn" class="btn-primary">
+        <i class="fas fa-search mr-2"></i>查詢所有訂單
+      </button>
+    </div>
+  </div>
+
+  <!-- 多筆訂單列表（手機查詢結果） -->
+  <div id="multi-order-area" class="hidden space-y-4">
+    <div class="flex items-center justify-between">
+      <h2 class="font-black text-base" style="color:#451a03">
+        <i class="fas fa-list text-amber-500 mr-2"></i>您的訂單紀錄
+      </h2>
+      <span id="multi-order-count" class="text-xs text-slate-400"></span>
+    </div>
+    <div id="multi-order-list" class="space-y-3"></div>
+    <div class="text-center">
+      <button onclick="resetSearch()" class="btn-outline">
+        <i class="fas fa-redo mr-1"></i> 重新查詢
+      </button>
     </div>
   </div>
 
@@ -225,12 +273,157 @@ const steps = [
   { label: '已送達',   icon: 'fa-home' },
 ];
 
+// Tab 切換
+function switchTab(mode) {
+  const isOrder = mode === 'order';
+  document.getElementById('search-form').classList.toggle('hidden', !isOrder);
+  document.getElementById('phone-form').classList.toggle('hidden', isOrder);
+  document.getElementById('multi-order-area').classList.add('hidden');
+  document.getElementById('result-area').classList.add('hidden');
+  document.getElementById('not-found').classList.add('hidden');
+  const tabOrder = document.getElementById('tab-order');
+  const tabPhone = document.getElementById('tab-phone');
+  if(isOrder){
+    tabOrder.style.cssText='background:linear-gradient(90deg,#d4af37,#f59e0b);color:white';
+    tabPhone.style.cssText='background:white;color:#6b7280';
+  } else {
+    tabPhone.style.cssText='background:linear-gradient(90deg,#d4af37,#f59e0b);color:white';
+    tabOrder.style.cssText='background:white;color:#6b7280';
+  }
+}
+
+// 手機號碼查詢（多筆訂單）
+async function searchByPhone() {
+  const phone = document.getElementById('input-phone-full').value.trim();
+  if(!/^09\d{8}$/.test(phone)){alert('請輸入正確的手機號碼（09 開頭共 10 碼）');return;}
+  const phone3 = phone.slice(-3);
+  const btn = document.getElementById('search-phone-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> 查詢中...';
+  document.getElementById('multi-order-area').classList.add('hidden');
+  document.getElementById('not-found').classList.add('hidden');
+  document.getElementById('loading-area').classList.remove('hidden');
+
+  let orders = [];
+
+  // 1. 查 Google Sheet
+  if(CONFIG.SCRIPT_URL){
+    try {
+      const url = CONFIG.SCRIPT_URL + '?action=getorders&phone=' + encodeURIComponent(phone);
+      const res = await fetch(url);
+      const json = await res.json();
+      if(json.ok && Array.isArray(json.orders)) orders = json.orders;
+    } catch(e){}
+  }
+
+  // 2. fallback localStorage
+  if(orders.length === 0){
+    try {
+      const local = JSON.parse(localStorage.getItem('gbjyg_orders') || '[]');
+      orders = local.filter(o => String(o.customer_phone || '') === phone || String(o.customer_phone || '').slice(-3) === phone3);
+    } catch(e){}
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-search mr-2"></i>查詢所有訂單';
+  document.getElementById('loading-area').classList.add('hidden');
+
+  if(orders.length === 0){
+    document.getElementById('not-found').classList.remove('hidden');
+    return;
+  }
+
+  // 依時間降冪排序
+  orders.sort((a,b) => new Date(b.created_at||0) - new Date(a.created_at||0));
+  renderMultiOrders(orders);
+}
+
+const statusColorMap = {
+  '訂單成立':'bg-blue-100 text-blue-700',
+  '已通知業務部':'bg-blue-100 text-blue-700',
+  '業務確認':'bg-yellow-100 text-yellow-700',
+  '業務部確認':'bg-yellow-100 text-yellow-700',
+  '備貨中':'bg-orange-100 text-orange-700',
+  '出貨中':'bg-purple-100 text-purple-700',
+  '已出貨':'bg-purple-100 text-purple-700',
+  '配送中':'bg-indigo-100 text-indigo-700',
+  '已送達':'bg-green-100 text-green-700',
+  '已收款完成':'bg-green-200 text-green-800',
+  '已結案':'bg-gray-100 text-gray-600',
+  '取消訂單':'bg-red-100 text-red-600',
+};
+
+function renderMultiOrders(orders) {
+  const list = document.getElementById('multi-order-list');
+  document.getElementById('multi-order-count').textContent = '共 ' + orders.length + ' 筆訂單';
+  list.innerHTML = orders.map((o, idx) => {
+    const statusInfo = statusMap[o.order_status] || { step: 0, badge: 'bg-gray-100 text-gray-600', desc: '處理中' };
+    const badgeCls = statusColorMap[o.order_status] || 'bg-gray-100 text-gray-600';
+    const currentStep = Math.max(0, statusInfo.step);
+    const progressPct = Math.round((currentStep / (steps.length - 1)) * 100);
+    return `<div class="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
+      <div class="flex justify-between items-start mb-3">
+        <div>
+          <p class="font-mono font-black text-sm gold-text">${o.order_number || '—'}</p>
+          <p class="text-xs text-slate-400 mt-0.5">${o.created_at ? String(o.created_at).slice(0,10) : '—'} · ${o.product || '商品'}</p>
+        </div>
+        <span class="text-xs font-bold px-2 py-1 rounded-full ${badgeCls} flex-shrink-0 ml-2">${o.order_status || '訂單成立'}</span>
+      </div>
+      <div class="mb-3">
+        <div class="flex justify-between text-xs text-slate-400 mb-1">
+          <span>出貨進度</span><span>${steps[currentStep]?.label || ''}</span>
+        </div>
+        <div class="w-full bg-gray-100 rounded-full h-2">
+          <div class="h-2 rounded-full" style="width:${progressPct}%;background:linear-gradient(90deg,#2d6a4f,#40c870)"></div>
+        </div>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="font-black text-base gold-text">NT$ ${Number(o.total||0).toLocaleString()}</span>
+        <button onclick="showSingleOrder(${idx})" class="text-xs px-3 py-1.5 rounded-lg font-bold border border-amber-300 text-amber-700 hover:bg-amber-50 transition">
+          查看詳情 <i class="fas fa-chevron-right ml-1"></i>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+
+  // 儲存到 window 供詳情使用
+  window._multiOrders = orders;
+  document.getElementById('multi-order-area').classList.remove('hidden');
+}
+
+function showSingleOrder(idx) {
+  const o = window._multiOrders[idx];
+  if(!o) return;
+  renderResult(o);
+  document.getElementById('multi-order-area').classList.add('hidden');
+  // 在詳情頁底部加「返回列表」按鈕
+  const backBtn = document.createElement('div');
+  backBtn.className = 'text-center';
+  backBtn.id = 'back-to-list-btn';
+  backBtn.innerHTML = '<button onclick="backToMultiList()" class="btn-outline"><i class="fas fa-arrow-left mr-1"></i> 返回訂單列表</button>';
+  const resultArea = document.getElementById('result-area');
+  const existing = document.getElementById('back-to-list-btn');
+  if(existing) existing.remove();
+  resultArea.appendChild(backBtn);
+}
+
+function backToMultiList() {
+  document.getElementById('result-area').classList.add('hidden');
+  document.getElementById('back-to-list-btn')?.remove();
+  document.getElementById('multi-order-area').classList.remove('hidden');
+}
+
 // 從 URL 參數自動帶入
 window.addEventListener('DOMContentLoaded', () => {
   const p = new URLSearchParams(location.search);
   if (p.get('order')) document.getElementById('input-order').value = p.get('order').toUpperCase();
   if (p.get('phone')) document.getElementById('input-phone').value = p.get('phone');
   if (p.get('order') && p.get('phone')) searchOrder();
+  // LINE 模式（手機查詢優先）
+  if (p.get('mode') === 'line' || p.get('phone_full')) {
+    switchTab('phone');
+    if(p.get('phone_full')) document.getElementById('input-phone-full').value = p.get('phone_full');
+  }
 });
 
 async function searchOrder() {
@@ -343,10 +536,12 @@ function renderResult(o) {
 function resetSearch() {
   document.getElementById('input-order').value = '';
   document.getElementById('input-phone').value = '';
+  document.getElementById('input-phone-full').value = '';
   document.getElementById('result-area').classList.add('hidden');
+  document.getElementById('multi-order-area').classList.add('hidden');
   document.getElementById('not-found').classList.add('hidden');
   document.getElementById('loading-area').classList.add('hidden');
-  document.getElementById('input-order').focus();
+  document.getElementById('back-to-list-btn')?.remove();
 }
 </script>
 </body>
