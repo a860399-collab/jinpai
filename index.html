@@ -1112,20 +1112,48 @@
       <div class="text-xs text-slate-400 mb-1">步驟 3／3</div>
       <div class="w-16 h-16 herb-bg rounded-full flex items-center justify-center text-white text-3xl mx-auto">✓</div>
       <h3 class="text-2xl font-black deep-text">訂單成立！</h3>
-      <div class="bg-amber-50 rounded-xl p-4 text-left space-y-1 text-sm">
+
+      <!-- 訂單編號 + 複製按鈕 -->
+      <div class="bg-amber-50 rounded-xl p-4 text-left space-y-2 text-sm">
         <p class="font-bold deep-text">訂單編號：</p>
-        <p id="success-order-num" class="font-mono font-black text-lg gold-text"></p>
-        <p class="text-slate-500 text-xs">請截圖或記下訂單編號，可查詢出貨進度</p>
+        <div class="flex items-center gap-2">
+          <p id="success-order-num" class="font-mono font-black text-base gold-text flex-1 break-all"></p>
+          <button onclick="copyOrderNum()" id="copy-btn" class="bg-amber-200 hover:bg-amber-300 text-amber-800 text-xs px-3 py-1.5 rounded-lg font-bold transition flex-shrink-0">
+            <i class="fas fa-copy mr-1"></i>複製
+          </button>
+        </div>
+        <p class="text-slate-500 text-xs">建議截圖保存，或直接複製訂單編號</p>
       </div>
+
+      <!-- Email 確認訊息（有填 Email 才顯示） -->
+      <div id="email-confirm-msg" class="hidden bg-blue-50 border border-blue-100 rounded-xl p-3 text-sm text-blue-700 text-left flex items-start gap-2">
+        <i class="fas fa-envelope mt-0.5 flex-shrink-0"></i>
+        <span>訂單確認信（含訂單號與查詢連結）已寄至您的 Email，請確認收件匣。</span>
+      </div>
+
+      <!-- 3 種查詢方式 -->
+      <div class="bg-green-50 border border-green-100 rounded-xl p-4 text-left text-sm space-y-2">
+        <p class="font-bold text-green-800 mb-2">📦 3 種方式查詢訂單進度：</p>
+        <p class="flex items-start gap-2 text-green-700"><i class="fas fa-envelope mt-0.5 flex-shrink-0 text-blue-500"></i><span><strong>Email 信箱</strong>：信中有訂單號與一鍵查詢連結</span></p>
+        <p class="flex items-start gap-2 text-green-700"><i class="fab fa-line mt-0.5 flex-shrink-0" style="color:#06c755"></i><span><strong>LINE 官方帳號 @111wrvef</strong>：加入後點選「查詢訂單」，輸入手機號碼即可看到所有訂單進度</span></p>
+        <p class="flex items-start gap-2 text-green-700"><i class="fas fa-search mt-0.5 flex-shrink-0 text-amber-500"></i><span><strong>官網查詢頁</strong>：輸入訂單號 + 手機末三碼查詢</span></p>
+      </div>
+
       <div class="space-y-2 text-sm text-slate-600">
         <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> 業務部已收到訂單通知</p>
         <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> 請保持手機暢通，物流人員會來電</p>
         <p class="flex items-center justify-center gap-2"><i class="fas fa-check-circle text-green-500"></i> 商品送達時再付款，當面驗貨</p>
       </div>
-        <p class="text-xs mt-2 text-blue-500">客服將協助確認訂單資訊</p>
-      </div>
+
       <div class="flex flex-col gap-3">
-        <a id="track-link" href="order-tracking.html" class="btn-primary w-full py-3 rounded-xl font-bold block text-center no-underline">查詢出貨進度</a>
+        <a id="track-link" href="order-tracking.html" class="btn-primary w-full py-3 rounded-xl font-bold block text-center no-underline">
+          <i class="fas fa-search mr-2"></i>查詢出貨進度
+        </a>
+        <a href="https://line.me/R/ti/p/@111wrvef" target="_blank"
+          class="w-full py-3 rounded-xl font-bold block text-center no-underline text-white"
+          style="background:#06c755">
+          <i class="fab fa-line mr-2"></i>LINE 查詢訂單 @111wrvef
+        </a>
         <button onclick="closeSuccessModal()" class="btn-outline w-full py-3 rounded-xl font-bold">返回首頁</button>
       </div>
     </div>
@@ -1323,10 +1351,21 @@ function backToOrder(){
   setTimeout(()=>{ document.getElementById('order-modal').classList.remove('modal-hidden'); },50);
 }
 
+function copyOrderNum(){
+  const num=document.getElementById('success-order-num').textContent;
+  if(navigator.clipboard){navigator.clipboard.writeText(num).then(()=>{
+    const btn=document.getElementById('copy-btn');
+    btn.innerHTML='<i class="fas fa-check mr-1"></i>已複製';
+    btn.classList.add('bg-green-200','text-green-800');
+    setTimeout(()=>{btn.innerHTML='<i class="fas fa-copy mr-1"></i>複製';btn.classList.remove('bg-green-200','text-green-800')},2000);
+  });}
+}
+
 function submitOrder(){
   const name=document.getElementById('order-name').value.trim();
   const phone=document.getElementById('order-phone').value.trim();
   const address=document.getElementById('order-address').value.trim();
+  const customerEmail=document.getElementById('order-email').value.trim();
   if(!name||!phone||!address){alert('資料不完整，請返回填寫');return;}
   const p=qtyPricing[selectedQty]||qtyPricing[1];
   const now=new Date();
@@ -1354,6 +1393,9 @@ function submitOrder(){
     document.getElementById('success-order-num').textContent=orderNum;
     const referralEl=document.getElementById('success-referral-code'); if(referralEl) referralEl.textContent=refCode;
     document.getElementById('track-link').href='order-tracking.html?order='+orderNum+'&phone='+phone.slice(-3);
+    // 顯示 Email 確認訊息
+    const emailMsg=document.getElementById('email-confirm-msg');
+    if(emailMsg) emailMsg.classList.toggle('hidden',!customerEmail);
     document.getElementById('success-modal').classList.remove('modal-hidden');
   },50);
 }
