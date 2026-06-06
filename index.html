@@ -1202,8 +1202,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const reveals=document.querySelectorAll('.reveal');
   const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('shown')})},{threshold:0.1});
   reveals.forEach(r=>obs.observe(r));
-  setTimeout(showToast,4000);
-  setInterval(showToast,22000);
+  // 跑馬燈已停用（避免重複顯示感覺不真實）
   updateOrderSummary();
 });
 
