@@ -306,21 +306,32 @@ async function searchByPhone() {
 
   let orders = [];
 
-  // 1. 查 Google Sheet
+  // 1. 查 Google Sheet（加前端二次篩選，防 GAS 回傳全量資料）
   if(CONFIG.SCRIPT_URL){
     try {
       const url = CONFIG.SCRIPT_URL + '?action=getorders&phone=' + encodeURIComponent(phone);
       const res = await fetch(url);
       const json = await res.json();
-      if(json.ok && Array.isArray(json.orders)) orders = json.orders;
+      if(json.ok && Array.isArray(json.orders)){
+        // 嚴格比對：標準化後相符才顯示
+        const norm = phone.replace(/^0+/, '');
+        orders = json.orders.filter(o => {
+          const stored = String(o.customer_phone || '').replace(/^0+/, '');
+          return stored === norm || String(o.customer_phone || '') === phone;
+        });
+      }
     } catch(e){}
   }
 
-  // 2. fallback localStorage
+  // 2. fallback localStorage（嚴格比對，移除開頭 0 做正規化）
   if(orders.length === 0){
     try {
       const local = JSON.parse(localStorage.getItem('gbjyg_orders') || '[]');
-      orders = local.filter(o => String(o.customer_phone || '') === phone || String(o.customer_phone || '').slice(-3) === phone3);
+      const norm = phone.replace(/^0+/, '');
+      orders = local.filter(o => {
+        const stored = String(o.customer_phone || '').replace(/^0+/, '');
+        return stored === norm || String(o.customer_phone || '') === phone;
+      });
     } catch(e){}
   }
 
