@@ -122,6 +122,17 @@
   ｜<a href="order-tracking.html" style="color:#94a3b8;text-decoration:underline">訂單查詢</a>
 </div>
 
+<!-- 可信度公告列 -->
+<div style="background:linear-gradient(90deg,#1e3a5f,#1a4d2e);color:#fff;text-align:center;font-size:12px;padding:6px 16px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px">
+  <span>🔒 本站使用 HTTPS 加密傳輸</span>
+  <span>｜</span>
+  <span>🏭 台南新營 GMP 中藥廠監製 · 藥商執照：南市藥販字第 6205011116 號</span>
+  <span>｜</span>
+  <span>📋 衛署成字第 015614 號 · 合法廣告核准</span>
+  <span>｜</span>
+  <span style="color:#fbbf24">⚠️ 本站不會主動要求您匯款或轉帳，僅接受貨到付款</span>
+</div>
+
 <!-- 導航 -->
 <nav class="sticky top-0 z-[100] bg-white/95 backdrop-blur-md border-b border-amber-100 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -1038,6 +1049,10 @@
         <div class="flex justify-between text-slate-500"><span>運費</span><span id="display-shipping">$100</span></div>
         <div class="border-t border-amber-200 pt-1 flex justify-between font-black text-base deep-text"><span>合計</span><span id="display-total">$450</span></div>
       </div>
+      <!-- Honeypot：機器人會填這格，真人看不到 -->
+      <div style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden" aria-hidden="true">
+        <input type="text" id="order-hp" name="_hp" tabindex="-1" autocomplete="off" placeholder="請勿填寫">
+      </div>
       <div class="space-y-2 text-xs">
         <label class="flex items-start gap-2"><input type="checkbox" id="consent-order"><span class="text-xs text-slate-600">我已閱讀並同意 <a href="privacy.html" target="_blank" class="underline gold-text">個人資料使用說明</a>，並同意以貨到付款方式下單。<span class="text-red-500">*</span></span></label>
         <label class="flex items-start gap-2 mt-1"><input type="checkbox" id="consent-marketing"><span class="text-xs text-slate-500">我同意接收會員優惠、產品資訊與活動通知（選填）</span></label>
@@ -1373,7 +1388,8 @@ function submitOrder(){
   const rand=String(Math.floor(Math.random()*9000)+1000);
   const orderNum='ORDER-'+datePart+'-'+rand;
   const refCode=name.slice(0,1).toUpperCase()+'REF'+rand;
-  const order={order_number:orderNum,product:p.label,customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:usedReferralCode,referral_code:usedReferralCode,quantity:p.qty,subtotal:p.sub,discount_amount:0,shipping_fee:p.ship,total:p.sub+p.ship,payment_method:'貨到付款',order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value,source:'website'};
+  const hpVal = (document.getElementById('order-hp') || {}).value || '';
+  const order={order_number:orderNum,product:p.label,customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:usedReferralCode,referral_code:usedReferralCode,quantity:p.qty,subtotal:p.sub,discount_amount:0,shipping_fee:p.ship,total:p.sub+p.ship,payment_method:'貨到付款',order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value,source:'website',_hp:hpVal};
   const orders=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
   orders.push(order);
   localStorage.setItem('gbjyg_orders',JSON.stringify(orders));
