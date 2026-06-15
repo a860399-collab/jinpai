@@ -58,6 +58,8 @@
     .form-input{width:100%;border:1.5px solid #d1d5db;border-radius:10px;padding:10px 14px;font-size:15px;transition:border-color .2s;outline:none}
     .form-input:focus{border-color:var(--gold-light);box-shadow:0 0 0 3px rgba(212,175,55,.15)}
     .form-label{font-size:13px;font-weight:600;color:#374151;margin-bottom:4px;display:block}
+    .delivery-card input[type=radio],.cvs-card input[type=radio]{display:none}
+    .selected-delivery{border-color:var(--gold-light)!important;background:#fffbeb!important;color:var(--deep)}
     /* FAQ */
     .faq-item .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .2s}
     .faq-item.open .faq-answer{max-height:300px}
@@ -1063,9 +1065,54 @@
         <label class="form-label">Email（接收訂單確認信）</label>
         <input type="email" id="order-email" class="form-input" placeholder="your@email.com">
       </div>
-      <div>
+      <!-- 配送方式 -->
+      <div class="bg-slate-50 rounded-xl p-4 space-y-3">
+        <label class="form-label mb-1">配送方式 <span class="text-red-500">*</span></label>
+        <div class="flex gap-3">
+          <label class="flex-1 cursor-pointer">
+            <input type="radio" name="delivery_method" id="delivery-home" value="宅配到府" checked onchange="toggleDelivery()">
+            <div class="delivery-card border-2 rounded-xl p-3 text-center text-sm font-bold transition selected-delivery">
+              🏠 宅配到府
+              <div class="text-xs text-slate-400 font-normal mt-0.5">貨到付款</div>
+            </div>
+          </label>
+          <label class="flex-1 cursor-pointer">
+            <input type="radio" name="delivery_method" id="delivery-cvs" value="超商取貨" onchange="toggleDelivery()">
+            <div class="delivery-card border-2 rounded-xl p-3 text-center text-sm font-bold transition border-gray-200 bg-white">
+              🏪 超商取貨
+              <div class="text-xs text-slate-400 font-normal mt-0.5">貨到付款</div>
+            </div>
+          </label>
+        </div>
+      </div>
+      <!-- 宅配地址 -->
+      <div id="section-home-address">
         <label class="form-label">收件地址 <span class="text-red-500">*</span></label>
         <input type="text" id="order-address" class="form-input" placeholder="縣市+區+詳細地址">
+      </div>
+      <!-- 超商取貨資料 -->
+      <div id="section-cvs" style="display:none" class="space-y-3">
+        <div>
+          <label class="form-label">選擇超商品牌 <span class="text-red-500">*</span></label>
+          <div class="flex gap-3 mt-1">
+            <label class="flex-1 cursor-pointer">
+              <input type="radio" name="cvs_brand" id="cvs-711" value="7-11">
+              <div class="cvs-card border-2 rounded-xl p-3 text-center text-sm font-bold transition border-gray-200 bg-white">
+                🟠 7-ELEVEN
+              </div>
+            </label>
+            <label class="flex-1 cursor-pointer">
+              <input type="radio" name="cvs_brand" id="cvs-family" value="全家">
+              <div class="cvs-card border-2 rounded-xl p-3 text-center text-sm font-bold transition border-gray-200 bg-white">
+                🟢 全家 FamilyMart
+              </div>
+            </label>
+          </div>
+        </div>
+        <div>
+          <label class="form-label">門市名稱 <span class="text-red-500">*</span></label>
+          <input type="text" id="order-cvs-store" class="form-input" placeholder="例：台北敦南門市">
+        </div>
       </div>
       <div>
         <label class="form-label">備註</label>
@@ -1126,6 +1173,14 @@
           <span class="font-bold text-green-700">貨到付款（送達時付現）</span>
         </div>
         <div class="flex items-start gap-3 p-4">
+          <span class="text-slate-400 w-20 flex-shrink-0">配送方式</span>
+          <span id="rev-delivery" class="font-bold deep-text"></span>
+        </div>
+        <div id="rev-cvs-row" class="flex items-start gap-3 p-4" style="display:none">
+          <span class="text-slate-400 w-20 flex-shrink-0">取貨門市</span>
+          <span id="rev-cvs" class="font-bold"></span>
+        </div>
+        <div class="flex items-start gap-3 p-4">
           <span class="text-slate-400 w-20 flex-shrink-0">姓名</span>
           <span id="rev-name" class="font-bold"></span>
         </div>
@@ -1137,7 +1192,7 @@
           <span class="text-slate-400 w-20 flex-shrink-0">Email</span>
           <span id="rev-email" class="font-bold break-all"></span>
         </div>
-        <div class="flex items-start gap-3 p-4">
+        <div id="rev-address-row" class="flex items-start gap-3 p-4">
           <span class="text-slate-400 w-20 flex-shrink-0">收件地址</span>
           <span id="rev-address" class="font-bold leading-snug"></span>
         </div>
@@ -1339,17 +1394,57 @@ function updateOrderSummary(){
 }
 
 
+function toggleDelivery(){
+  const isHome=document.getElementById('delivery-home').checked;
+  document.getElementById('section-home-address').style.display=isHome?'':'none';
+  document.getElementById('section-cvs').style.display=isHome?'none':'';
+  // 更新 card 樣式
+  document.querySelectorAll('.delivery-card').forEach(c=>{
+    c.classList.remove('selected-delivery','border-amber-400','bg-amber-50');
+    c.classList.add('border-gray-200','bg-white');
+  });
+  const sel=isHome?document.getElementById('delivery-home'):document.getElementById('delivery-cvs');
+  const card=sel.nextElementSibling;
+  card.classList.remove('border-gray-200','bg-white');
+  card.classList.add('selected-delivery','border-amber-400','bg-amber-50');
+}
+function selectCvsBrand(val){
+  document.querySelectorAll('.cvs-card').forEach(c=>{
+    c.classList.remove('border-amber-400','bg-amber-50');
+    c.classList.add('border-gray-200','bg-white');
+  });
+  const radio=val==='7-11'?document.getElementById('cvs-711'):document.getElementById('cvs-family');
+  if(radio){ radio.checked=true; radio.nextElementSibling.classList.remove('border-gray-200','bg-white'); radio.nextElementSibling.classList.add('border-amber-400','bg-amber-50'); }
+}
+// 讓 CVS 品牌 radio 也更新樣式
+document.addEventListener('DOMContentLoaded',function(){
+  ['cvs-711','cvs-family'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('change',function(){ selectCvsBrand(this.value); });
+  });
+  toggleDelivery();
+});
+
 function validateForm(){
   const name=document.getElementById('order-name').value.trim();
   const phone=document.getElementById('order-phone').value.trim();
-  const address=document.getElementById('order-address').value.trim();
   const email=document.getElementById('order-email').value.trim();
   const consentEl=document.getElementById('consent-order');
   const consent=consentEl ? consentEl.checked : true;
+  const isHome=document.getElementById('delivery-home').checked;
   // 必填檢查
   if(!name){alert('請填寫收件人姓名');return false;}
   if(!phone){alert('請填寫手機號碼');return false;}
-  if(!address){alert('請填寫收件地址');return false;}
+  if(isHome){
+    const address=document.getElementById('order-address').value.trim();
+    if(!address){alert('請填寫收件地址');return false;}
+    if(address.length < 8){alert('收件地址請填寫完整（縣市＋區＋詳細地址）');return false;}
+  } else {
+    const brand=document.querySelector('input[name="cvs_brand"]:checked');
+    const store=document.getElementById('order-cvs-store').value.trim();
+    if(!brand){alert('請選擇超商品牌（7-11 或 全家）');return false;}
+    if(!store){alert('請填寫取貨門市名稱');return false;}
+  }
   // 手機格式：09開頭 + 共10碼
   if(!/^09\d{8}$/.test(phone)){
     alert('手機號碼格式不正確！\n需要 09 開頭共 10 碼數字\n例：0912345678');return false;
@@ -1357,10 +1452,6 @@ function validateForm(){
   // Email 格式（有填才驗證）
   if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
     alert('Email 格式不正確，請重新確認\n例：your@email.com');return false;
-  }
-  // 地址長度檢查
-  if(address.length < 8){
-    alert('收件地址請填寫完整（縣市＋區＋詳細地址）');return false;
   }
   // 推薦碼必填（3+1方案）
   if(String(selectedQty).startsWith('s')&&!referralValid){
@@ -1374,16 +1465,26 @@ function goToReview(){
   if(!validateForm()) return;
   const name=document.getElementById('order-name').value.trim();
   const phone=document.getElementById('order-phone').value.trim();
-  const address=document.getElementById('order-address').value.trim();
   const email=document.getElementById('order-email').value.trim();
   const note=document.getElementById('order-note').value.trim();
+  const isHome=document.getElementById('delivery-home').checked;
+  const address=isHome?(document.getElementById('order-address').value.trim()):'';
+  const cvsEl=document.querySelector('input[name="cvs_brand"]:checked');
+  const cvsBrand=cvsEl?cvsEl.value:'';
+  const cvsStore=document.getElementById('order-cvs-store').value.trim();
   const p=qtyPricing[selectedQty]||qtyPricing[1];
   // 填入確認卡片
   document.getElementById('rev-product').textContent=p.label;
   document.getElementById('rev-total').textContent='NT$ '+(p.sub+p.ship).toLocaleString()+(p.ship?'（含運費$'+p.ship+'）':'（免運）');
+  document.getElementById('rev-delivery').textContent=isHome?'🏠 宅配到府':'🏪 超商取貨';
+  const cvsRow=document.getElementById('rev-cvs-row');
+  if(!isHome){ document.getElementById('rev-cvs').textContent=cvsBrand+' '+cvsStore; cvsRow.style.display='flex'; }
+  else { cvsRow.style.display='none'; }
   document.getElementById('rev-name').textContent=name;
   document.getElementById('rev-phone').textContent=phone;
-  document.getElementById('rev-address').textContent=address;
+  const addrRow=document.getElementById('rev-address-row');
+  document.getElementById('rev-address').textContent=address||'（超商取貨）';
+  addrRow.style.display=isHome?'flex':'none';
   const emailRow=document.getElementById('rev-email-row');
   document.getElementById('rev-email').textContent=email||'（未填）';
   emailRow.style.display=email?'flex':'none';
@@ -1426,9 +1527,14 @@ function copyOrderNum(){
 function submitOrder(){
   const name=document.getElementById('order-name').value.trim();
   const phone=document.getElementById('order-phone').value.trim();
-  const address=document.getElementById('order-address').value.trim();
   const customerEmail=document.getElementById('order-email').value.trim();
-  if(!name||!phone||!address){alert('資料不完整，請返回填寫');return;}
+  const isHome=document.getElementById('delivery-home').checked;
+  const address=isHome?(document.getElementById('order-address').value.trim()):'';
+  const deliveryMethod=isHome?'宅配':'超商取貨';
+  const cvsEl=document.querySelector('input[name="cvs_brand"]:checked');
+  const cvsBrand=cvsEl?cvsEl.value:'';
+  const cvsStore=document.getElementById('order-cvs-store').value.trim();
+  if(!name||!phone||(isHome&&!address)){alert('資料不完整，請返回填寫');return;}
   const p=qtyPricing[selectedQty]||qtyPricing[1];
   const now=new Date();
   const datePart=now.toISOString().slice(0,10).replace(/-/g,'');
@@ -1436,7 +1542,7 @@ function submitOrder(){
   const orderNum='ORDER-'+datePart+'-'+rand;
   const refCode=name.slice(0,1).toUpperCase()+'REF'+rand;
   const hpVal = (document.getElementById('order-hp') || {}).value || '';
-  const order={order_number:orderNum,product:p.label,customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:usedReferralCode,referral_code:usedReferralCode,quantity:p.qty,subtotal:p.sub,discount_amount:0,shipping_fee:p.ship,total:p.sub+p.ship,payment_method:'貨到付款',order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value,source:'website',_hp:hpVal};
+  const order={order_number:orderNum,product:p.label,customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:usedReferralCode,referral_code:usedReferralCode,quantity:p.qty,subtotal:p.sub,discount_amount:0,shipping_fee:p.ship,total:p.sub+p.ship,payment_method:'貨到付款',delivery_method:deliveryMethod,cvs_store_brand:cvsBrand,cvs_store_name:cvsStore,order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value,source:'website',_hp:hpVal};
   const orders=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
   orders.push(order);
   localStorage.setItem('gbjyg_orders',JSON.stringify(orders));
