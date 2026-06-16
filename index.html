@@ -1105,86 +1105,65 @@
       </div>
       <!-- 超商取貨資料 -->
       <div id="section-cvs" style="display:none" class="space-y-3">
-        <!-- 步驟說明 -->
-        <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-xs text-amber-800 leading-relaxed">
-          📋 <strong>選取步驟：</strong>選品牌 → 選縣市 → 選區 → 輸入路名查詢 → 確認門市名稱
+        <div class="bg-blue-50 border border-blue-200 rounded-xl px-4 py-2 text-xs text-blue-800">
+          🏪 <strong>超商取貨說明：</strong>請先選擇縣市、行政區，再搜尋門市。系統會自動帶入門市店號與地址。
         </div>
-        <!-- Step 1：超商品牌 -->
+        <!-- ① 縣市 -->
         <div>
-          <label class="form-label">① 超商品牌 <span class="text-red-500">*</span></label>
-          <div class="flex gap-3 mt-1">
-            <label class="flex-1 cursor-pointer">
-              <input type="radio" name="cvs_brand" id="cvs-711" value="7-11" onchange="selectCvsBrand('7-11')" style="display:none">
-              <div class="cvs-card border-2 rounded-xl transition border-gray-200 bg-white overflow-hidden flex flex-col items-center">
-                <!-- 7-ELEVEN 品牌色塊 -->
-                <div style="background:#007840;width:100%;padding:10px 4px 8px;text-align:center;line-height:1;">
-                  <span style="font-family:'Arial Black',Impact,Arial,sans-serif;font-size:2.2rem;font-weight:900;color:#F26522;letter-spacing:-2px;display:inline;">7</span><span style="font-family:'Arial Black',Impact,Arial,sans-serif;font-size:0.9rem;font-weight:900;color:#fff;letter-spacing:0px;display:inline;vertical-align:35%;">-ELEVEN</span>
-                </div>
-                <div style="background:#F26522;width:100%;height:5px;"></div>
-                <div style="padding:4px 0 5px;font-size:0.72rem;color:#64748b;text-align:center;">貨到付款</div>
-              </div>
-            </label>
-            <label class="flex-1 cursor-pointer">
-              <input type="radio" name="cvs_brand" id="cvs-family" value="全家" onchange="selectCvsBrand('全家')" style="display:none">
-              <div class="cvs-card border-2 rounded-xl transition border-gray-200 bg-white overflow-hidden flex flex-col items-center">
-                <!-- 全家 FamilyMart 品牌色塊 -->
-                <div style="background:#0068B7;width:100%;padding:8px 4px 6px;text-align:center;line-height:1.3;">
-                  <!-- 屋頂造型 SVG -->
-                  <svg viewBox="0 0 60 22" width="60" height="22" style="display:block;margin:0 auto 3px;" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="0,22 12,4 24,22" fill="#00A650"/>
-                    <polygon points="18,22 30,4 42,22" fill="#00A650"/>
-                    <polygon points="36,22 48,4 60,22" fill="#00A650"/>
-                  </svg>
-                  <div style="font-family:Arial,sans-serif;font-size:0.78rem;font-weight:900;color:#fff;letter-spacing:0.3px;">全家 FamilyMart</div>
-                </div>
-                <div style="background:#00A650;width:100%;height:5px;"></div>
-                <div style="padding:4px 0 5px;font-size:0.72rem;color:#64748b;text-align:center;">貨到付款</div>
-              </div>
-            </label>
-          </div>
-        </div>
-        <!-- Step 2：縣市 -->
-        <div>
-          <label class="form-label">② 縣市 <span class="text-red-500">*</span></label>
+          <label class="form-label">① 縣市 <span class="text-red-500">*</span></label>
           <select id="cvs-city" class="form-input" onchange="updateCvsDistrict()">
             <option value="">── 請選擇縣市 ──</option>
-            <option>台北市</option><option>新北市</option><option>桃園市</option>
-            <option>台中市</option><option>台南市</option><option>高雄市</option>
-            <option>基隆市</option><option>新竹市</option><option>新竹縣</option>
-            <option>苗栗縣</option><option>彰化縣</option><option>南投縣</option>
-            <option>雲林縣</option><option>嘉義市</option><option>嘉義縣</option>
-            <option>屏東縣</option><option>宜蘭縣</option><option>花蓮縣</option>
-            <option>台東縣</option><option>澎湖縣</option><option>金門縣</option>
-            <option>連江縣</option>
           </select>
         </div>
-        <!-- Step 3：區 -->
+        <!-- ② 行政區 -->
         <div>
-          <label class="form-label">③ 區 <span class="text-red-500">*</span></label>
-          <select id="cvs-district" class="form-input">
+          <label class="form-label">② 行政區 <span class="text-red-500">*</span></label>
+          <select id="cvs-district" class="form-input" onchange="filterStoreList()">
             <option value="">── 請先選縣市 ──</option>
           </select>
         </div>
-        <!-- Step 4：路名查詢 -->
+        <!-- ③ 門市搜尋 -->
         <div>
-          <label class="form-label">④ 門市名稱關鍵字搜尋</label>
+          <label class="form-label">③ 搜尋門市（名稱 / 店號 / 地址關鍵字）</label>
           <div class="flex gap-2">
-            <input type="text" id="cvs-road" class="form-input flex-1" placeholder="輸入門市名稱，例：知母義、信義、中山…" oninput="cvsSearchDebounce()">
-            <button type="button" onclick="openCvsSearch()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap transition">
-              🔍 搜尋
-            </button>
+            <input type="text" id="cvs-search-kw" class="form-input flex-1" placeholder="例：新營、F08801、中正路…" oninput="filterStoreList()">
+            <button type="button" onclick="filterStoreList()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap transition">🔍</button>
           </div>
-          <div id="cvs-search-results" style="display:none;max-height:220px;overflow-y:auto;border:1px solid #fcd34d;border-radius:12px;margin-top:6px;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,0.10);"></div>
-          <p class="text-xs text-slate-400 mt-1">輸入門市名稱關鍵字後按搜尋，或直接在下方填寫</p>
         </div>
-        <!-- Step 5：確認門市名稱 -->
-        <div class="bg-slate-50 rounded-xl p-3 border-2 border-dashed border-amber-300">
-          <label class="form-label">⑤ 確認取貨門市名稱 <span class="text-red-500">*</span></label>
-          <input type="text" id="order-cvs-store" class="form-input mt-1" placeholder="例：知母義門市">
-          <p class="text-xs text-amber-700 mt-1 font-medium">✏️ 從搜尋結果點選，或直接填寫門市名稱</p>
+        <!-- ④ 門市清單 -->
+        <div id="cvs-list-wrap" style="display:none">
+          <label class="form-label">④ 門市清單</label>
+          <div id="cvs-store-list" style="max-height:220px;overflow-y:auto;border:1px solid #fcd34d;border-radius:12px;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.08)"></div>
         </div>
+        <!-- ⑤ 已選門市 -->
+        <div id="cvs-selected-card" style="display:none" class="bg-green-50 border-2 border-green-400 rounded-xl p-3 space-y-1">
+          <div class="flex justify-between items-start">
+            <span class="text-xs font-bold text-green-700">✅ 已選擇取貨門市</span>
+            <button type="button" onclick="clearSelectedStore()" class="text-xs text-slate-400 hover:text-red-500">✕ 重選</button>
+          </div>
+          <div class="font-bold text-sm" id="cvs-sel-chain-name"></div>
+          <div class="text-xs text-slate-600">店號：<span id="cvs-sel-code" class="font-mono font-bold"></span></div>
+          <div class="text-xs text-slate-600">地址：<span id="cvs-sel-addr"></span></div>
+        </div>
+        <!-- 找不到門市？自行填寫 -->
+        <div>
+          <button type="button" onclick="toggleManualFill()" class="text-xs text-amber-700 underline">找不到門市？自行填寫門市資訊</button>
+          <div id="manual-fill-wrap" style="display:none" class="mt-2 space-y-2 bg-amber-50 border border-amber-200 rounded-xl p-3">
+            <p class="text-xs text-amber-800 font-bold">⚠️ 請填寫完整門市名稱與地址（找不到門市時使用）</p>
+            <input type="text" id="manual-store-name" class="form-input text-sm" placeholder="門市名稱，例：知母義門市">
+            <input type="text" id="manual-store-addr" class="form-input text-sm" placeholder="門市地址，例：台南市新營區○○路○○號">
+            <button type="button" onclick="applyManualFill()" class="bg-amber-500 text-white text-sm font-bold px-4 py-2 rounded-xl w-full">確認使用此門市</button>
+          </div>
+        </div>
+        <!-- 隱藏欄位 -->
+        <input type="hidden" id="h-store-code">
+        <input type="hidden" id="h-store-name">
+        <input type="hidden" id="h-store-city">
+        <input type="hidden" id="h-store-district">
+        <input type="hidden" id="h-store-addr">
+        <input type="hidden" id="h-cvs-chain">
       </div>
-      <div>
+            <div>
         <label class="form-label">備註</label>
         <textarea id="order-note" class="form-input" rows="2" placeholder="特殊需求或給業務部的說明"></textarea>
       </div>
@@ -1248,7 +1227,7 @@
         </div>
         <div id="rev-cvs-row" class="flex items-start gap-3 p-4" style="display:none">
           <span class="text-slate-400 w-20 flex-shrink-0">取貨門市</span>
-          <span id="rev-cvs" class="font-bold"></span>
+          <span id="rev-cvs" class="font-bold leading-relaxed"></span>
         </div>
         <div class="flex items-start gap-3 p-4">
           <span class="text-slate-400 w-20 flex-shrink-0">姓名</span>
@@ -1353,6 +1332,7 @@ const faqs=[
 ];
 
 document.addEventListener('DOMContentLoaded',()=>{
+  toggleDelivery();
   document.querySelectorAll('.qty-btn').forEach(btn=>btn.classList.add('border-gray-200','bg-white'));
   selectQty(1);
   const list=document.getElementById('faq-list');
@@ -1464,82 +1444,148 @@ function updateOrderSummary(){
 }
 
 
-function toggleDelivery(){
-  const isHome=document.getElementById('delivery-home').checked;
-  document.getElementById('section-home-address').style.display=isHome?'':'none';
-  document.getElementById('section-cvs').style.display=isHome?'none':'';
-  // 更新 card 樣式
-  document.querySelectorAll('.delivery-card').forEach(c=>{
-    c.classList.remove('selected-delivery','border-amber-400','bg-amber-50');
-    c.classList.add('border-gray-200','bg-white');
-  });
-  const sel=isHome?document.getElementById('delivery-home'):document.getElementById('delivery-cvs');
-  const card=sel.nextElementSibling;
-  card.classList.remove('border-gray-200','bg-white');
-  card.classList.add('selected-delivery','border-amber-400','bg-amber-50');
+// ── 門市資料 ────────────────────────────────────
+var _storeData = [];
+var _selectedStore = null;
+var _manualFillMode = false;
+
+function loadStoreData(){
+  fetch('./data/store_locations.json')
+    .then(r=>r.json())
+    .then(data=>{
+      _storeData = data.filter(s=>s.status==='active');
+      console.log('[門市] 載入', _storeData.length, '筆');
+    })
+    .catch(e=>console.warn('[門市] 載入失敗', e));
 }
-function selectCvsBrand(val){
-  document.querySelectorAll('.cvs-card').forEach(c=>{
-    c.classList.remove('border-amber-400','bg-amber-50');
-    c.classList.add('border-gray-200','bg-white');
+loadStoreData();
+
+// ── 配送方式切換 ──────────────────────────────────
+function toggleDelivery(){
+  const val = document.querySelector('input[name="delivery_method"]:checked').value;
+  const isHome = val === 'home';
+  const isCvs = val === '711' || val === 'familymart';
+  document.getElementById('section-home-address').style.display = isHome ? '' : 'none';
+  document.getElementById('section-cvs').style.display = isCvs ? '' : 'none';
+  // 卡片樣式
+  ['home','711','family'].forEach(id=>{
+    const card = document.getElementById('card-'+id);
+    if(!card) return;
+    card.classList.remove('selected-delivery','border-amber-400','bg-amber-50','border-gray-200','bg-white');
+    card.classList.add('border-gray-200','bg-white');
   });
-  const radio=val==='7-11'?document.getElementById('cvs-711'):document.getElementById('cvs-family');
-  if(radio){ radio.checked=true; radio.nextElementSibling.classList.remove('border-gray-200','bg-white'); radio.nextElementSibling.classList.add('border-amber-400','bg-amber-50'); }
+  const activeId = isHome?'home':(val==='711'?'711':'family');
+  const activeCard = document.getElementById('card-'+activeId);
+  if(activeCard){ activeCard.classList.remove('border-gray-200','bg-white'); activeCard.classList.add('selected-delivery','border-amber-400','bg-amber-50'); }
+  // 更新縣市清單（依超商品牌）
+  if(isCvs) updateCvsCity();
+  clearSelectedStore();
 }
 
-// ── 超商門市搜尋（Nominatim） ──────────────────────────────────
-var _cvsDebTimer=null;
-function cvsSearchDebounce(){
-  clearTimeout(_cvsDebTimer);
-  _cvsDebTimer=setTimeout(openCvsSearch,600);
+function getSelectedChain(){
+  const val = (document.querySelector('input[name="delivery_method"]:checked')||{}).value||'';
+  return val === '711' ? '7-11' : val === 'familymart' ? '全家' : '';
 }
-function openCvsSearch(){
-  const brandEl=document.querySelector('input[name="cvs_brand"]:checked');
-  const kw=document.getElementById('cvs-road').value.trim();
-  const res=document.getElementById('cvs-search-results');
-  if(!brandEl){
-    res.style.display='block';
-    res.innerHTML='<p style="padding:10px;font-size:12px;color:#b45309;">⚠️ 請先選擇超商品牌</p>';
+
+function updateCvsCity(){
+  const chain = getSelectedChain();
+  const stores = _storeData.filter(s=>s.chain===chain);
+  const cities = [...new Set(stores.map(s=>s.city))].sort();
+  const sel = document.getElementById('cvs-city');
+  sel.innerHTML = '<option value="">── 請選擇縣市 ──</option>' + cities.map(c=>`<option>${c}</option>`).join('');
+  document.getElementById('cvs-district').innerHTML = '<option value="">── 請先選縣市 ──</option>';
+  document.getElementById('cvs-list-wrap').style.display = 'none';
+}
+
+function updateCvsDistrict(){
+  const chain = getSelectedChain();
+  const city = document.getElementById('cvs-city').value;
+  if(!city){ document.getElementById('cvs-district').innerHTML='<option value="">── 請先選縣市 ──</option>'; return; }
+  const districts = [...new Set(_storeData.filter(s=>s.chain===chain&&s.city===city).map(s=>s.district))].sort();
+  const sel = document.getElementById('cvs-district');
+  sel.innerHTML = '<option value="">── 請選擇行政區 ──</option>' + districts.map(d=>`<option>${d}</option>`).join('');
+  filterStoreList();
+}
+
+function filterStoreList(){
+  const chain = getSelectedChain();
+  const city = document.getElementById('cvs-city').value;
+  const district = document.getElementById('cvs-district').value;
+  const kw = (document.getElementById('cvs-search-kw').value||'').trim().toLowerCase();
+  if(!chain) return;
+  let results = _storeData.filter(s=>s.chain===chain);
+  if(city) results = results.filter(s=>s.city===city);
+  if(district) results = results.filter(s=>s.district===district);
+  if(kw) results = results.filter(s=>
+    s.store_name.toLowerCase().includes(kw)||
+    s.store_code.toLowerCase().includes(kw)||
+    s.address.toLowerCase().includes(kw)
+  );
+  const wrap = document.getElementById('cvs-list-wrap');
+  const list = document.getElementById('cvs-store-list');
+  if(!results.length){
+    wrap.style.display = 'block';
+    list.innerHTML = '<div style="padding:12px;font-size:12px;color:#64748b;text-align:center">找不到符合的門市，請嘗試其他關鍵字，或使用「自行填寫」</div>';
     return;
   }
-  if(!kw){res.style.display='none';return;}
-  const brandMap={'7-11':'7-Eleven','全家':'全家便利商店 FamilyMart'};
-  const brandQ=brandMap[brandEl.value]||brandEl.value;
-  res.style.display='block';
-  res.innerHTML='<p style="padding:10px;font-size:12px;color:#64748b;">🔍 搜尋中…</p>';
-  fetch('https://nominatim.openstreetmap.org/search?q='+encodeURIComponent(brandQ+' '+kw)+'&countrycodes=tw&format=json&limit=8&addressdetails=1',
-    {headers:{'Accept-Language':'zh-TW,zh','User-Agent':'jinpai-order-form'}})
-  .then(r=>r.json())
-  .then(function(data){
-    if(!data||!data.length){
-      res.innerHTML='<div style="padding:10px;font-size:12px;color:#ef4444;">找不到「'+kw+'」相關門市，請嘗試其他關鍵字，或直接在下方填寫門市名稱</div>';
-      return;
-    }
-    res.innerHTML=data.map(function(item){
-      var parts=item.display_name.split(',');
-      var name=parts[0].trim();
-      var addr=parts.slice(1,4).join(',').trim();
-      return '<div onclick="selectCvsResult(\''+name.replace(/'/g,"\\'")+'\')" style="padding:10px 12px;font-size:13px;cursor:pointer;border-bottom:1px solid #fef3c7;transition:background .15s" onmouseover="this.style.background=\'#fffbeb\'" onmouseout="this.style.background=\'\'"><strong>'+name+'</strong><br><span style="font-size:11px;color:#94a3b8;">'+addr+'</span></div>';
-    }).join('');
-  })
-  .catch(function(){
-    res.innerHTML='<div style="padding:10px;font-size:12px;color:#ef4444;">搜尋失敗，請直接在下方填寫門市名稱</div>';
-  });
+  wrap.style.display = 'block';
+  list.innerHTML = results.slice(0,50).map(s=>`
+    <div onclick="selectStore(${JSON.stringify(s).replace(/"/g,'&quot;')})" style="padding:10px 12px;font-size:13px;cursor:pointer;border-bottom:1px solid #fef3c7;transition:background .15s" onmouseover="this.style.background='#fffbeb'" onmouseout="this.style.background=''">
+      <div style="font-weight:700">${s.chain} ${s.store_name} <span style="font-size:11px;color:#94a3b8;font-weight:400">店號:${s.store_code}</span></div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">${s.address}</div>
+    </div>`).join('');
 }
-function selectCvsResult(name){
-  document.getElementById('order-cvs-store').value=name;
-  var res=document.getElementById('cvs-search-results');
-  res.innerHTML='<div style="padding:8px 12px;font-size:12px;color:#059669;">✅ 已選擇：'+name+'</div>';
-  setTimeout(function(){res.style.display='none';},1500);
+
+function selectStore(s){
+  _selectedStore = s;
+  _manualFillMode = false;
+  document.getElementById('h-store-code').value = s.store_code;
+  document.getElementById('h-store-name').value = s.store_name;
+  document.getElementById('h-store-city').value = s.city;
+  document.getElementById('h-store-district').value = s.district;
+  document.getElementById('h-store-addr').value = s.address;
+  document.getElementById('h-cvs-chain').value = s.chain;
+  document.getElementById('cvs-sel-chain-name').textContent = s.chain + ' ' + s.store_name;
+  document.getElementById('cvs-sel-code').textContent = s.store_code;
+  document.getElementById('cvs-sel-addr').textContent = s.address;
+  document.getElementById('cvs-selected-card').style.display = 'block';
+  document.getElementById('cvs-list-wrap').style.display = 'none';
+  document.getElementById('manual-fill-wrap').style.display = 'none';
 }
-// 讓 CVS 品牌 radio 也更新樣式
-document.addEventListener('DOMContentLoaded',function(){
-  ['cvs-711','cvs-family'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.addEventListener('change',function(){ selectCvsBrand(this.value); });
+
+function clearSelectedStore(){
+  _selectedStore = null;
+  _manualFillMode = false;
+  ['h-store-code','h-store-name','h-store-city','h-store-district','h-store-addr','h-cvs-chain'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
   });
-  toggleDelivery();
-});
+  document.getElementById('cvs-selected-card').style.display = 'none';
+}
+
+function toggleManualFill(){
+  const wrap = document.getElementById('manual-fill-wrap');
+  wrap.style.display = wrap.style.display==='none' ? '' : 'none';
+}
+
+function applyManualFill(){
+  const name = document.getElementById('manual-store-name').value.trim();
+  const addr = document.getElementById('manual-store-addr').value.trim();
+  if(!name || !addr){ alert('請填寫門市名稱與地址'); return; }
+  const chain = getSelectedChain();
+  _manualFillMode = true;
+  _selectedStore = {chain, store_code:'手填', store_name:name, city:'', district:'', address:addr};
+  document.getElementById('h-store-code').value = '手填';
+  document.getElementById('h-store-name').value = name;
+  document.getElementById('h-store-city').value = '';
+  document.getElementById('h-store-district').value = '';
+  document.getElementById('h-store-addr').value = addr;
+  document.getElementById('h-cvs-chain').value = chain;
+  document.getElementById('cvs-sel-chain-name').textContent = chain + ' ' + name + '（自填）';
+  document.getElementById('cvs-sel-code').textContent = '手填';
+  document.getElementById('cvs-sel-addr').textContent = addr;
+  document.getElementById('cvs-selected-card').style.display = 'block';
+  document.getElementById('manual-fill-wrap').style.display = 'none';
+}
 
 function validateForm(){
   const name=document.getElementById('order-name').value.trim();
@@ -1547,8 +1593,8 @@ function validateForm(){
   const email=document.getElementById('order-email').value.trim();
   const consentEl=document.getElementById('consent-order');
   const consent=consentEl ? consentEl.checked : true;
-  const isHome=document.getElementById('delivery-home').checked;
-  // 必填檢查
+  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'home';
+  const isHome = deliveryVal==='home';
   if(!name){alert('請填寫收件人姓名');return false;}
   if(!phone){alert('請填寫手機號碼');return false;}
   if(isHome){
@@ -1556,20 +1602,15 @@ function validateForm(){
     if(!address){alert('請填寫收件地址');return false;}
     if(address.length < 8){alert('收件地址請填寫完整（縣市＋區＋詳細地址）');return false;}
   } else {
-    const brand=document.querySelector('input[name="cvs_brand"]:checked');
-    const store=document.getElementById('order-cvs-store').value.trim();
-    if(!brand){alert('請選擇超商品牌（7-11 或 全家）');return false;}
-    if(!store){alert('請填寫取貨門市名稱');return false;}
+    const storeCode = document.getElementById('h-store-code').value.trim();
+    if(!storeCode){alert('請先選擇取貨門市');return false;}
   }
-  // 手機格式：09開頭 + 共10碼
   if(!/^09\d{8}$/.test(phone)){
     alert('手機號碼格式不正確！\n需要 09 開頭共 10 碼數字\n例：0912345678');return false;
   }
-  // Email 格式（有填才驗證）
   if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
     alert('Email 格式不正確，請重新確認\n例：your@email.com');return false;
   }
-  // 推薦碼必填（3+1方案）
   if(String(selectedQty).startsWith('s')&&!referralValid){
     alert('購買 3+1 方案需輸入有效推薦碼，請向業務人員索取');return false;
   }
@@ -1583,19 +1624,23 @@ function goToReview(){
   const phone=document.getElementById('order-phone').value.trim();
   const email=document.getElementById('order-email').value.trim();
   const note=document.getElementById('order-note').value.trim();
-  const isHome=document.getElementById('delivery-home').checked;
+  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'home';
+  const isHome=deliveryVal==='home';
   const address=isHome?(document.getElementById('order-address').value.trim()):'';
-  const cvsEl=document.querySelector('input[name="cvs_brand"]:checked');
-  const cvsBrand=cvsEl?cvsEl.value:'';
-  const cvsStore=document.getElementById('order-cvs-store').value.trim();
   const p=qtyPricing[selectedQty]||qtyPricing[1];
-  // 填入確認卡片
   document.getElementById('rev-product').textContent=p.label;
   document.getElementById('rev-total').textContent='NT$ '+(p.sub+p.ship).toLocaleString()+(p.ship?'（含運費$'+p.ship+'）':'（免運）');
-  document.getElementById('rev-delivery').textContent=isHome?'🏠 宅配到府':'🏪 超商取貨';
+  const deliveryLabels={home:'🏠 宅配到府',711:'🏪 7-ELEVEN 超商取貨',familymart:'🏪 全家 FamilyMart 取貨'};
+  document.getElementById('rev-delivery').textContent=deliveryLabels[deliveryVal]||deliveryVal;
   const cvsRow=document.getElementById('rev-cvs-row');
-  if(!isHome){ document.getElementById('rev-cvs').textContent=cvsBrand+' '+cvsStore; cvsRow.style.display='flex'; }
-  else { cvsRow.style.display='none'; }
+  if(!isHome&&_selectedStore){
+    const s=_selectedStore;
+    document.getElementById('rev-cvs').innerHTML=
+      '<strong>'+s.chain+' '+s.store_name+'</strong><br>'+
+      '<span style="font-size:11px;color:#64748b">店號：'+s.store_code+'</span><br>'+
+      '<span style="font-size:11px;color:#64748b">'+s.address+'</span>';
+    cvsRow.style.display='flex';
+  } else { cvsRow.style.display='none'; }
   document.getElementById('rev-name').textContent=name;
   document.getElementById('rev-phone').textContent=phone;
   const addrRow=document.getElementById('rev-address-row');
@@ -1607,7 +1652,6 @@ function goToReview(){
   const noteRow=document.getElementById('rev-note-row');
   document.getElementById('rev-note').textContent=note||'（無）';
   noteRow.style.display=note?'flex':'none';
-  // 切換 modal
   closeOrderModal();
   setTimeout(()=>{ document.getElementById('review-modal').classList.remove('modal-hidden'); },50);
 }
@@ -1644,12 +1688,17 @@ function submitOrder(){
   const name=document.getElementById('order-name').value.trim();
   const phone=document.getElementById('order-phone').value.trim();
   const customerEmail=document.getElementById('order-email').value.trim();
-  const isHome=document.getElementById('delivery-home').checked;
+  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'home';
+  const isHome=deliveryVal==='home';
   const address=isHome?(document.getElementById('order-address').value.trim()):'';
-  const deliveryMethod=isHome?'宅配':'超商取貨';
-  const cvsEl=document.querySelector('input[name="cvs_brand"]:checked');
-  const cvsBrand=cvsEl?cvsEl.value:'';
-  const cvsStore=document.getElementById('order-cvs-store').value.trim();
+  const deliveryLabels={home:'宅配到府',711:'7-ELEVEN超商取貨',familymart:'全家超商取貨'};
+  const deliveryMethod=deliveryLabels[deliveryVal]||deliveryVal;
+  const storeCode=document.getElementById('h-store-code').value||'';
+  const storeName=document.getElementById('h-store-name').value||'';
+  const storeCity=document.getElementById('h-store-city').value||'';
+  const storeDistrict=document.getElementById('h-store-district').value||'';
+  const storeAddr=document.getElementById('h-store-addr').value||'';
+  const cvsChain=document.getElementById('h-cvs-chain').value||'';
   if(!name||!phone||(isHome&&!address)){alert('資料不完整，請返回填寫');return;}
   const p=qtyPricing[selectedQty]||qtyPricing[1];
   const now=new Date();
@@ -1658,7 +1707,7 @@ function submitOrder(){
   const orderNum='ORDER-'+datePart+'-'+rand;
   const refCode=name.slice(0,1).toUpperCase()+'REF'+rand;
   const hpVal = (document.getElementById('order-hp') || {}).value || '';
-  const order={order_number:orderNum,product:p.label,customer_name:name,customer_phone:phone,customer_email:document.getElementById('order-email').value,shipping_address:address,discount_code:usedReferralCode,referral_code:usedReferralCode,quantity:p.qty,subtotal:p.sub,discount_amount:0,shipping_fee:p.ship,total:p.sub+p.ship,payment_method:'貨到付款',delivery_method:deliveryMethod,cvs_store_brand:cvsBrand,cvs_store_name:cvsStore,order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value,source:'website',_hp:hpVal};
+  const order={order_number:orderNum,product:p.label,customer_name:name,customer_phone:phone,customer_email:customerEmail,shipping_address:address,discount_code:usedReferralCode,referral_code:usedReferralCode,quantity:p.qty,subtotal:p.sub,discount_amount:0,shipping_fee:p.ship,total:p.sub+p.ship,payment_method:'貨到付款',delivery_method:deliveryMethod,convenience_chain:cvsChain,store_code:storeCode,store_name:storeName,store_city:storeCity,store_district:storeDistrict,store_address:storeAddr,order_status:'訂單成立',referral_code_issued:refCode,marketing_consent:document.getElementById('consent-marketing').checked,created_at:now.toISOString(),notes:document.getElementById('order-note').value,source:'website',_hp:hpVal};
   const orders=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
   orders.push(order);
   localStorage.setItem('gbjyg_orders',JSON.stringify(orders));
@@ -1704,133 +1753,186 @@ setInterval(showToast,8000);
 setTimeout(showToast,3000);
 
 // ═══════════════════════════════════════════════
-//  宇宙太極 Canvas 動畫（升級版：五行八卦）
+//  宇宙太極 Canvas 動畫（五行星球 + 八卦 + 太極）
 // ═══════════════════════════════════════════════
 (function initCosmosCanvas(){
   const canvas=document.getElementById('cosmos-canvas');
   if(!canvas)return;
-  const SIZE=500;
-  canvas.width=SIZE;canvas.height=SIZE;
+  const SIZE=500; canvas.width=SIZE; canvas.height=SIZE;
   const ctx=canvas.getContext('2d');
-  const cx=SIZE/2,cy=SIZE/2;
+  const cx=SIZE/2, cy=SIZE/2;
   const isReduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   // ── Stars ──
-  const stars=Array.from({length:220},()=>({
-    x:cx+(Math.random()-0.5)*SIZE*0.92,
-    y:cy+(Math.random()-0.5)*SIZE*0.92,
-    r:Math.random()*1.3+0.2,
-    alpha:Math.random()*0.7+0.2,
-    speed:Math.random()*0.03+0.005,
+  const stars=Array.from({length:280},()=>({
+    x:Math.random()*SIZE, y:Math.random()*SIZE,
+    r:Math.random()*1.4+0.2,
+    alpha:Math.random()*0.8+0.15,
+    speed:Math.random()*0.025+0.003,
     phase:Math.random()*Math.PI*2
   }));
 
-  // ── Five elements ──
+  // ── Five Elements — planet-style ──
+  // Arranged as pentagon (top=金, clockwise: 木,水,火,土)
   const ELEMENTS=[
-    {name:'金',color:'#d9a441',glow:'rgba(217,164,65,0.55)',text:'#1a0800',phase:-90},
-    {name:'木',color:'#40c870',glow:'rgba(64,200,112,0.5)',text:'#0a2410',phase:-18},
-    {name:'水',color:'#2898ff',glow:'rgba(40,152,255,0.55)',text:'#001c40',phase:54},
-    {name:'火',color:'#ff6020',glow:'rgba(255,96,32,0.55)',text:'#200000',phase:126},
-    {name:'土',color:'#b07840',glow:'rgba(176,120,64,0.5)',text:'#1a0a00',phase:198},
+    {name:'金',color:'#e8c84a',glow:'rgba(232,200,74,0.7)',dark:'#6b4c00',orbit:148,startDeg:-90},
+    {name:'木',color:'#4ec86a',glow:'rgba(60,180,80,0.65)',dark:'#0a2810',orbit:148,startDeg:-18},
+    {name:'水',color:'#3a9fff',glow:'rgba(40,140,255,0.65)',dark:'#001830',orbit:148,startDeg:54},
+    {name:'火',color:'#ff5520',glow:'rgba(255,70,20,0.7)',dark:'#2a0000',orbit:148,startDeg:126},
+    {name:'土',color:'#c48830',glow:'rgba(180,120,40,0.6)',dark:'#1a0800',orbit:148,startDeg:198},
   ];
-  const ORBIT_R=148,ORBIT_PERIOD=65000;
+  const PERIOD=70000; // ms for one full orbit
 
-  // ── Bagua ──
+  // ── Bagua — outer ring ──
   const BAGUA=[
-    {name:'乾',color:'#f5d26b',r:0},{name:'兌',color:'#8fd7ff',r:45},
-    {name:'離',color:'#ffb347',r:90},{name:'震',color:'#4fd37a',r:135},
-    {name:'坤',color:'#e8c850',r:180},{name:'巽',color:'#a4ffb5',r:225},
-    {name:'坎',color:'#38a9ff',r:270},{name:'艮',color:'#c8a060',r:315},
+    {name:'乾',deg:0},{name:'兌',deg:45},{name:'離',deg:90},{name:'震',deg:135},
+    {name:'坤',deg:180},{name:'巽',deg:225},{name:'坎',deg:270},{name:'艮',deg:315},
   ];
-  const BAGUA_R=195;
+  const BAGUA_R=200;
 
-  function drawElementBall(x,y,el){
-    const grd=ctx.createRadialGradient(x,y,0,x,y,28);
-    grd.addColorStop(0,el.glow);grd.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(x,y,28,0,Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.arc(x,y,16,0,Math.PI*2);
-    ctx.fillStyle=el.color;ctx.fill();
-    ctx.font='bold 14px "Noto Sans TC",sans-serif';
-    ctx.fillStyle=el.text;ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(el.name,x,y);
-  }
-
-  function drawBaguaChar(x,y,sym,angle){
-    ctx.save();ctx.translate(x,y);ctx.rotate(angle);
-    ctx.font='12px "Noto Sans TC",sans-serif';
-    ctx.fillStyle=sym.color;ctx.globalAlpha=0.75;
-    ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillText(sym.name,0,0);
-    ctx.restore();
-  }
-
-  function drawTaichi(t){
-    const r=58,spin=t*0.0004;
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(spin);
-    // outer circle clip
-    ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.clip();
-    // black half
-    ctx.beginPath();ctx.arc(0,0,r,-Math.PI/2,Math.PI/2);
-    ctx.lineTo(0,0);ctx.fillStyle='#1a1a2e';ctx.fill();
-    // white half
-    ctx.beginPath();ctx.arc(0,0,r,Math.PI/2,-Math.PI/2);
-    ctx.lineTo(0,0);ctx.fillStyle='#f5f0e8';ctx.fill();
-    // black small circle (in white)
-    ctx.beginPath();ctx.arc(0,r/2,r/4,0,Math.PI*2);
-    ctx.fillStyle='#1a1a2e';ctx.fill();
-    // white small circle (in black)
-    ctx.beginPath();ctx.arc(0,-r/2,r/4,0,Math.PI*2);
-    ctx.fillStyle='#f5f0e8';ctx.fill();
-    // outer ring
-    ctx.restore();
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(spin);
-    ctx.beginPath();ctx.arc(0,0,r+3,0,Math.PI*2);
-    ctx.strokeStyle='rgba(212,175,55,0.6)';ctx.lineWidth=2;ctx.stroke();
-    ctx.restore();
-  }
-
-  function draw(t){
-    // Background
-    ctx.clearRect(0,0,SIZE,SIZE);
+  // ── Draw galaxy nebula background ──
+  function drawBackground(){
+    // Dark space
     const bg=ctx.createRadialGradient(cx,cy,0,cx,cy,cx);
-    bg.addColorStop(0,'#1a0e2e');bg.addColorStop(1,'#050508');
-    ctx.save();ctx.beginPath();ctx.arc(cx,cy,cx,0,Math.PI*2);
-    ctx.fillStyle=bg;ctx.fill();ctx.restore();
+    bg.addColorStop(0,'#12082a'); bg.addColorStop(0.5,'#080416'); bg.addColorStop(1,'#020108');
+    ctx.fillStyle=bg; ctx.fillRect(0,0,SIZE,SIZE);
+    // Nebula streaks
+    const neb=ctx.createRadialGradient(cx*0.6,cy*0.5,0,cx*0.6,cy*0.5,SIZE*0.55);
+    neb.addColorStop(0,'rgba(40,20,80,0.18)'); neb.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=neb; ctx.fillRect(0,0,SIZE,SIZE);
+    const neb2=ctx.createRadialGradient(cx*1.4,cy*1.3,0,cx*1.4,cy*1.3,SIZE*0.5);
+    neb2.addColorStop(0,'rgba(20,40,80,0.15)'); neb2.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=neb2; ctx.fillRect(0,0,SIZE,SIZE);
+  }
 
-    // Stars
+  // ── Draw stars ──
+  function drawStars(t){
     stars.forEach(s=>{
       const a=s.alpha*(0.5+0.5*Math.sin(t*s.speed+s.phase));
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(255,255,255,'+a.toFixed(2)+')';ctx.fill();
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,'+a.toFixed(2)+')'; ctx.fill();
     });
+  }
 
-    // Bagua ring (slowly rotating)
-    const baguaSpin=t*0.000015;
+  // ── Draw pentagram energy lines between elements ──
+  function drawPentagramLines(positions,t){
+    // Connect each element to next-2 (star pattern)
+    const penta=[0,2,4,1,3,0];
+    ctx.save();
+    for(let i=0;i<5;i++){
+      const a=positions[penta[i]], b=positions[penta[i+1]];
+      const pulse=0.4+0.35*Math.sin(t*0.0008+i);
+      const grad=ctx.createLinearGradient(a.x,a.y,b.x,b.y);
+      grad.addColorStop(0,'rgba(255,255,220,'+pulse+')');
+      grad.addColorStop(0.5,'rgba(220,200,255,'+(pulse*0.6)+')');
+      grad.addColorStop(1,'rgba(255,255,220,'+pulse+')');
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle=grad; ctx.lineWidth=1.2; ctx.globalAlpha=0.55;
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  // ── Draw orbit ring ──
+  function drawOrbitRing(){
+    ctx.beginPath(); ctx.arc(cx,cy,148,0,Math.PI*2);
+    ctx.strokeStyle='rgba(200,180,100,0.12)'; ctx.lineWidth=1; ctx.stroke();
+  }
+
+  // ── Draw planet ball ──
+  function drawPlanet(x,y,el){
+    const R=18;
+    // Outer glow
+    const glow=ctx.createRadialGradient(x,y,0,x,y,R*2.5);
+    glow.addColorStop(0,el.glow); glow.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.save(); ctx.globalAlpha=0.7;
+    ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(x,y,R*2.5,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+    // Planet sphere
+    const sphere=ctx.createRadialGradient(x-R*0.3,y-R*0.35,R*0.05,x,y,R);
+    sphere.addColorStop(0,'rgba(255,255,255,0.65)');
+    sphere.addColorStop(0.25,el.color);
+    sphere.addColorStop(0.7,el.color);
+    sphere.addColorStop(1,el.dark);
+    ctx.beginPath(); ctx.arc(x,y,R,0,Math.PI*2);
+    ctx.fillStyle=sphere; ctx.fill();
+    // Text label
+    ctx.font='bold 13px "Noto Sans TC",sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillStyle='rgba(255,255,255,0.92)'; ctx.fillText(el.name,x,y);
+  }
+
+  // ── Draw bagua ring ──
+  function drawBagua(t){
+    const spinSpeed=0.000012;
     BAGUA.forEach((sym,i)=>{
-      const a=sym.r*Math.PI/180+baguaSpin;
-      const x=cx+BAGUA_R*Math.cos(a),y=cy+BAGUA_R*Math.sin(a);
-      drawBaguaChar(x,y,sym,a+Math.PI/2);
+      const a=(sym.deg*Math.PI/180)+t*spinSpeed;
+      const x=cx+BAGUA_R*Math.cos(a), y=cy+BAGUA_R*Math.sin(a);
+      const alpha=0.55+0.25*Math.sin(t*0.0006+i);
+      ctx.save(); ctx.globalAlpha=alpha;
+      // Glow dot
+      const g=ctx.createRadialGradient(x,y,0,x,y,12);
+      g.addColorStop(0,'rgba(80,220,255,0.4)'); g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,12,0,Math.PI*2); ctx.fill();
+      // Character
+      ctx.font='bold 14px "Noto Sans TC",sans-serif';
+      ctx.fillStyle='#7aeeff'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(sym.name,x,y);
+      ctx.restore();
     });
+    // Outer ring glow
+    ctx.beginPath(); ctx.arc(cx,cy,BAGUA_R,0,Math.PI*2);
+    ctx.strokeStyle='rgba(80,200,255,0.08)'; ctx.lineWidth=1.5; ctx.stroke();
+  }
 
-    // Five element orbit
-    ELEMENTS.forEach(el=>{
-      const a=(el.phase+t*360/ORBIT_PERIOD)*Math.PI/180;
-      const x=cx+ORBIT_R*Math.cos(a),y=cy+ORBIT_R*Math.sin(a);
-      drawElementBall(x,y,el);
+  // ── Draw yin-yang (太極) ──
+  function drawTaichi(t){
+    const r=56, spin=t*0.0003;
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(spin);
+    ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2);
+    ctx.clip();
+    // Black half
+    ctx.beginPath(); ctx.arc(0,0,r,-Math.PI/2,Math.PI/2);
+    ctx.lineTo(0,0); ctx.fillStyle='#101030'; ctx.fill();
+    // White half
+    ctx.beginPath(); ctx.arc(0,0,r,Math.PI/2,-Math.PI/2);
+    ctx.lineTo(0,0); ctx.fillStyle='#f0ece0'; ctx.fill();
+    // Upper small circle (white in black = bright)
+    ctx.beginPath(); ctx.arc(0,-r/2,r/4,0,Math.PI*2); ctx.fillStyle='#f0ece0'; ctx.fill();
+    // Lower small circle (black in white = dark)
+    ctx.beginPath(); ctx.arc(0,r/2,r/4,0,Math.PI*2); ctx.fillStyle='#101030'; ctx.fill();
+    ctx.restore();
+    // Border ring
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(spin);
+    ctx.beginPath(); ctx.arc(0,0,r+2,0,Math.PI*2);
+    ctx.strokeStyle='rgba(212,175,55,0.55)'; ctx.lineWidth=2; ctx.stroke();
+    // Inner glow
+    const innerGlow=ctx.createRadialGradient(0,0,r*0.4,0,0,r+10);
+    innerGlow.addColorStop(0,'rgba(212,175,55,0)');
+    innerGlow.addColorStop(1,'rgba(212,175,55,0.15)');
+    ctx.fillStyle=innerGlow; ctx.beginPath(); ctx.arc(0,0,r+10,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  // ── Main animation loop ──
+  function draw(t){
+    ctx.clearRect(0,0,SIZE,SIZE);
+    drawBackground();
+    drawStars(t);
+    drawOrbitRing();
+    drawBagua(t);
+    // Compute element positions
+    const positions=ELEMENTS.map(el=>{
+      const a=(el.startDeg*Math.PI/180)+(t*2*Math.PI/PERIOD);
+      return {x:cx+el.orbit*Math.cos(a), y:cy+el.orbit*Math.sin(a), el};
     });
-
-    // Taichi center
+    drawPentagramLines(positions,t);
+    positions.forEach(p=>drawPlanet(p.x,p.y,p.el));
     drawTaichi(t);
-
-    if(!isReduced)requestAnimationFrame(draw);
+    if(!isReduced) requestAnimationFrame(draw);
   }
 
-  if(isReduced){
-    // Static fallback
-    draw(0);
-  } else {
-    requestAnimationFrame(draw);
-  }
+  if(isReduced){ draw(0); } else { requestAnimationFrame(draw); }
 })();
 
 // ── 捲動顯現 ──
