@@ -1,0 +1,35 @@
+﻿{
+    "name":  "DISABLED_REDACTED_LINE_OA_WORKFLOW_PLACEHOLDER_n8n_workflow_金太極_v5.json",
+    "active":  false,
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "content":  "This workflow was disabled by Codex on 2026-06-16 because it was invalid JSON and contained credential/API blocker risk. Rebuild from the safe AI_MARKETING_TEAM blueprint only after external credential rotation and manual approval."
+                                     },
+                      "id":  "disabled_notice",
+                      "name":  "DISABLED - DO NOT RUN",
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "typeVersion":  1,
+                      "position":  [
+                                       0,
+                                       0
+                                   ]
+                  }
+              ],
+    "connections":  {
+
+                    },
+    "settings":  {
+
+                 },
+    "staticData":  null,
+    "meta":  {
+                 "redactedBy":  "Codex",
+                 "redactedDate":  "2026-06-16",
+                 "reason":  "credential/API blocker cleanup; invalid workflow replaced with disabled dry-run stub",
+                 "safeBlueprint":  "AI_MARKETING_TEAM/10_LINE_OA_30_DAY_AUTOMATION/2026-06-10/LINE_OA_30_DAY_SAFE_INTEGRATION_BLUEPRINT.md",
+                 "externalCredentialRotationRequired":  true,
+                 "directPublishingAllowed":  false,
+                 "manualApprovalRequiredBeforeAnyFutureAutomation":  true
+             }
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>出貨更新｜金牌一條根業務部</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+    body{font-family:'Noto Sans TC',sans-serif;background:#f0fdf4}
+    .form-input{width:100%;border:1.5px solid #d1d5db;border-radius:10px;padding:10px 14px;font-size:15px;outline:none;transition:border-color .2s}
+    .form-input:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.15)}
+    .form-label{font-size:13px;font-weight:700;color:#374151;margin-bottom:4px;display:block}
+    .btn-green{background:#16a34a;color:white;padding:12px 24px;border-radius:10px;font-weight:900;cursor:pointer;transition:all .2s;width:100%;font-size:16px;border:none}
+    .btn-green:hover{background:#15803d;transform:translateY(-1px)}
+  </style>
+</head>
+<body class="min-h-screen">
+  <div style="background:#f59e0b;color:#1e293b;text-align:center;font-size:11px;padding:4px 8px;font-weight:700">
+    ⚠️ PROTOTYPE — 更新僅儲存至 localStorage，正式上線需後端 token 驗證
+  </div>
+
+  <div class="max-w-lg mx-auto px-4 py-10">
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+        <i class="fas fa-truck text-green-600 text-2xl"></i>
+      </div>
+      <h1 class="text-2xl font-black text-gray-800">出貨狀態更新</h1>
+      <p class="text-gray-500 text-sm mt-1">金牌一條根業務部專用頁面</p>
+    </div>
+
+    <!-- 訂單查詢 -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-5" id="lookup-section">
+      <h2 class="font-bold text-gray-700 mb-4">查詢訂單</h2>
+      <div class="space-y-3">
+        <div>
+          <label class="form-label">訂單編號</label>
+          <input type="text" id="lookup-order" class="form-input" placeholder="ORDER-YYYYMMDD-XXXX">
+        </div>
+        <button onclick="lookupOrder()" class="btn-green">查詢訂單</button>
+        <p id="lookup-error" class="text-red-500 text-sm hidden text-center"></p>
+      </div>
+    </div>
+
+    <!-- 訂單資訊（只顯示出貨必要資訊）-->
+    <div id="order-info" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-5 hidden">
+      <h2 class="font-bold text-gray-700 mb-4">訂單資訊</h2>
+      <div class="bg-gray-50 rounded-xl p-4 text-sm space-y-2">
+        <div class="flex justify-between"><span class="text-gray-400">訂單編號</span><span id="info-num" class="font-mono font-bold text-amber-700"></span></div>
+        <div class="flex justify-between"><span class="text-gray-400">下單日期</span><span id="info-date" class="font-medium"></span></div>
+        <div class="flex justify-between"><span class="text-gray-400">收件人</span><span id="info-name" class="font-bold text-gray-800"></span></div>
+        <div class="flex justify-between"><span class="text-gray-400">手機</span><span id="info-phone" class="font-medium"></span></div>
+        <div class="flex justify-between"><span class="text-gray-400">收件地址</span><span id="info-address" class="font-medium text-xs text-right max-w-[200px]"></span></div>
+        <div class="flex justify-between"><span class="text-gray-400">商品</span><span id="info-product" class="font-medium"></span></div>
+        <div class="flex justify-between"><span class="text-gray-400">貨到付款金額</span><span id="info-amount" class="font-black text-green-700 text-base"></span></div>
+        <div class="flex justify-between"><span class="text-gray-400">目前狀態</span><span id="info-status" class="font-bold text-blue-600"></span></div>
+        <div class="flex justify-between"><span class="text-gray-400">備註</span><span id="info-note" class="text-xs text-gray-500 text-right max-w-[200px]"></span></div>
+      </div>
+      <div class="mt-3 bg-amber-50 rounded-xl p-3 text-xs text-amber-700">
+        <strong>注意：</strong>業務部僅能查看出貨必要資訊，不包含會員行銷標籤、推薦碼績效與完整會員名冊。
+      </div>
+    </div>
+
+    <!-- 出貨更新表單 -->
+    <div id="update-form" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hidden">
+      <h2 class="font-bold text-gray-700 mb-4">更新出貨狀態</h2>
+      <div class="space-y-4">
+        <div>
+          <label class="form-label">出貨狀態 <span class="text-red-500">*</span></label>
+          <select id="update-status" class="form-input">
+            <option value="業務部確認">業務部確認</option>
+            <option value="備貨中">備貨中</option>
+            <option value="已出貨">已出貨</option>
+            <option value="配送中">配送中</option>
+            <option value="已送達">已送達</option>
+            <option value="已收款完成">已收款完成</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">物流公司</label>
+          <select id="update-logistics" class="form-input">
+            <option value="">-- 選擇物流公司 --</option>
+            <option>黑貓宅急便</option>
+            <option>統一速達（嘉里大榮）</option>
+            <option>新竹物流</option>
+            <option>宅配通</option>
+            <option>台灣郵便</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">物流單號</label>
+          <input type="text" id="update-tracking" class="form-input" placeholder="輸入物流追蹤號碼">
+        </div>
+        <div>
+          <label class="form-label">業務部備註</label>
+          <textarea id="update-note" class="form-input" rows="2" placeholder="例：已安排出貨，預計明日到貨"></textarea>
+        </div>
+        <button onclick="submitUpdate()" class="btn-green">確認更新出貨狀態</button>
+        <p class="text-xs text-gray-400 text-center">更新後客戶可在訂單查詢頁看到最新進度</p>
+      </div>
+    </div>
+
+    <!-- 成功訊息 -->
+    <div id="success-msg" class="bg-green-50 rounded-2xl border border-green-200 p-6 text-center hidden">
+      <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+        <i class="fas fa-check text-green-600 text-xl"></i>
+      </div>
+      <h3 class="font-bold text-green-800 mb-2">出貨狀態已更新！</h3>
+      <p id="success-detail" class="text-sm text-green-600"></p>
+      <button onclick="resetForm()" class="mt-4 bg-green-600 text-white px-6 py-2 rounded-xl font-bold text-sm">更新其他訂單</button>
+    </div>
+  </div>
+
+<script>
+let currentOrder=null;
+
+async function lookupOrder(){
+  const num=document.getElementById('lookup-order').value.trim();
+  const err=document.getElementById('lookup-error');
+  if(!num){err.textContent='請輸入訂單編號';err.classList.remove('hidden');return;}
+  err.classList.add('hidden');
+
+  let order=null;
+  const local=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
+  order=local.find(o=>o.order_number===num);
+  if(!order){
+    try{const res=await fetch('mock-data.json');const d=await res.json();order=(d.orders||[]).find(o=>o.order_number===num);}catch(e){}
+  }
+  if(!order){err.textContent='找不到訂單，請確認訂單編號是否正確';err.classList.remove('hidden');return;}
+  currentOrder=order;
+  showOrderInfo(order);
+}
+
+function showOrderInfo(o){
+  document.getElementById('info-num').textContent=o.order_number;
+  document.getElementById('info-date').textContent=(o.created_at||'').slice(0,10);
+  document.getElementById('info-name').textContent=o.customer_name;
+  document.getElementById('info-phone').textContent=o.customer_phone;
+  document.getElementById('info-address').textContent=o.shipping_address||o.customer_address||'—';
+  document.getElementById('info-product').textContent=o.product||'3+1家庭分享組';
+  document.getElementById('info-amount').textContent='$'+(o.total||o.total_amount||o.cod_amount||0).toLocaleString();
+  document.getElementById('info-status').textContent=o.order_status||'—';
+  document.getElementById('info-note').textContent=o.notes||'—';
+  document.getElementById('order-info').classList.remove('hidden');
+  document.getElementById('update-form').classList.remove('hidden');
+  if(o.order_status)document.getElementById('update-status').value=o.order_status;
+  if(o.logistics_company)document.getElementById('update-logistics').value=o.logistics_company;
+  if(o.tracking_number)document.getElementById('update-tracking').value=o.tracking_number;
+}
+
+function submitUpdate(){
+  if(!currentOrder){alert('請先查詢訂單');return;}
+  const newStatus=document.getElementById('update-status').value;
+  const logistics=document.getElementById('update-logistics').value;
+  const tracking=document.getElementById('update-tracking').value;
+  const note=document.getElementById('update-note').value;
+
+  // 更新 localStorage
+  const orders=JSON.parse(localStorage.getItem('gbjyg_orders')||'[]');
+  const idx=orders.findIndex(o=>o.order_number===currentOrder.order_number);
+  const updateData={order_status:newStatus,logistics_company:logistics||currentOrder.logistics_company,tracking_number:tracking||currentOrder.tracking_number,business_note:note,business_updated_at:new Date().toISOString()};
+  if(newStatus==='已出貨'&&!currentOrder.shipped_at)updateData.shipped_at=new Date().toISOString();
+  if(newStatus==='已送達'&&!currentOrder.delivered_at)updateData.delivered_at=new Date().toISOString();
+  if(newStatus==='已收款完成'&&!currentOrder.cod_collected_at)updateData.cod_collected_at=new Date().toISOString();
+  if(idx>=0){Object.assign(orders[idx],updateData);localStorage.setItem('gbjyg_orders',JSON.stringify(orders));}
+
+  document.getElementById('success-detail').textContent=`訂單 ${currentOrder.order_number} 狀態已更新為「${newStatus}」${logistics?'，物流：'+logistics:''}${tracking?'，單號：'+tracking:''}`;
+  document.getElementById('order-info').classList.add('hidden');
+  document.getElementById('update-form').classList.add('hidden');
+  document.getElementById('success-msg').classList.remove('hidden');
+}
+
+function resetForm(){
+  currentOrder=null;
+  document.getElementById('lookup-order').value='';
+  document.getElementById('order-info').classList.add('hidden');
+  document.getElementById('update-form').classList.add('hidden');
+  document.getElementById('success-msg').classList.add('hidden');
+}
+
+// URL 帶入訂單編號
+window.addEventListener('DOMContentLoaded',()=>{
+  const p=new URLSearchParams(location.search);
+  if(p.get('order')){document.getElementById('lookup-order').value=p.get('order');lookupOrder();}
+});
+</script>
+</body>
+</html>

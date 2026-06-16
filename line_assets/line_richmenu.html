@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:2500px;height:1686px;overflow:hidden;}
+.wrap{
+  width:2500px;height:1686px;
+  background:linear-gradient(160deg,#050814 0%,#08111f 100%);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(2,1fr);
+  gap:0;
+  font-family:'DroidSansFallback',sans-serif;
+}
+.cell{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:1px solid rgba(212,175,55,0.2);
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:background .3s;
+}
+.cell::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 40%,var(--glow) 0%,transparent 65%);
+  opacity:0.18;
+}
+.cell-1{--glow:#d9a441;}
+.cell-2{--glow:#4fd37a;}
+.cell-3{--glow:#38a9ff;}
+.cell-4{--glow:#ff6a22;}
+.cell-5{--glow:#d9a441;}
+.cell-6{--glow:#8fd7ff;}
+
+.icon-wrap{
+  width:160px;height:160px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:32px;font-size:80px;
+  box-shadow:0 0 40px var(--glow,rgba(212,175,55,0.4));
+}
+.cell-1 .icon-wrap{background:radial-gradient(135deg,#d9a441,#8a5a00);}
+.cell-2 .icon-wrap{background:radial-gradient(135deg,#2d7a4f,#145028);}
+.cell-3 .icon-wrap{background:radial-gradient(135deg,#1a6aaa,#003080);}
+.cell-4 .icon-wrap{background:radial-gradient(135deg,#cc4810,#800800);}
+.cell-5 .icon-wrap{background:radial-gradient(135deg,#c9922a,#7a4a00);}
+.cell-6 .icon-wrap{background:radial-gradient(135deg,#2a6088,#0a2040);}
+
+.cell-label{
+  font-size:56px;font-weight:900;
+  color:#ffffff;letter-spacing:2px;margin-bottom:12px;
+  text-shadow:0 2px 12px rgba(0,0,0,0.5);
+}
+.cell-sub{
+  font-size:32px;color:rgba(200,220,240,0.7);letter-spacing:1px;
+}
+
+/* Top border accent */
+.cell-1::after,.cell-2::after,.cell-3::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,transparent,var(--glow),transparent);
+}
+.cell-4::after,.cell-5::after,.cell-6::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,transparent,var(--glow),transparent);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Row 1 -->
+  <div class="cell cell-1">
+    <div class="icon-wrap">🛒</div>
+    <div class="cell-label">立即下單</div>
+    <div class="cell-sub">3+1組合 $1,000</div>
+  </div>
+
+  <div class="cell cell-2">
+    <div class="icon-wrap">📦</div>
+    <div class="cell-label">查詢訂單</div>
+    <div class="cell-sub">輸入訂單號碼追蹤</div>
+  </div>
+
+  <div class="cell cell-3">
+    <div class="icon-wrap">🎁</div>
+    <div class="cell-label">領取優惠碼</div>
+    <div class="cell-sub">新會員 $50 折抵券</div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="cell cell-4">
+    <div class="icon-wrap">📖</div>
+    <div class="cell-label">使用教學</div>
+    <div class="cell-sub">3步驟簡單舒緩</div>
+  </div>
+
+  <div class="cell cell-5">
+    <div class="icon-wrap">🌿</div>
+    <div class="cell-label">產品介紹</div>
+    <div class="cell-sub">草本成分・認證資訊</div>
+  </div>
+
+  <div class="cell cell-6">
+    <div class="icon-wrap">💬</div>
+    <div class="cell-label">聯絡客服</div>
+    <div class="cell-sub">週一至週五 9-18 時</div>
+  </div>
+
+</div>
+</body>
+</html>

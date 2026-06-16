@@ -1,0 +1,36 @@
+﻿{
+    "name":  "DISABLED_REDACTED_LEGACY_LINE_OA_WORKFLOW_n8n_workflow_金太極_v4.json",
+    "active":  false,
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "content":  "DISABLED BY NORA/Codex on 2026-06-16. This legacy LINE OA/n8n workflow was replaced with a non-publishing safety stub because it contained LINE endpoint or credential-risk patterns. Do not import or activate. Use LINE_OA_SAFE_AUTOMATION_DRY_RUN_WORKFLOW.json for dry-run testing only."
+                                     },
+                      "id":  "disabled_notice",
+                      "name":  "DISABLED - LEGACY WORKFLOW DO NOT RUN",
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "typeVersion":  1,
+                      "position":  [
+                                       0,
+                                       0
+                                   ]
+                  }
+              ],
+    "connections":  {
+
+                    },
+    "settings":  {
+
+                 },
+    "staticData":  null,
+    "meta":  {
+                 "redactedBy":  "NORA/Codex",
+                 "redactedDate":  "2026-06-16",
+                 "originalFile":  "n8n_workflow_金太極_v4.json",
+                 "reason":  "Legacy workflow contained LINE endpoint or credential-risk patterns",
+                 "activeMustRemainFalse":  true,
+                 "externalCredentialRotationRequired":  true,
+                 "directPublishingAllowed":  false,
+                 "manualApprovalRequiredBeforeAnyFutureAutomation":  true
+             }
+}

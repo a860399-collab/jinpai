@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:878px;overflow:hidden;}
+.wrap{
+  width:1080px;height:878px;
+  background:linear-gradient(135deg,#050814 0%,#0d0a28 40%,#08111f 70%,#050814 100%);
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  font-family:'DroidSansFallback',sans-serif;
+}
+/* nebula */
+.nebula1{position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(80,40,180,0.18) 0%,transparent 70%);
+  top:-100px;right:-50px;}
+.nebula2{position:absolute;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,55,0.1) 0%,transparent 70%);
+  bottom:-80px;left:100px;}
+/* stars */
+.star{position:absolute;border-radius:50%;background:white;}
+/* left text panel */
+.left{
+  width:560px;padding:60px 60px 60px 70px;position:relative;z-index:2;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(212,175,55,0.18);border:1px solid rgba(212,175,55,0.45);
+  color:#f5d26b;font-size:13px;font-weight:700;
+  padding:5px 14px;border-radius:20px;margin-bottom:24px;letter-spacing:.5px;
+}
+.title{
+  font-size:60px;font-weight:900;line-height:1.2;
+  color:#ffffff;margin-bottom:16px;letter-spacing:-1px;
+}
+.title span{color:#d9a441;}
+.sub{
+  font-size:17px;color:#c4d9f0;line-height:1.8;
+  border-left:3px solid rgba(212,175,55,0.6);
+  padding-left:16px;margin-bottom:32px;
+}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
+.tag{
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.18);
+  color:#e0eaf5;font-size:13px;padding:6px 14px;border-radius:8px;
+}
+.cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,#c9922a,#f5d26b);
+  color:#1a0800;font-size:18px;font-weight:900;
+  padding:14px 32px;border-radius:12px;
+  box-shadow:0 4px 24px rgba(212,175,55,0.4);letter-spacing:.5px;
+}
+/* right product panel */
+.right{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+}
+.product-frame{
+  width:320px;height:380px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.product-halo{
+  position:absolute;width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(212,175,55,0.25) 0%,transparent 70%);
+}
+.product-ring{
+  position:absolute;width:300px;height:300px;border-radius:50%;
+  border:1.5px solid rgba(212,175,55,0.3);
+}
+.product-img{
+  width:240px;position:relative;z-index:2;
+  filter:drop-shadow(0 0 30px rgba(212,175,55,0.4));
+}
+/* Cert badge */
+.cert{
+  position:absolute;bottom:60px;right:60px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(212,175,55,0.3);
+  border-radius:12px;padding:10px 16px;text-align:center;z-index:3;
+}
+.cert-num{color:#f5d26b;font-size:11px;font-weight:700;letter-spacing:.5px;}
+.cert-label{color:#a0b8c8;font-size:10px;margin-top:2px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="nebula1"></div>
+  <div class="nebula2"></div>
+
+  <!-- Stars -->
+  <div class="star" style="width:2px;height:2px;top:5%;left:5%;opacity:.8"></div>
+  <div class="star" style="width:1px;height:1px;top:8%;left:45%;opacity:.6"></div>
+  <div class="star" style="width:2px;height:2px;top:15%;left:65%;opacity:.5"></div>
+  <div class="star" style="width:1px;height:1px;top:25%;left:30%;opacity:.7"></div>
+  <div class="star" style="width:2px;height:2px;top:75%;left:15%;opacity:.5"></div>
+  <div class="star" style="width:1px;height:1px;top:88%;left:55%;opacity:.6"></div>
+  <div class="star" style="width:2px;height:2px;top:60%;left:90%;opacity:.4"></div>
+  <div class="star" style="width:1px;height:1px;top:40%;left:85%;opacity:.7"></div>
+  <div class="star" style="width:2px;height:2px;top:92%;left:78%;opacity:.5"></div>
+
+  <!-- Left text -->
+  <div class="left">
+    <div class="badge">🌿 LINE 官方帳號</div>
+    <div class="title">金牌<span>一條根</span><br>草本舒緩膏</div>
+    <div class="sub">
+      台南 GMP 中藥廠監製・草本植萃<br>
+      專為上班族、開車族、長輩設計
+    </div>
+    <div class="tags">
+      <span class="tag">✦ 衛署成字第 015614 號</span>
+      <span class="tag">📦 貨到付款</span>
+      <span class="tag">🚚 滿千免運</span>
+    </div>
+    <div class="cta">加入好友・立即領 $50 折抵券</div>
+  </div>
+
+  <!-- Right product -->
+  <div class="right">
+    <div class="product-frame">
+      <div class="product-halo"></div>
+      <div class="product-ring"></div>
+      <img class="product-img" src="../照片/產品主圖.png" onerror="this.style.opacity=0">
+    </div>
+  </div>
+
+  <!-- Cert -->
+  <div class="cert">
+    <div class="cert-num">衛署成字第 015614 號</div>
+    <div class="cert-label">政府核准・合法廣告</div>
+  </div>
+</div>
+</body>
+</html>

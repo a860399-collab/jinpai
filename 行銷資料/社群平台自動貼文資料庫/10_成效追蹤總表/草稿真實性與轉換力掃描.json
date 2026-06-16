@@ -1,0 +1,361 @@
+{
+  "platforms": {
+    "01_LINE_OA": {
+      "file": "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\社群平台自動貼文資料庫\\01_LINE_OA\\02_待審核草稿\\LINE 官方帳號_待審核貼文草稿_360則.csv",
+      "rows": 360,
+      "banned_hits": {
+        "治療疾病": 52,
+        "神效": 12
+      },
+      "internal_phrase_hits": {},
+      "trust_marker_hits": {
+        "藥證": 62,
+        "乙類成藥": 28,
+        "藥師": 258,
+        "官方": 8
+      },
+      "purchase_marker_hits": {
+        "購買": 103,
+        "私訊": 155
+      },
+      "top_repeated_openings": [
+        [
+          "運動後局部痠痛的保守處理",
+          6
+        ],
+        [
+          "冬青油與清涼舒緩體感",
+          6
+        ],
+        [
+          "早晨活動前的關節暖身",
+          6
+        ],
+        [
+          "不能擦在破皮或傷口",
+          6
+        ],
+        [
+          "芒種後濕熱生活保養",
+          6
+        ],
+        [
+          "久站後小腿不適舒緩",
+          6
+        ],
+        [
+          "你最常哪個部位緊繃",
+          6
+        ],
+        [
+          "長輩外用膏使用安全",
+          6
+        ]
+      ],
+      "trust_marker_density_per_post": 0.99,
+      "purchase_marker_density_per_post": 0.72
+    },
+    "02_Facebook": {
+      "file": "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\社群平台自動貼文資料庫\\02_Facebook\\02_待審核草稿\\Facebook_待審核貼文草稿_360則.csv",
+      "rows": 360,
+      "banned_hits": {
+        "治療疾病": 156,
+        "神效": 18
+      },
+      "internal_phrase_hits": {
+        "保守邊界": 720,
+        "這則貼文要傳達的重點": 720,
+        "不是神奇療法": 720,
+        "適合放在": 720
+      },
+      "trust_marker_hits": {
+        "藥證": 143,
+        "乙類成藥": 42,
+        "藥師": 593,
+        "官方": 12
+      },
+      "purchase_marker_hits": {
+        "購買": 206,
+        "私訊": 310
+      },
+      "top_repeated_openings": [
+        [
+          "【運動後局部痠痛的保守處理】",
+          6
+        ],
+        [
+          "【冬青油與清涼舒緩體感】",
+          6
+        ],
+        [
+          "【早晨活動前的關節暖身】",
+          6
+        ],
+        [
+          "【不能擦在破皮或傷口】",
+          6
+        ],
+        [
+          "【芒種後濕熱生活保養】",
+          6
+        ],
+        [
+          "【久站後小腿不適舒緩】",
+          6
+        ],
+        [
+          "【你最常哪個部位緊繃】",
+          6
+        ],
+        [
+          "【長輩外用膏使用安全】",
+          6
+        ]
+      ],
+      "trust_marker_density_per_post": 2.19,
+      "purchase_marker_density_per_post": 1.43
+    },
+    "03_Instagram": {
+      "file": "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\社群平台自動貼文資料庫\\03_Instagram\\02_待審核草稿\\Instagram_待審核貼文草稿_360則.csv",
+      "rows": 360,
+      "banned_hits": {
+        "治療疾病": 104,
+        "神效": 12
+      },
+      "internal_phrase_hits": {},
+      "trust_marker_hits": {
+        "藥證": 112,
+        "乙類成藥": 28,
+        "藥師": 695,
+        "官方": 8
+      },
+      "purchase_marker_hits": {
+        "購買": 206
+      },
+      "top_repeated_openings": [
+        [
+          "Slide 1：運動後局部痠痛的保守處理",
+          6
+        ],
+        [
+          "Slide 1：冬青油與清涼舒緩體感",
+          6
+        ],
+        [
+          "Slide 1：早晨活動前的關節暖身",
+          6
+        ],
+        [
+          "Slide 1：不能擦在破皮或傷口",
+          6
+        ],
+        [
+          "Slide 1：芒種後濕熱生活保養",
+          6
+        ],
+        [
+          "Slide 1：久站後小腿不適舒緩",
+          6
+        ],
+        [
+          "Slide 1：你最常哪個部位緊繃",
+          6
+        ],
+        [
+          "Slide 1：長輩外用膏使用安全",
+          6
+        ]
+      ],
+      "trust_marker_density_per_post": 2.34,
+      "purchase_marker_density_per_post": 0.57
+    },
+    "04_Threads": {
+      "file": "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\社群平台自動貼文資料庫\\04_Threads\\02_待審核草稿\\Threads_待審核貼文草稿_360則.csv",
+      "rows": 360,
+      "banned_hits": {
+        "根治": 360,
+        "治療疾病": 52,
+        "立即見效": 360,
+        "神效": 6
+      },
+      "internal_phrase_hits": {},
+      "trust_marker_hits": {
+        "藥證": 31,
+        "乙類成藥": 14,
+        "藥師": 77,
+        "官方": 4
+      },
+      "purchase_marker_hits": {},
+      "top_repeated_openings": [
+        [
+          "運動後局部痠痛的保守處理，其實最容易被忽略的是「使用邊界」",
+          6
+        ],
+        [
+          "冬青油與清涼舒緩體感，其實最容易被忽略的是「使用邊界」",
+          6
+        ],
+        [
+          "早晨活動前的關節暖身，其實最容易被忽略的是「使用邊界」",
+          6
+        ],
+        [
+          "不能擦在破皮或傷口，其實最容易被忽略的是「使用邊界」",
+          6
+        ],
+        [
+          "芒種後濕熱生活保養，其實最容易被忽略的是「使用邊界」",
+          6
+        ],
+        [
+          "久站後小腿不適舒緩，其實最容易被忽略的是「使用邊界」",
+          6
+        ],
+        [
+          "你最常哪個部位緊繃，其實最容易被忽略的是「使用邊界」",
+          6
+        ],
+        [
+          "長輩外用膏使用安全，其實最容易被忽略的是「使用邊界」",
+          6
+        ]
+      ],
+      "trust_marker_density_per_post": 0.35,
+      "purchase_marker_density_per_post": 0.0
+    },
+    "05_TikTok": {
+      "file": "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\社群平台自動貼文資料庫\\05_TikTok\\02_待審核草稿\\TikTok_待審核貼文草稿_360則.csv",
+      "rows": 360,
+      "banned_hits": {
+        "治療疾病": 104,
+        "神效": 18
+      },
+      "internal_phrase_hits": {
+        "保守邊界": 720
+      },
+      "trust_marker_hits": {
+        "藥證": 118,
+        "乙類成藥": 42,
+        "藥師": 335,
+        "官方": 12
+      },
+      "purchase_marker_hits": {
+        "購買": 206
+      },
+      "top_repeated_openings": [
+        [
+          "0-3秒 Hook：運動後局部痠痛的保守處理，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：冬青油與清涼舒緩體感，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：早晨活動前的關節暖身，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：不能擦在破皮或傷口，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：芒種後濕熱生活保養，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：久站後小腿不適舒緩，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：你最常哪個部位緊繃，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：長輩外用膏使用安全，你也遇過嗎",
+          6
+        ]
+      ],
+      "trust_marker_density_per_post": 1.41,
+      "purchase_marker_density_per_post": 0.57
+    },
+    "06_抖音": {
+      "file": "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\社群平台自動貼文資料庫\\06_抖音\\02_待審核草稿\\抖音_待審核貼文草稿_360則.csv",
+      "rows": 360,
+      "banned_hits": {
+        "神效": 18
+      },
+      "internal_phrase_hits": {
+        "保守邊界": 720
+      },
+      "trust_marker_hits": {
+        "官方": 12
+      },
+      "purchase_marker_hits": {
+        "購買": 206
+      },
+      "top_repeated_openings": [
+        [
+          "0-3秒 Hook：運動后局部酸痛的保守處理，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：冬青油与清涼舒缓体感，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：早晨活動前的关节暖身，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：不能擦在破皮或傷口，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：芒种后濕熱生活保養，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：久站后小腿不适舒缓，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：你最常哪個部位緊繃，你也遇過嗎",
+          6
+        ],
+        [
+          "0-3秒 Hook：长輩外用膏使用安全，你也遇過嗎",
+          6
+        ]
+      ],
+      "trust_marker_density_per_post": 0.03,
+      "purchase_marker_density_per_post": 0.57
+    }
+  },
+  "totals": {
+    "draft_files": 6,
+    "draft_rows": 2160,
+    "banned_hits": {
+      "治療疾病": 468,
+      "神效": 84,
+      "根治": 360,
+      "立即見效": 360
+    },
+    "internal_phrase_hits": {
+      "保守邊界": 2160,
+      "這則貼文要傳達的重點": 720,
+      "不是神奇療法": 720,
+      "適合放在": 720
+    },
+    "trust_marker_hits": {
+      "藥證": 466,
+      "乙類成藥": 154,
+      "藥師": 1958,
+      "官方": 56
+    },
+    "purchase_marker_hits": {
+      "購買": 927,
+      "私訊": 465
+    }
+  }
+}

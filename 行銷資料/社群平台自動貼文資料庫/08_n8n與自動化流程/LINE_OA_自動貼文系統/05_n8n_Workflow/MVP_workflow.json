@@ -1,0 +1,374 @@
+{
+  "name": "金牌一條根｜LINE OA 自動貼文 MVP",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "node-01",
+      "name": "手動觸發",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "notes": "正式上線後改為 Cron 節點：0 7,12,19,21 * * *"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "pillar",
+              "value": "A"
+            },
+            {
+              "name": "topic_name",
+              "value": "一條根草本保養正確使用方式"
+            },
+            {
+              "name": "audience",
+              "value": "40-65歲注重保健的族群"
+            },
+            {
+              "name": "time_slot",
+              "value": "19:00 晚間保健"
+            },
+            {
+              "name": "angle",
+              "value": "步驟型"
+            },
+            {
+              "name": "inspiration",
+              "value": "三個讓草本保養效果更好的小技巧"
+            },
+            {
+              "name": "season",
+              "value": "夏季"
+            },
+            {
+              "name": "brand_link",
+              "value": "自然帶入一條根保養概念"
+            },
+            {
+              "name": "system_prompt",
+              "value": "你是「金牌一條根｜舒活嚴選草本保養生活館」的專業品牌內容創作者，同時也是台灣食品廣告合規審查員。\n\n品牌定位：東方草本養生 × 現代生活保健 × 身心平衡哲學\n核心主張：草本智慧，呵護每一天的身心舒適\n\n語氣要求：溫暖、親切、有知識感、像朋友在分享。不說教、不誇張、不浮誇。文字簡潔有力，適合手機閱讀。\n\n絕對禁止：治療、根治、痊癒、消炎、止痛保證、消腫、改善疾病、藥效顯著、臨床證實治療、保證有效、100%有效、立即見效、替代藥物、醫師保證療效。\n\n安全表達：舒緩緊繃感、維持日常活動舒適度、草本保養呵護、傳統養生智慧、有助維持良好生活習慣。\n\n每則貼文結尾必加：「本內容為一般保健養生資訊分享，非醫療診斷建議。如有身體不適，請洽詢專業醫師。」"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-02",
+      "name": "設定主題參數",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [460, 300],
+      "notes": "修改此節點的 value 值來切換主題。pillar: A-H"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-6\",\n  \"max_tokens\": 2000,\n  \"system\": {{ JSON.stringify($json.system_prompt) }},\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"【本次貼文任務】\\n\\n主題分類：{{ $json.pillar }}\\n主題名稱：{{ $json.topic_name }}\\n目標受眾：{{ $json.audience }}\\n發布時段：{{ $json.time_slot }}\\n內容角度：{{ $json.angle }}\\n靈感方向：{{ $json.inspiration }}\\n季節/節氣：{{ $json.season }}\\n品牌連結：{{ $json.brand_link }}\\n\\n請依以下格式完整輸出：\\n\\n【貼文標題】（12字以內）：\\n【第一句Hook】：\\n【短版文案】（50-80字）：\\n【完整版文案】（150-250字）：\\n【圖卡文案第一行】（主標，10字內）：\\n【圖卡文案第二行】（副標，12字內）：\\n【圖卡文案第三行】（提醒，10字內）：\\n【CTA】：\\n【Hashtag】（5-8個）：\\n【免責聲明】：\\n【圖片主視覺概念】（15-20字）：\\n【DALLE Prompt 1:1】：\\n【合規風險等級】（低/中/高）：\\n【審查結果】（PASS/FAIL/需修改）：\"\n    }\n  ]\n}",
+        "options": {
+          "timeout": 60000,
+          "retry": {
+            "maxTries": 3,
+            "waitBetweenTries": 5000
+          }
+        }
+      },
+      "id": "node-03",
+      "name": "Claude 生成文案",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "cred-claude",
+          "name": "Claude API Key"
+        }
+      },
+      "notes": "需在 n8n Credentials 建立 HTTP Header Auth，名稱: Claude API Key，Header Name: x-api-key，Value: 你的 Claude API Key"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 解析 Claude 回傳的結構化文案\nconst response = $input.first().json;\nconst raw = response.content[0].text;\n\nfunction extract(label) {\n  const regex = new RegExp(`【${label}】[^：：]*[：:]([\\\\s\\\\S]*?)(?=【|$)`, 'i');\n  const match = raw.match(regex);\n  return match ? match[1].trim() : '';\n}\n\nconst title = extract('貼文標題');\nconst hook = extract('第一句Hook');\nconst short_copy = extract('短版文案');\nconst full_copy = extract('完整版文案');\nconst card_line1 = extract('圖卡文案第一行');\nconst card_line2 = extract('圖卡文案第二行');\nconst card_line3 = extract('圖卡文案第三行');\nconst cta = extract('CTA');\nconst hashtags = extract('Hashtag');\nconst disclaimer = extract('免責聲明');\nconst image_concept = extract('圖片主視覺概念');\nconst dalle_prompt = extract('DALLE Prompt 1:1');\nconst risk_level = extract('合規風險等級');\nconst audit_result = extract('審查結果');\n\n// 組裝 LINE 發布格式\nconst line_message = `${title}\\n\\n${full_copy}\\n\\n${cta}\\n\\n${hashtags}\\n\\n${disclaimer}`;\n\nreturn [{\n  json: {\n    title,\n    hook,\n    short_copy,\n    full_copy,\n    card_line1,\n    card_line2,\n    card_line3,\n    cta,\n    hashtags,\n    disclaimer,\n    image_concept,\n    dalle_prompt,\n    risk_level,\n    audit_result,\n    line_message,\n    raw_response: raw,\n    created_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-04",
+      "name": "解析文案結構",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "notes": "用 regex 從 Claude 回傳文字中提取各欄位"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-01",
+              "leftValue": "={{ $json.audit_result }}",
+              "rightValue": "FAIL",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            },
+            {
+              "id": "cond-02",
+              "leftValue": "={{ $json.risk_level }}",
+              "rightValue": "高",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-05",
+      "name": "合規審查閘門",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 300],
+      "notes": "PASS 且非高風險 → 繼續；FAIL 或高風險 → 人工審核通知"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pmOlxQ_CDrXejZ7JnD8X_t62JPvJY03a77E_WTibQ04",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "03_貼文草稿佇列",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "草稿ID": "=D{{ $now.format('YYYYMMDDHHmm') }}",
+            "建立日期": "={{ $now.format('YYYY-MM-DD') }}",
+            "主題分類": "={{ $('設定主題參數').item.json.pillar }}",
+            "貼文標題": "={{ $json.title }}",
+            "狀態": "⏳待審核",
+            "合規風險": "={{ $json.risk_level }}",
+            "人工審核": "否",
+            "排定發布時間": "={{ $('設定主題參數').item.json.time_slot }}",
+            "短版文案(預覽)": "={{ $json.short_copy.substring(0, 50) }}...",
+            "圖片狀態": "⬜待生成",
+            "CTA": "={{ $json.cta }}",
+            "審核備註": ""
+          },
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "node-06",
+      "name": "寫入 Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1340, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "cred-gsheets",
+          "name": "Google Sheets OAuth2"
+        }
+      },
+      "notes": "需在 n8n Credentials 設定 Google Sheets OAuth2。Spreadsheet ID 已預填。"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/broadcast",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"messages\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"📋 新草稿待審核\\n\\n標題：{{ $('解析文案結構').item.json.title }}\\n風險：{{ $('解析文案結構').item.json.risk_level }}\\n審查：{{ $('解析文案結構').item.json.audit_result }}\\n\\n請至 Google Sheets 審核後更新狀態為 ✅待發布\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "node-07",
+      "name": "LINE 通知審核人員",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1560, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "cred-line",
+          "name": "LINE Channel Access Token"
+        }
+      },
+      "notes": "需在 n8n Credentials 建立 HTTP Header Auth，名稱: LINE Channel Access Token，Header Name: Authorization，Value: Bearer R60cjQbVqBAGNbDLlOlmjcZzJX4FuZh9YAgugAezWg+rkp8AAoVAew2vod7Av4fXWXvMgS8CQJJYeL+/W9pVcne+GOWBCUNGxczRNMDM7RB7PxAU5OY81VLJEvjnnbUwS/Qwtu9zIPfzVh7dCBblRgdB04t89/1O/w1cDnyilFU="
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/broadcast",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"messages\": [\n    {\n      \"type\": \"text\",\n      \"text\": \"⚠️ 合規警報：草稿未通過審查\\n\\n標題：{{ $('解析文案結構').item.json.title }}\\n風險等級：{{ $('解析文案結構').item.json.risk_level }}\\n審查結果：{{ $('解析文案結構').item.json.audit_result }}\\n\\n此草稿已被攔截，請人工審查修改。\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "node-08",
+      "name": "合規失敗警報",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 420],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "cred-line",
+          "name": "LINE Channel Access Token"
+        }
+      },
+      "notes": "合規 FAIL 或高風險時觸發，發送警報到 LINE 頻道"
+    }
+  ],
+  "connections": {
+    "手動觸發": {
+      "main": [
+        [
+          {
+            "node": "設定主題參數",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "設定主題參數": {
+      "main": [
+        [
+          {
+            "node": "Claude 生成文案",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude 生成文案": {
+      "main": [
+        [
+          {
+            "node": "解析文案結構",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "解析文案結構": {
+      "main": [
+        [
+          {
+            "node": "合規審查閘門",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "合規審查閘門": {
+      "main": [
+        [
+          {
+            "node": "寫入 Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "合規失敗警報",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "寫入 Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "LINE 通知審核人員",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "jinpai-lineoa-mvp"
+  },
+  "pinData": {},
+  "versionId": "1.0.0",
+  "triggerCount": 0,
+  "tags": [
+    {
+      "createdAt": "2026-06-02",
+      "updatedAt": "2026-06-02",
+      "id": "tag-01",
+      "name": "金牌一條根"
+    },
+    {
+      "createdAt": "2026-06-02",
+      "updatedAt": "2026-06-02",
+      "id": "tag-02",
+      "name": "LINE OA"
+    }
+  ]
+}

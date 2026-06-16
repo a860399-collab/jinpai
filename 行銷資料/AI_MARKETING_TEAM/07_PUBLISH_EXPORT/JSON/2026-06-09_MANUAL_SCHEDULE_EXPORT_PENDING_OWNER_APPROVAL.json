@@ -1,0 +1,9 @@
+﻿{
+  "date": "2026-06-09",
+  "theme": "上班族肩頸腰背舒緩",
+  "status": "PENDING_OWNER_FINAL_APPROVAL",
+  "human_approved": false,
+  "publish_warning": "Do not upload, schedule, API-send, or publish until owner explicitly approves.",
+  "source_packet": "AI_MARKETING_TEAM/05_DRAFT_OUTBOX/2026-06-09/",
+  "csv_export": "AI_MARKETING_TEAM/07_PUBLISH_EXPORT/CSV/2026-06-09_MANUAL_SCHEDULE_EXPORT_PENDING_OWNER_APPROVAL.csv"
+}

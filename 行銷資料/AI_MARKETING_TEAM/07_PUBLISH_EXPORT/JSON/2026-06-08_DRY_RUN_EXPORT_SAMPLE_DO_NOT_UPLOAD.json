@@ -1,0 +1,21 @@
+﻿{
+  "export_warning": "DO_NOT_UPLOAD_DRY_RUN",
+  "human_approved": false,
+  "items": [
+    {
+      "id": "2026-06-08-fb-001",
+      "date": "2026-06-08",
+      "platform": "FB",
+      "status": "PENDING_REVIEW",
+      "content": {
+        "topic": "久站族下班後小腿舒緩",
+        "hook": "站了一整天，小腿緊到想把鞋子丟旁邊？",
+        "cta": "加入 LINE 了解正確使用方式"
+      },
+      "compliance": {
+        "status": "PASS",
+        "human_approved": false
+      }
+    }
+  ]
+}

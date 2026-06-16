@@ -1,0 +1,127 @@
+﻿{
+    "name":  "LINE_OA_SAFE_AUTOMATION_DRY_RUN_WORKFLOW",
+    "active":  false,
+    "nodes":  [
+                  {
+                      "parameters":  {
+
+                                     },
+                      "id":  "manual_trigger",
+                      "name":  "Manual Dry Run Trigger",
+                      "type":  "n8n-nodes-base.manualTrigger",
+                      "typeVersion":  1,
+                      "position":  [
+                                       0,
+                                       0
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "content":  "SAFE DRY RUN ONLY. This workflow prepares a sample LINE OA scheduled post packet for review. It does not call LINE API, does not contain tokens, and must stay inactive until human approval and credential governance are complete."
+                                     },
+                      "id":  "safety_note",
+                      "name":  "Safety Note - No Publishing",
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "typeVersion":  1,
+                      "position":  [
+                                       240,
+                                       -160
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "return [{ json: { mode: \"DRY_RUN_ONLY\", platform: \"LINE_OA\", scheduled_date: \"YYYY-MM-DD\", scheduled_time: \"20:30\", review_status: \"PENDING_HUMAN_REVIEW\", publish_allowed: false, title: \"Sample LINE OA title for dry-run\", main_text: \"Sample reviewed copy goes here. Use only local舒緩, 按摩放鬆, 暫時舒緩, 日常保養 language.\", cta: \"查看今日保養提醒\", forbidden_actions: [\"NO_LINE_API_CALL\", \"NO_TOKEN\", \"NO_AUTO_PUBLISH\", \"NO_LOGIN\"], next_step: \"Export CSV or send to human review queue only\" } }];"
+                                     },
+                      "id":  "build_sample_packet",
+                      "name":  "Build Dry Run Post Packet",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       260,
+                                       0
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const item = $input.first().json; const forbidden = [\"治療\",\"根治\",\"消炎治本\",\"修復軟骨\",\"消除骨刺\",\"治療椎間盤突出\",\"治療神經痛\",\"打通經絡\",\"排毒\",\"保證有效\",\"一擦就好\",\"神奇\",\"特效\"]; const text = `${item.title || \"\"}\\n${item.main_text || \"\"}`; const hits = forbidden.filter(term =\u003e text.includes(term)); return [{ json: { ...item, compliance_status: hits.length === 0 ? \"PASS_FOR_DRY_RUN\" : \"NEEDS_REWRITE\", forbidden_term_hits: hits, final_action: \"WRITE_REVIEW_QUEUE_ONLY_DO_NOT_PUBLISH\" } }];"
+                                     },
+                      "id":  "dry_run_compliance_check",
+                      "name":  "Dry Run Compliance Check",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       520,
+                                       0
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "return $input.all().map(item =\u003e ({ json: { ...item.json, output_destination: \"AI_MARKETING_TEAM/06_REVIEW_QUEUE/PENDING_REVIEW.md or CSV manual export\", line_api_called: false, posted_to_line: false, workflow_result: \"DRY_RUN_COMPLETE_NO_EXTERNAL_ACTION\" } }));"
+                                     },
+                      "id":  "dry_run_result",
+                      "name":  "Dry Run Result - No External Action",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       780,
+                                       0
+                                   ]
+                  }
+              ],
+    "connections":  {
+                        "Manual Dry Run Trigger":  {
+                                                       "main":  [
+                                                                    {
+                                                                        "node":  "Build Dry Run Post Packet",
+                                                                        "type":  "main",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                   },
+                        "Build Dry Run Post Packet":  {
+                                                          "main":  [
+                                                                       {
+                                                                           "node":  "Dry Run Compliance Check",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
+                                                      },
+                        "Dry Run Compliance Check":  {
+                                                         "main":  [
+                                                                      {
+                                                                          "node":  "Dry Run Result - No External Action",
+                                                                          "type":  "main",
+                                                                          "index":  0
+                                                                      }
+                                                                  ]
+                                                     }
+                    },
+    "settings":  {
+                     "executionOrder":  "v1"
+                 },
+    "staticData":  null,
+    "meta":  {
+                 "createdBy":  "NORA/Codex",
+                 "createdDate":  "2026-06-16",
+                 "purpose":  "LINE OA dry-run automation only",
+                 "containsCredentials":  false,
+                 "callsExternalApi":  false,
+                 "directPublishingAllowed":  false,
+                 "humanReviewRequired":  true,
+                 "safeSourceCsv":  "社群平台自動貼文資料庫/01_LINE_OA/02_待審核草稿/LINE 官方帳號_V2信任轉換版_待審核草稿_360則.csv",
+                 "importSafetyNote":  "Before import, verify n8n environment does not auto-activate imported workflows. Keep active=false.",
+                 "connectedSourceCsv":  "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\社群平台自動貼文資料庫\\01_LINE_OA\\02_待審核草稿\\LINE 官方帳號_V2信任轉換版_待審核草稿_360則.csv",
+                 "latestDryRunOutputCsv":  "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\行銷資料\\AI_MARKETING_TEAM\\10_LINE_OA_30_DAY_AUTOMATION\\2026-06-16_DRY_RUN_360_PENDING_REVIEW\\LINE_OA_360_DRY_RUN_PENDING_REVIEW.csv",
+                 "latestDryRunOutputJson":  "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\行銷資料\\AI_MARKETING_TEAM\\10_LINE_OA_30_DAY_AUTOMATION\\2026-06-16_DRY_RUN_360_PENDING_REVIEW\\LINE_OA_360_DRY_RUN_PENDING_REVIEW.json",
+                 "latestDryRunSummary":  "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\行銷資料\\AI_MARKETING_TEAM\\10_LINE_OA_30_DAY_AUTOMATION\\2026-06-16_DRY_RUN_360_PENDING_REVIEW\\LINE_OA_360_DRY_RUN_PENDING_REVIEW_SUMMARY.md",
+                 "latestDryRunRows":  360,
+                 "latestDryRunDate":  "2026-06-16",
+                 "latestFutureRescheduledCsv":  "C:\\Users\\Lenovo\\Desktop\\FolderSorter\\02_專案資料\\金牌一條根網路行銷\\行銷資料\\AI_MARKETING_TEAM\\10_LINE_OA_30_DAY_AUTOMATION\\2026-06-16_FUTURE_RESCHEDULED_REVIEW\\LINE_OA_360_FUTURE_RESCHEDULED_PENDING_REVIEW.csv",
+                 "latestFutureRescheduledRows":  360,
+                 "latestFutureRescheduledStartDate":  "2026-06-17",
+                 "latestFutureRescheduledEndDate":  "2026-12-13",
+                 "latestMayaRewriteCount":  5
+             },
+    "description":  "SAFE_FOR_DRY_RUN_IMPORT_ONLY. This n8n workflow must not publish to LINE OA. No token, no LINE API call, no external posting. Human review required before any future production automation."
+}
