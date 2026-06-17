@@ -71,9 +71,7 @@
     /* Sticky CTA mobile */
     .sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:150;background:white;border-top:1px solid #e5e7eb;padding:10px 16px;display:none}
     @media(max-width:768px){.sticky-bar{display:flex;gap:10px}}
-    /* Toast */
-    .toast{position:fixed;top:80px;right:12px;z-index:190;background:white;border-left:4px solid var(--gold-light);border-radius:10px;padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,.12);font-size:13px;max-width:260px;pointer-events:none}
-    @keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+    /* Toast — 已移除假購買通知 */
     .coupon-code{font-family:monospace;font-size:20px;font-weight:900;letter-spacing:3px;color:var(--herb);background:#d1fae5;padding:8px 20px;border-radius:10px;border:2px dashed var(--herb);display:inline-block}
     .admin-link-badge{background:#1e293b;color:#94a3b8;font-size:11px;padding:2px 8px;border-radius:999px}
 
@@ -186,13 +184,7 @@
   </div>
 </nav>
 
-<!-- Toast 通知 -->
-<div id="purchase-toast" class="toast" style="display:none">
-  <div class="flex items-center gap-2">
-    <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 text-xs"><i class="fas fa-shopping-bag"></i></div>
-    <div id="toast-text" class="deep-text text-xs"></div>
-  </div>
-</div>
+<!-- Toast 通知 — 已移除假購買通知 -->
 
 <!-- HERO -->
 <header class="hero-section py-16 md:py-24 px-4">
@@ -1082,15 +1074,15 @@
       <div class="bg-slate-50 rounded-xl p-4 space-y-3">
         <label class="form-label mb-1">配送方式 <span class="text-red-500">*</span></label>
         <div class="flex gap-3">
-          <label class="flex-1 cursor-pointer">
-            <input type="radio" name="delivery_method" id="delivery-home" value="宅配到府" checked onchange="toggleDelivery()">
+          <label class="flex-1 cursor-pointer" onclick="document.getElementById('delivery-home').checked=true;setTimeout(toggleDelivery,0)">
+            <input type="radio" name="delivery_method" id="delivery-home" value="宅配到府" checked>
             <div class="delivery-card border-2 rounded-xl p-3 text-center text-sm font-bold transition selected-delivery">
               🏠 宅配到府
               <div class="text-xs text-slate-400 font-normal mt-0.5">貨到付款</div>
             </div>
           </label>
-          <label class="flex-1 cursor-pointer">
-            <input type="radio" name="delivery_method" id="delivery-cvs" value="超商取貨" onchange="toggleDelivery()">
+          <label class="flex-1 cursor-pointer" onclick="document.getElementById('delivery-cvs').checked=true;setTimeout(toggleDelivery,0)">
+            <input type="radio" name="delivery_method" id="delivery-cvs" value="超商取貨">
             <div class="delivery-card border-2 rounded-xl p-3 text-center text-sm font-bold transition border-gray-200 bg-white">
               🏪 超商取貨
               <div class="text-xs text-slate-400 font-normal mt-0.5">貨到付款</div>
@@ -1106,25 +1098,44 @@
       <!-- 超商取貨資料 -->
       <div id="section-cvs" style="display:none" class="space-y-3">
         <div class="bg-blue-50 border border-blue-200 rounded-xl px-4 py-2 text-xs text-blue-800">
-          🏪 <strong>超商取貨說明：</strong>請先選擇縣市、行政區，再搜尋門市。系統會自動帶入門市店號與地址。
+          🏪 <strong>超商取貨說明：</strong>請先選擇超商品牌，再選縣市、行政區搜尋門市。
         </div>
-        <!-- ① 縣市 -->
+        <!-- ① 超商品牌 -->
         <div>
-          <label class="form-label">① 縣市 <span class="text-red-500">*</span></label>
+          <label class="form-label">① 超商品牌 <span class="text-red-500">*</span></label>
+          <div class="flex gap-3">
+            <label class="flex-1 cursor-pointer">
+              <input type="radio" name="cvs_chain" id="chain-711" value="7-11" onchange="updateCvsCity()">
+              <div id="chain-card-711" class="delivery-card border-2 rounded-xl p-3 text-center text-sm font-bold transition border-gray-200 bg-white">
+                🟠 7-ELEVEN
+              </div>
+            </label>
+            <!-- 全家暫時隱藏，原廠尚未合作，需要時移除 style="display:none" -->
+            <label class="flex-1 cursor-pointer" style="display:none">
+              <input type="radio" name="cvs_chain" id="chain-family" value="全家" onchange="updateCvsCity()">
+              <div id="chain-card-family" class="delivery-card border-2 rounded-xl p-3 text-center text-sm font-bold transition border-gray-200 bg-white">
+                💚 全家 FamilyMart
+              </div>
+            </label>
+          </div>
+        </div>
+        <!-- ② 縣市 -->
+        <div>
+          <label class="form-label">② 縣市 <span class="text-red-500">*</span></label>
           <select id="cvs-city" class="form-input" onchange="updateCvsDistrict()">
-            <option value="">── 請選擇縣市 ──</option>
+            <option value="">── 請先選超商品牌 ──</option>
           </select>
         </div>
         <!-- ② 行政區 -->
         <div>
-          <label class="form-label">② 行政區 <span class="text-red-500">*</span></label>
+          <label class="form-label">③ 行政區 <span class="text-red-500">*</span></label>
           <select id="cvs-district" class="form-input" onchange="filterStoreList()">
             <option value="">── 請先選縣市 ──</option>
           </select>
         </div>
         <!-- ③ 門市搜尋 -->
         <div>
-          <label class="form-label">③ 搜尋門市（名稱 / 店號 / 地址關鍵字）</label>
+          <label class="form-label">④ 搜尋門市（名稱 / 店號 / 地址關鍵字）</label>
           <div class="flex gap-2">
             <input type="text" id="cvs-search-kw" class="form-input flex-1" placeholder="例：新營、F08801、中正路…" oninput="filterStoreList()">
             <button type="button" onclick="filterStoreList()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap transition">🔍</button>
@@ -1132,7 +1143,7 @@
         </div>
         <!-- ④ 門市清單 -->
         <div id="cvs-list-wrap" style="display:none">
-          <label class="form-label">④ 門市清單</label>
+          <label class="form-label">⑤ 門市清單</label>
           <div id="cvs-store-list" style="max-height:220px;overflow-y:auto;border:1px solid #fcd34d;border-radius:12px;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.08)"></div>
         </div>
         <!-- ⑤ 已選門市 -->
@@ -1342,6 +1353,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   const reveals=document.querySelectorAll('.reveal');
   const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('shown')})},{threshold:0.1});
   reveals.forEach(r=>obs.observe(r));
+  const revealHiddens=document.querySelectorAll('.reveal-hidden');
+  const obsH=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('reveal-active');obsH.unobserve(e.target);}})},{threshold:0.1});
+  revealHiddens.forEach(r=>obsH.observe(r));
   // 跑馬燈已停用（避免重複顯示感覺不真實）
   updateOrderSummary();
 });
@@ -1354,8 +1368,9 @@ function openOrderModal(){
   referralValid=false; usedReferralCode='';
   document.getElementById('order-referral').value='';
   document.getElementById('referral-result').classList.add('hidden');
-  document.getElementById('set-section-locked').classList.remove('hidden');
-  document.getElementById('set-section-open').classList.add('hidden');
+  // 重設配送方式為宅配
+  const homeRadio = document.getElementById('delivery-home');
+  if(homeRadio){ homeRadio.checked=true; toggleDelivery(); }
   selectQty(1);
   updateOrderSummary();
 }
@@ -1463,32 +1478,43 @@ loadStoreData();
 // ── 配送方式切換 ──────────────────────────────────
 function toggleDelivery(){
   const val = document.querySelector('input[name="delivery_method"]:checked').value;
-  const isHome = val === 'home';
-  const isCvs = val === '711' || val === 'familymart';
+  const isHome = val === '宅配到府';
+  const isCvs = val === '超商取貨';
   document.getElementById('section-home-address').style.display = isHome ? '' : 'none';
   document.getElementById('section-cvs').style.display = isCvs ? '' : 'none';
   // 卡片樣式
-  ['home','711','family'].forEach(id=>{
-    const card = document.getElementById('card-'+id);
+  document.querySelectorAll('input[name="delivery_method"]').forEach(radio => {
+    const card = radio.nextElementSibling;
     if(!card) return;
-    card.classList.remove('selected-delivery','border-amber-400','bg-amber-50','border-gray-200','bg-white');
+    card.classList.remove('selected-delivery','border-amber-400','bg-amber-50');
     card.classList.add('border-gray-200','bg-white');
   });
-  const activeId = isHome?'home':(val==='711'?'711':'family');
-  const activeCard = document.getElementById('card-'+activeId);
+  const activeRadio = document.querySelector('input[name="delivery_method"]:checked');
+  const activeCard = activeRadio?.nextElementSibling;
   if(activeCard){ activeCard.classList.remove('border-gray-200','bg-white'); activeCard.classList.add('selected-delivery','border-amber-400','bg-amber-50'); }
-  // 更新縣市清單（依超商品牌）
-  if(isCvs) updateCvsCity();
+  // 重設超商品牌
+  if(isCvs){
+    document.querySelectorAll('input[name="cvs_chain"]').forEach(r=>r.checked=false);
+    document.querySelectorAll('[id^="chain-card-"]').forEach(c=>{ c.classList.remove('selected-delivery','border-amber-400','bg-amber-50'); c.classList.add('border-gray-200','bg-white'); });
+    document.getElementById('cvs-city').innerHTML='<option value="">── 請先選超商品牌 ──</option>';
+    document.getElementById('cvs-district').innerHTML='<option value="">── 請先選縣市 ──</option>';
+    document.getElementById('cvs-list-wrap').style.display='none';
+  }
   clearSelectedStore();
 }
 
 function getSelectedChain(){
-  const val = (document.querySelector('input[name="delivery_method"]:checked')||{}).value||'';
-  return val === '711' ? '7-11' : val === 'familymart' ? '全家' : '';
+  const chainRadio = document.querySelector('input[name="cvs_chain"]:checked');
+  return chainRadio ? chainRadio.value : '';
 }
 
 function updateCvsCity(){
   const chain = getSelectedChain();
+  // 更新品牌卡片樣式
+  document.querySelectorAll('[id^="chain-card-"]').forEach(c=>{ c.classList.remove('selected-delivery','border-amber-400','bg-amber-50'); c.classList.add('border-gray-200','bg-white'); });
+  const activeChainCard = chain==='7-11'?document.getElementById('chain-card-711'):chain==='全家'?document.getElementById('chain-card-family'):null;
+  if(activeChainCard){ activeChainCard.classList.remove('border-gray-200','bg-white'); activeChainCard.classList.add('selected-delivery','border-amber-400','bg-amber-50'); }
+  if(!chain){ document.getElementById('cvs-city').innerHTML='<option value="">── 請先選超商品牌 ──</option>'; return; }
   const stores = _storeData.filter(s=>s.chain===chain);
   const cities = [...new Set(stores.map(s=>s.city))].sort();
   const sel = document.getElementById('cvs-city');
@@ -1593,8 +1619,8 @@ function validateForm(){
   const email=document.getElementById('order-email').value.trim();
   const consentEl=document.getElementById('consent-order');
   const consent=consentEl ? consentEl.checked : true;
-  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'home';
-  const isHome = deliveryVal==='home';
+  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'宅配到府';
+  const isHome = deliveryVal==='宅配到府';
   if(!name){alert('請填寫收件人姓名');return false;}
   if(!phone){alert('請填寫手機號碼');return false;}
   if(isHome){
@@ -1624,13 +1650,13 @@ function goToReview(){
   const phone=document.getElementById('order-phone').value.trim();
   const email=document.getElementById('order-email').value.trim();
   const note=document.getElementById('order-note').value.trim();
-  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'home';
-  const isHome=deliveryVal==='home';
+  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'宅配到府';
+  const isHome=deliveryVal==='宅配到府';
   const address=isHome?(document.getElementById('order-address').value.trim()):'';
   const p=qtyPricing[selectedQty]||qtyPricing[1];
   document.getElementById('rev-product').textContent=p.label;
   document.getElementById('rev-total').textContent='NT$ '+(p.sub+p.ship).toLocaleString()+(p.ship?'（含運費$'+p.ship+'）':'（免運）');
-  const deliveryLabels={home:'🏠 宅配到府',711:'🏪 7-ELEVEN 超商取貨',familymart:'🏪 全家 FamilyMart 取貨'};
+  const deliveryLabels={'宅配到府':'🏠 宅配到府','超商取貨':'🏪 超商取貨'};
   document.getElementById('rev-delivery').textContent=deliveryLabels[deliveryVal]||deliveryVal;
   const cvsRow=document.getElementById('rev-cvs-row');
   if(!isHome&&_selectedStore){
@@ -1688,11 +1714,11 @@ function submitOrder(){
   const name=document.getElementById('order-name').value.trim();
   const phone=document.getElementById('order-phone').value.trim();
   const customerEmail=document.getElementById('order-email').value.trim();
-  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'home';
-  const isHome=deliveryVal==='home';
+  const deliveryVal=(document.querySelector('input[name="delivery_method"]:checked')||{}).value||'宅配到府';
+  const isHome=deliveryVal==='宅配到府';
   const address=isHome?(document.getElementById('order-address').value.trim()):'';
-  const deliveryLabels={home:'宅配到府',711:'7-ELEVEN超商取貨',familymart:'全家超商取貨'};
-  const deliveryMethod=deliveryLabels[deliveryVal]||deliveryVal;
+  const cvsChainVal=document.querySelector('input[name="cvs_chain"]:checked')?.value||'';
+  const deliveryMethod=isHome?'宅配到府':(cvsChainVal?cvsChainVal+'超商取貨':'超商取貨');
   const storeCode=document.getElementById('h-store-code').value||'';
   const storeName=document.getElementById('h-store-name').value||'';
   const storeCity=document.getElementById('h-store-city').value||'';
@@ -1741,16 +1767,7 @@ function quickTrack(){
   window.location.href='order-tracking.html?order='+encodeURIComponent(num)+'&phone='+encodeURIComponent(last3);
 }
 
-const toastMsgs=['來自台北市的 陳*明 剛訂購了 3+1 家庭分享組','來自台中市的 林*玲 剛訂購了 3+1 家庭分享組','來自高雄市的 王*偉 剛訂購了 3+1 家庭分享組','來自新北市的 李*華 剛訂購了 3+1 家庭分享組','來自桃園市的 張*真 剛訂購了家庭常備大組'];
-let ti=0;
-function showToast(){
-  const t=document.getElementById('purchase-toast');
-  document.getElementById('toast-text').innerHTML='<strong>'+toastMsgs[ti%toastMsgs.length]+'</strong><br><span style="color:#9ca3af">貨到付款</span>';
-  t.style.display='block';t.style.animation='toastIn .4s ease';
-  setTimeout(()=>{t.style.display='none'},5000);ti++;
-}
-setInterval(showToast,8000);
-setTimeout(showToast,3000);
+// 假購買通知已移除
 
 // ═══════════════════════════════════════════════
 //  宇宙太極 Canvas 動畫（五行星球 + 八卦 + 太極）
