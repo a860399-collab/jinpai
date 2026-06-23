@@ -13,13 +13,14 @@
  * 出貨進度（6步驟）：
  *  訂單成立 → 業務確認 → 備貨中 → 已出貨 → 配送中 → 已送達
  *
- * 通知 Email：a8603992000@yahoo.com.tw
+ * 通知 Email：tftgmservice@gmail.com（主），副本 a8603992000@yahoo.com.tw
  */
 
 const SHEET_ID     = '1DIUI9ujWWlf_zJJEmlP12jRtm4S-gGIceg_3-CnF9mE';
 const ORDERS_TAB   = '訂單';
 const MEMBERS_TAB  = '會員';
-const NOTIFY_EMAIL = 'a8603992000@yahoo.com.tw';
+const NOTIFY_EMAIL = 'tftgmservice@gmail.com';
+const NOTIFY_CC    = 'a8603992000@yahoo.com.tw';
 
 // ─── CORS Helper ─────────────────────────────────────────────
 function cors(output) {
@@ -158,6 +159,9 @@ function addOrder(data) {
     d.marketing_consent  ? '是' : '否',
     d.referral_code      || '',
     '',  // 業務Email已發
+    d.delivery_method    || '宅配到府',  // 配送方式（col 25）
+    d.convenience_chain  || '',           // 取貨超商（col 26）
+    d.store_name         ? (d.store_name + (d.store_address ? ' ' + d.store_address : '')) : '',  // 取貨門市（col 27）
   ]);
 
   upsertMember(d);
@@ -192,8 +196,8 @@ function sendOrderNotificationEmail(d) {
 【收件人資訊】
   收件姓名：${d.customer_name}
   手機號碼：${d.customer_phone}
-  收件地址：${d.shipping_address}
-${d.customer_email ? '  Email：' + d.customer_email + '\n' : ''}${d.notes ? '  備註：' + d.notes + '\n' : ''}
+  配送方式：${d.delivery_method || '宅配到府'}
+${d.delivery_method && d.delivery_method.includes('超商') ? '  取貨超商：' + (d.convenience_chain || '') + '\n  門市名稱：' + (d.store_name || '') + '\n  門市地址：' + (d.store_address || '') + '\n  門市代碼：' + (d.store_code || '') + '\n' : '  收件地址：' + d.shipping_address + '\n'}${d.customer_email ? '  Email：' + d.customer_email + '\n' : ''}${d.notes ? '  備註：' + d.notes + '\n' : ''}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 【推薦資訊】
   使用推薦碼：${d.referral_code || '無'}
@@ -222,6 +226,7 @@ https://docs.google.com/spreadsheets/d/${SHEET_ID}/
 
     MailApp.sendEmail({
       to:      NOTIFY_EMAIL,
+      cc:      NOTIFY_CC,
       subject: subject,
       body:    body,
     });
@@ -489,5 +494,8 @@ function normalize(o) {
     source:            o['來源']        || '',
     notes:             o['備註']        || '',
     marketing_consent: o['行銷同意']    === '是',
+    delivery_method:   o['配送方式']    || '',
+    cvs_chain:         o['取貨超商']    || '',
+    cvs_store:         o['取貨門市']    || '',
   };
 }
