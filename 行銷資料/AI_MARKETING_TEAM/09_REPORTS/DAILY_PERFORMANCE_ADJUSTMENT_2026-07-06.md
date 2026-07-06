@@ -62,6 +62,29 @@ Review queue only: YES
 
 以下建議只能進入 review queue，不得直接發布、上傳或修改任何社群內容。
 
+## 實質每日貼文更新
+
+已依本次資料不足狀態與 2026-07-06 市場情報，產出一組可人工審核的每日貼文素材包。因 `PLATFORM_POST_PERFORMANCE_LOG.csv` 仍無成效資料列，本包標記為 `UNVALIDATED_HYPOTHESIS`，不得宣稱為已驗證優化。
+
+- 總包：`05_DRAFT_OUTBOX/2026-07-06/2026-07-06_DAILY_MARKETING_PACKET.md`
+- 可複製貼文：`05_DRAFT_OUTBOX/2026-07-06/2026-07-06_COPY_READY_FINAL_REVIEW.md`
+- 圖像與短影音 brief：`05_DRAFT_OUTBOX/2026-07-06/2026-07-06_IMAGE_BRIEFS.md`
+- 合規初審：`05_DRAFT_OUTBOX/2026-07-06/2026-07-06_COMPLIANCE_REVIEW.md`
+
+本次實質內容主題：`久站職業下班後的共同語言`。
+
+產出平台與素材：
+
+- LINE OA：推播文案與 `久站` / `安全使用` keyword 回覆草稿。
+- Threads：第一人稱共鳴貼文與留言誘因。
+- FB：職業情境長文。
+- IG：caption、Reels hook 與 carousel 方向。
+- TikTok / Reels / 抖音：短影音 hook、口播、字幕與 shot list。
+- Ads：A/B 版廣告文案。
+- AMBER / LEON：四格漫畫、LINE/FB 方圖、IG 輪播與短影音視覺 brief。
+
+Review queue index 已更新：`06_REVIEW_QUEUE/PENDING_REVIEW.md`。
+
 ### MAYA 文案
 
 - 不宣稱已有成效驗證；文案定位為小規模測試。

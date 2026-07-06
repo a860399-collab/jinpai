@@ -90,3 +90,69 @@ All generated drafts must be listed here before use. Nothing in this file is app
 - 人工決策模板：$decisionTemplate
 - 狀態：PENDING HUMAN REVIEW；publish_allowed 全部維持 NO。
 
+
+### Update: Threads Visual V2 Not-Too-AI Direction
+
+Date: 2026-06-17
+Folder: `05_DRAFT_OUTBOX/2026-06-17_LINE_THREADS_7DAY_DESIGN/THREADS_IMAGES_HUMAN_STYLE`
+Style doc: `THREADS_VISUAL_STYLE_V2_NOT_TOO_AI.md`
+
+Reason:
+- Owner said previous Threads images looked too AI.
+- V2 direction uses phone snapshot, sticky note, screenshot annotation and Taiwan daily-life texture.
+- Formal publishing should use real product/lifestyle photos as base images.
+
+## 2026-06-18 Threads Viral 14-Day Pack
+
+Status: PENDING_REVIEW
+Folder: `05_DRAFT_OUTBOX/2026-06-18_THREADS_VIRAL_14DAY_PACK`
+Files:
+- `2026-06-18_THREADS_VIRAL_14DAY_PACK.md`
+- `2026-06-18_THREADS_VIRAL_14DAY_PACK.csv`
+
+Scope:
+- 14 Threads posts
+- Each post includes hook, copy, comment trigger, CTA keyword, image scene and sticker text
+- Visual direction: human phone snapshot, not AI poster
+
+Safety:
+- No specific price, discount code, shipping threshold or order link
+- Hard blocker scan: PASS, 0 hits
+- Scan report: `12_SAFETY_GATES/HITL_APPROVAL_GATE/PENDING_MANUAL_APPROVAL/2026-06-18_THREADS_VIRAL_14DAY_PACK_SCAN.json`
+
+Required review:
+- Owner tone review
+- Visual production review
+- DR_LAW visual/copy check before posting
+
+## 2026-06-18 Threads Realistic Image Drafts
+
+Status: PENDING_VISUAL_REVIEW
+Folder: `05_DRAFT_OUTBOX/2026-06-18_THREADS_VIRAL_14DAY_PACK/THREADS_REALISTIC_IMAGE_DRAFTS`
+Scope:
+- 7 realistic lifestyle image drafts for Threads
+- Intended as background images; add real product photo and sticker text after owner selection
+
+Important:
+- Do not post directly yet.
+- Check for accidental logos/readable labels/AI artifacts before use.
+- Use real product cutout, not AI-generated fake product.
+
+## 2026-07-06 Daily Post Performance Feedback Update
+
+Status: PENDING_REVIEW
+Folder: `05_DRAFT_OUTBOX/2026-07-06`
+Theme: 久站職業下班後的共同語言
+Validation status: UNVALIDATED_HYPOTHESIS
+
+| Date | Packet | Platform | Item | DR_LAW status | Human reviewer | Human decision | Notes |
+|---|---|---|---|---|---|---|---|
+| 2026-07-06 | `05_DRAFT_OUTBOX/2026-07-06/2026-07-06_DAILY_MARKETING_PACKET.md` | ALL | 久站職業每日貼文總包 | PASS_CANDIDATE |  | PENDING | Draft only; no performance data yet |
+| 2026-07-06 | `05_DRAFT_OUTBOX/2026-07-06/2026-07-06_COPY_READY_FINAL_REVIEW.md` | LINE/THREADS/FB/IG/TIKTOK/DOUYIN/ADS | 可複製貼文與 LINE keyword 草稿 | PASS_CANDIDATE |  | PENDING | Owner final approval required |
+| 2026-07-06 | `05_DRAFT_OUTBOX/2026-07-06/2026-07-06_IMAGE_BRIEFS.md` | IMAGE/VIDEO | 四格漫畫、方圖、輪播與短影音 brief | PASS_CANDIDATE |  | PENDING_VISUAL_REVIEW | Use real approved product image only |
+| 2026-07-06 | `05_DRAFT_OUTBOX/2026-07-06/2026-07-06_COMPLIANCE_REVIEW.md` | COMPLIANCE | DR_LAW dry-run review | PASS_CANDIDATE |  | PENDING | Human review still required |
+
+Safety:
+- No platform login, API send, upload, scheduling, publishing, deletion, or social content modification.
+- LINE keywords `久站` and `安全使用` are draft copy only; do not activate before human approval.
+- All items remain `PENDING_REVIEW` until DR_LAW and owner approval.
