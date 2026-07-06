@@ -1,0 +1,8 @@
+day,date,theme,post_type,primary_goal,external_link,hook,cta_keyword,visual_direction,review_status
+1,2026-07-07,久站服務業,text + phone snapshot,comments / 留友看,NO,臉在營業，腳已經下班。,久站,門市收班手機照 + 工作鞋 + 收據 + 水瓶,PENDING_REVIEW
+2,2026-07-08,上班族下班,text-only first,replies / saves,NO,身體最誠實的時候，不是體檢。,部位留言,備忘錄截圖風身體下班通知表,PENDING_REVIEW
+3,2026-07-09,開車族,text + dashboard photo,niche comments,NO,導航只說還有 30 分鐘，沒說腰背已經到終點。,開車懂,車內生活照不露車牌平台 logo,PENDING_REVIEW
+4,2026-07-10,身體下班通知表,image-led,shares / saves,NO,我整理了一張「身體下班通知表」。,肩頸/腰背/小腿/手腕,四格備忘錄圖,PENDING_REVIEW
+5,2026-07-11,家庭常備,phone snapshot + soft product mention,trust / profile clicks,PROFILE_ONLY,家裡最可靠的人，通常不是最會講話的人。,安全使用,家庭抽屜常備物件 + 產品角落自然露出,PENDING_REVIEW
+6,2026-07-12,孝親貨到付款,story + soft CTA,DMs / profile clicks / link clicks,COMMENT_OR_PROFILE,我發現長輩買東西最怕的不是價格。,孝親/安全使用,LINE 對話框草稿風，不假冒真實對話,PENDING_REVIEW
+7,2026-07-13,一週總結團購,text + table image,comments / group inquiry,PROFILE_OPTIONAL,如果你身邊有這幾種人，他們可能都需要一個下班收工儀式。,團購,表格截圖風：那個人 vs 下班收工儀式,PENDING_REVIEW

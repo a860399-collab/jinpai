@@ -156,3 +156,22 @@ Safety:
 - No platform login, API send, upload, scheduling, publishing, deletion, or social content modification.
 - LINE keywords `久站` and `安全使用` are draft copy only; do not activate before human approval.
 - All items remain `PENDING_REVIEW` until DR_LAW and owner approval.
+
+## 2026-07-06 Threads 7-Day Traffic Rescue
+
+Status: PENDING_REVIEW
+Folder: `05_DRAFT_OUTBOX/2026-07-06_THREADS_7DAY_TRAFFIC_RESCUE`
+Theme: 不是你懶，是身體真的需要收工
+Validation status: UNVALIDATED_HYPOTHESIS
+
+| Date | Packet | Platform | Item | DR_LAW status | Human reviewer | Human decision | Notes |
+|---|---|---|---|---|---|---|---|
+| 2026-07-06 | `05_DRAFT_OUTBOX/2026-07-06_THREADS_7DAY_TRAFFIC_RESCUE/2026-07-06_THREADS_7DAY_TRAFFIC_RESCUE.md` | THREADS | 7 天 Threads 救流量貼文完整規劃 | PASS_CANDIDATE |  | PENDING | Draft only; do not post automatically |
+| 2026-07-06 | `05_DRAFT_OUTBOX/2026-07-06_THREADS_7DAY_TRAFFIC_RESCUE/2026-07-06_THREADS_7DAY_TRAFFIC_RESCUE.csv` | THREADS | 7 天貼文排程摘要 CSV | PASS_CANDIDATE |  | PENDING | Manual scheduling only |
+| 2026-07-06 | `05_DRAFT_OUTBOX/2026-07-06_THREADS_7DAY_TRAFFIC_RESCUE/2026-07-06_THREADS_RESEARCH_NOTES.md` | RESEARCH | Threads 搜尋與爆流量策略學習摘要 | PASS_CANDIDATE |  | PENDING | Public research only |
+
+Safety:
+- Do not log in to Threads, post, upload, schedule, delete, or modify platform content.
+- Days 1-5 avoid external product links in the main post to reduce hard-sell signals.
+- Day 6 link test is draft-only and should be used only after owner and DR_LAW review.
+- All posts use daily-care language and remain `PENDING_REVIEW`.
