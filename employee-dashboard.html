@@ -297,4 +297,9 @@ function showError(msg) {
 }
 
 function logout() {
-  history.replaceState(null, '', location.p
+  history.replaceState(null, '', location.pathname);
+  location.reload();
+}
+</script>
+</body>
+</html>
